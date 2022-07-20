@@ -1,24 +1,17 @@
 
 # Installation
 
-- [Installing myMVC](#Installing_myMVC) 
-	- [Installing](#Installing_via_command_line) 
-	- [Create a new Module](#create_module)
-	- [Run myMVC](#Run_myMVC)
-	- [Requirements](#Requirements)
-		- [Libraries via Composer Packages](#Libraries_via_Composer_Packages)
-		- [Libs](#Libs)
-		- [Autoloading](#Autoloading)
-- [Setup](#Setup)
-	- [Configurations](#Configurations)
-		- [main config](#main_config)
-		- [custom config](#custom_config)
+- [Installing](#Installing_via_command_line) 
+- [Create a new Module](#create_module)
+- [Run myMVC](#Run_myMVC)
+- [Requirements](#Requirements)
+	- [Libraries via Composer Packages](#Libraries_via_Composer_Packages)
+	- [Libs](#Libs)
+	- [Autoloading](#Autoloading)
 
 ---
 
-## Installing myMVC <a name="Installing_myMVC"></a>
-
-### Installing via command line <a name="Installing_via_command_line"></a>
+## Installing via command line <a name="Installing_via_command_line"></a>
 
 e.g. for a `develop` Environment
 
@@ -30,7 +23,7 @@ cd myMVC/public; php index.php
 
 The Auto-Installer will instantly begin to install all necessary files. (In case of errors, a text will prompt up showing details about what went wrong). 
 
-### Create a new Module <a name="create_module"></a>
+## Create a new Module <a name="create_module"></a>
 
 run myMVC.phar, it will show you a menu with options to create a new Module on CLI.
 
@@ -38,7 +31,7 @@ run myMVC.phar, it will show you a menu with options to create a new Module on C
 $ php myMVC.phar
 ~~~
 
-### Run myMVC <a name="Run_myMVC"></a>
+## Run myMVC <a name="Run_myMVC"></a>
 
 run php's internal webserver:
 
@@ -50,7 +43,7 @@ Call `localhost:1969` in your browser.
 
 ---
 
-### Requirements <a name="Requirements"></a>
+## Requirements <a name="Requirements"></a>
 
 - PHP 7
     - shell_exec
@@ -77,7 +70,7 @@ Call `localhost:1969` in your browser.
     /application/templates_c
     ~~~
 
-#### Libraries via Composer Packages <a name="Libraries_via_Composer_Packages"></a>
+### Libraries via Composer Packages <a name="Libraries_via_Composer_Packages"></a>
 
 To install Libraries manually:  
 
@@ -92,38 +85,14 @@ Further Information about Composer / JSON Config File and Handling
 - https://getcomposer.org/doc/01-basic-usage.md
 - https://www.digitalocean.com/community/articles/how-to-install-and-use-composer-on-your-vps-running-ubuntu
 
-#### Libs <a name="Libs"></a>
+### Libs <a name="Libs"></a>
 
 _Less_  
 
 - http://leafo.net/lessphp/
 - http://lessphp.gpeasy.com/#transitioning-from-leafolessphp
 
-#### Autoloading / PSR-0 <a name="Autoloading"></a>
+### Autoloading / PSR-0 <a name="Autoloading"></a>
 
 As of 2014-10-21 PSR-0 has been marked as deprecated. @see http://www.php-fig.org/psr/psr-0/
 
----
-
-## Setup <a name="Setup"></a>
-
-### Configurations <a name="Configurations"></a>
-
-#### main config <a name="main_config"></a>
-
-~~~
-/application/config/staging/{stage}/*
-~~~
-
-`{stage}` here depends on what you have set for `MVC_ENV`:
-
-if you have set `MVC_ENV` to 'developAtHome', the folder /application/config/staging/developAtHome/ would then be created automatically at runtime if it doesn't exist. Therefore a copy from folder `/application/config/staging/develop.sample/*` and its contents will be done.
-
-
-#### custom config <a name="custom_config"></a>
-
-~~~
-/config/{whatever}.php
-~~~
-
-Any file in this directory which has suffix .php will be required automatically (Attention: Reading A-Z). This is the right place to extend or overwrite the main config, to place policies and so on.
