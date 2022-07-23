@@ -1,3 +1,4 @@
+<!--[Getting Started]-->
 # Installation
 
 make sure that your local machine has PHP and Composer installed. 
