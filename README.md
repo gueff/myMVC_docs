@@ -1,4 +1,7 @@
-# myMVC_docs
-documentation for myMVC
 
-You can find the online version of the Laravel documentation at https://mymvc.ueffing.net
+myMVC Documentation
+
+Documentation for PHP myMVC Framework by gueff
+
+- github: https://github.com/gueff/myMVC/
+- documentation: https://mymvc.ueffing.net

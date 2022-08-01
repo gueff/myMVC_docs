@@ -1,33 +1,17 @@
-<!--[Getting Started]-->
-# Installation
+<!--[:Getting Started]-->
 
-make sure that your local machine has PHP and Composer installed. 
-After you have installed PHP and Composer, you may create a new myMVC project via the Composer create-project command:
+make sure that your local machine has PHP and Composer installed. After you have installed PHP and Composer, you can create a new myMVC project via the Composer create-project command  
 
-_get latest sources from main_  
+_get myMVC via composer_  
 ~~~bash
 composer create-project gueff/myMVC myMVC
 ~~~
 
-<!--
-_install latest version 1.3.x_  
-~~~bash
-composer create-project gueff/myMVC myMVC 1.3
-~~~
--->
-
 cd into the root folder of myMVC, where the file myMVC.phar resides.
-
-<!--
-~~~bash
-cd myMVC/public; ./serve.sh
-~~~
--->
 
 _run `myMVC.phar`_  
 ~~~bash
-cd myMVC;
-php myMVC.phar
+cd myMVC; php myMVC.phar
 ~~~
 
 The Auto-Installer will instantly begin to install all necessary files. (In case of errors, a text will prompt up showing details about what went wrong). This may take a moment.
@@ -62,6 +46,8 @@ a php framework by G. Üffing
 8 = 🔍 check on errors (php lint recursively)
 9 = ⛔ exit
 myMVC:~$  [<enter> = 0]
+you entered: 0
+[Wed Jul 27 07:20:00 2022] PHP 7.4.3 Development Server (http://127.0.0.1:1969) started
 ~~~
 
 Now you can call your application in your web browser at [http://127.0.0.1:1969](http://127.0.0.1:1969).

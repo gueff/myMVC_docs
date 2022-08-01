@@ -1,18 +1,14 @@
-<!--[Getting Started]-->
-# Directory Structure
+<!--[:Getting Started]-->
 
 ## root
 
-~~~
-├── application/
-├── config/
-├── modules/
-├── public/
-├── composer.json
-├── myMVC.phar
-└── README.md
-~~~
-
+├── [application/](#application)  
+├── config/  
+├── [modules/](#modules-moduleName)  
+├── public/  
+├── composer.json  
+├── myMVC.phar  
+└── README.md  
 
 ---
 
@@ -21,23 +17,21 @@
 
 The application directory contains core code of myMVC Framework and also working directories like `cache`, `log`, `session` and `templates_c`.
 
-~~~
-application/
-├── cache/
-├── config/
-├── doc/
-├── library/
-├── log/
-├── session/
-├── smartyPlugins/
-├── templates_c/
-├── vendor/
-├── composer.json
-└── composer.phar
-~~~
+application/  
+├── cache/  
+├── config/  
+├── doc/  
+├── [library/](#application-library)  
+├── log/  
+├── session/  
+├── smartyPlugins/  
+├── templates_c/  
+├── vendor/  
+├── composer.json  
+└── composer.phar  
 
 - `cache/`: place for caching files
-- `config/`: place for caching files
+- `config/`: place for global config files
 - `doc/`: GNU GENERAL PUBLIC LICENSE
 - `log/`: logfile directory
 - `session/`: SessionIDs are stored here
@@ -47,8 +41,9 @@ application/
 - `composer.json`: list of third party libraries to install
 - `composer.phar`: a standalone composer script; no need to install composer
 
+
 <a name="application-library"></a>
-#### application/library/
+#### application/library/ 
 
 This directory contains the core code of myMVC Framework inside the folder `MVC`.
 
@@ -91,28 +86,28 @@ application/library/
     └── View.php
 ~~~
 
-## modules/
+<a name="modules-moduleName"></a>
+## modules/{moduleName}/ 
 
 In the modules folder you create your own module (here in this example it is the module `Foo`).  
-In your module you will code your own application - You will find **Model**, **View**, **Controller** (MVC), but also some other directories.
+In your module you code your own application - You will find **Model**, **View**, **Controller** (MVC), but also some other directories.
 
-~~~
-modules/Foo/
-├── Controller/
-├── DataType/
-├── etc/
-├── Event/
-├── Model/
-├── Policy/
-├── templates/
-├── View/
-├── generateDataTypes.php
-├── install.sh
-└── publish.sh
-~~~
+modules/Foo/  
+├── Controller/  
+├── DataType/  
+├── etc/  
+├── Event/  
+├── Model/  
+├── Policy/  
+├── [templates/](#modules-moduleName-templates)  
+├── View/  
+├── generateDataTypes.php  
+├── install.sh  
+└── publish.sh  
+
 - `Controller/`: folder to place your Controller
 - `DataType/`: place for generated datatype classes
-- `etc/`: place for install- and config files, docs and routing
+- `etc/`: place for install- and config files, docs, routing and individual other stuff
 - `Event/`: place for classes dealing with events. This is optional;
 - `Model/`: place for Model classes
 - `Policy/`: classes for Policy
@@ -172,3 +167,23 @@ modules/Foo/
 ├── install.sh
 └── publish.sh
 ~~~
+
+<a name="modules-moduleName-templates"></a>
+## modules/{moduleName}/templates 
+
+_templates directory structure of a module `Foo`_  
+~~~
+modules/Foo/templates/
+└── Frontend
+    ├── content
+    │   ├── 404.tpl
+    │   ├── _cookieConsent.tpl
+    │   ├── index.tpl
+    │   └── _noscript.tpl
+    └── layout
+        ├── footer.tpl
+        ├── header.tpl
+        ├── index.tpl
+        └── menu.tpl
+~~~
+- you may find further Information in Topic [Frontend](/frontend/)
