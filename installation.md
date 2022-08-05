@@ -1,10 +1,20 @@
 <!--[:Getting Started]-->
 
-make sure that your local machine has PHP and Composer installed. After you have installed PHP and Composer, you can create a new myMVC project via the Composer create-project command  
+# Overview
+
+- [Get myMVC](#Get-myMVC)
+- [Requirements](#Requirements)
+
+---
+
+<a name="Get-myMVC"></a>
+## Get myMVC
+
+make sure that your local machine has PHP >=7.4 and Composer2 installed. After you have installed PHP and Composer, you can create a new myMVC project via the Composer create-project command  
 
 _get myMVC via composer_  
 ~~~bash
-composer create-project gueff/myMVC myMVC
+composer create-project --no-install gueff/myMVC myMVC
 ~~~
 
 cd into the root folder of myMVC, where the file myMVC.phar resides.
@@ -53,3 +63,53 @@ you entered: 0
 Now you can call your application in your web browser at [http://127.0.0.1:1969](http://127.0.0.1:1969).
 
 <a href="https://mymvc.ueffing.net/@image/getting-started/mymvc-installation/png/@size/" data-lightbox="gallery"><img class="figure-img img-fluid" src="https://mymvc.ueffing.net/@image/getting-started/mymvc-installation/png/@size/" title="mymvc-creating-a-module"></a><div style="clear:both;"></div>
+
+---
+
+<a name="Requirements"></a>
+## Requirements
+
+### PHP
+
+You need to have the PHP Version >=7.4 installed. Also you need some PHP-Extensions installed and PHP-functions enabled as listed below.
+
+_PHP Version_  
+~~~
+>=7.4
+~~~
+
+_Required PHP Extensions_  
+~~~
+Core
+ctype
+curl
+date
+dom
+fileinfo
+filter
+iconv
+json
+mbstring
+Phar
+posix
+Reflection
+session
+SimpleXML
+standard
+SPL
+zip
+~~~
+
+_Required PHP Functions_  
+~~~
+mb_strlen
+iconv
+utf8_decode
+~~~
+
+### Composer
+
+You need to have the composer dependency manager installed.  
+Visit the project Website of composer for more details about how to set up composer.
+
+- https://getcomposer.org/
