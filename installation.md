@@ -1,6 +1,6 @@
 <!--[:Getting Started]-->
 
-# Overview
+# Installation
 
 - [Get myMVC](#Get-myMVC)
 - [Requirements](#Requirements)

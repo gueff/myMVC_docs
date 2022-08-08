@@ -1,6 +1,6 @@
 <!--[:Getting Started]-->
 
-## Overview
+# Configuration
 
 - [Environment](#Environment)
 - [Main config](#main_config)

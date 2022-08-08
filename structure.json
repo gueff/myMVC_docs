@@ -1,0 +1,19 @@
+{
+  "Getting started": {
+    "Installation": "installation.md",
+    "Creating a Module":"creating-a-module.md",
+    "Configuration":"configuration.md",
+    "Directory Structure":"directory-structure.md",
+    "Frontend":"frontend.md"
+  },
+  "Basics": {
+    "Routing":"routing.md",
+    "Events":"events.md",
+    "Logging":"logging.md",
+    "Policy":"policy.md",
+    "CLI Wrapping":"cli-wrapping.md"
+  },
+  "Advanced": {
+    "Generating DataType Classes": "generating-datatype-classes.md"
+  }
+}

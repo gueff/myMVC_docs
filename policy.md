@@ -1,3 +1,6 @@
+
+# Policy 
+
 Policy Rules are bonded to a specific `Controller::Method()`.
 
 If a rule is detected for the requested method, the static Methods which are defined below will be executed then.

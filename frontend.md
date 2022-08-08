@@ -1,3 +1,6 @@
+
+# Frontend
+
 myMVC makes use of the robust Smarty Template Engine.  
 All Templates you define in your module's template folder.
 

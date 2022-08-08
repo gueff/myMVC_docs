@@ -1,5 +1,7 @@
 <!--[:Getting Started]-->
 
+# Creating a Module
+
 - cd into the root folder of myMVC, where the file `myMVC.phar` resides.
 - run `myMVC.phar`, it will show you a menu with some options.
 - enter `1` to create a new module.

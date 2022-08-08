@@ -1,3 +1,6 @@
+
+# Logging
+
 _default path for logfiles_  
 ~~~
 /application/log/

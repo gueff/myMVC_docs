@@ -1,3 +1,6 @@
+
+# Generating DataType Classes
+
 with this Generator you can easily generate DataType Classes. Consider those Classes more than a Storage than a Logic Element.
 
 You can easily define what name the class and which namespace it should have, which properties or constants it should provide.
