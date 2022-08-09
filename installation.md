@@ -62,7 +62,7 @@ you entered: 0
 
 Now you can call your application in your web browser at [http://127.0.0.1:1969](http://127.0.0.1:1969).
 
-<a href="https://mymvc.ueffing.net/@image/getting-started/mymvc-installation/png/@size/" data-lightbox="gallery"><img class="figure-img img-fluid" src="https://mymvc.ueffing.net/@image/getting-started/mymvc-installation/png/@size/" title="mymvc-creating-a-module"></a><div style="clear:both;"></div>
+![myMVC Installation](/doc/getting-started/mymvc-installation.png)
 
 ---
 

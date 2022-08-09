@@ -47,7 +47,8 @@ unMVC:~$
 Now [🏁 run local development server](/installation/#Run_myMVC) again.  
 Call http://127.0.0.1:1969/ and you will see your new created module frontend
 
-<a href="https://mymvc.ueffing.net/@image/getting-started/mymvc-creating-a-module/png/@size/" data-lightbox="gallery"><img class="figure-img img-fluid" src="https://mymvc.ueffing.net/@image/getting-started/mymvc-creating-a-module/png/@size/600/" title="mymvc-creating-a-module"></a><div style="clear:both;"></div>
+![myMVC Creating a Module](/doc/getting-started/mymvc-creating-a-module.png)
+
 
 _directory structure of the created module `Foo`_  
 - @see [Directory Structure](/directory-structure/)
