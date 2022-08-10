@@ -1,4 +1,5 @@
-## Overview
+# Installation
+
 - [myMVC](#myMVC)
 - [Installing myMVC](#Installing_myMVC) 
 	- [Installing](#Installing_via_command_line) 
