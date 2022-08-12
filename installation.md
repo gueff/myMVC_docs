@@ -38,7 +38,7 @@
 
 ____________________________________________________________________
 
-## myMVC <a name="myMVC"></a>
+## myMVC <a id="myMVC"></a>
 
 This is my MVC Framework, written in PHP. Open Source and free of charge.
 - Open Source
@@ -49,9 +49,9 @@ This is my MVC Framework, written in PHP. Open Source and free of charge.
 - Expandable
 - DataType Creation
 
-## Installing myMVC <a name="Installing_myMVC"></a>
+## Installing myMVC <a id="Installing_myMVC"></a>
 
-### Installing via command line <a name="Installing_via_command_line"></a>
+### Installing via command line <a id="Installing_via_command_line"></a>
 
 e.g. for a `develop` Environment
 
@@ -63,7 +63,7 @@ cd myMVC/public; php index.php
 
 The Auto-Installer will instantly begin to install all necessary files. (In case of errors, a text will prompt up showing details about what went wrong). 
 
-### Create a new Module <a name="create_module"></a>
+### Create a new Module <a id="create_module"></a>
 
 run myMVC.phar, it will show you a menu with options to create a new Module on CLI.
 
@@ -71,7 +71,7 @@ run myMVC.phar, it will show you a menu with options to create a new Module on C
 $ php myMVC.phar
 ~~~
 
-### Run myMVC <a name="Run_myMVC"></a>
+### Run myMVC <a id="Run_myMVC"></a>
 
 run php's internal webserver:
 
@@ -83,7 +83,7 @@ Call `localhost:1969` in your browser.
 
 ____________________________________________________________________
 
-### Requirements <a name="Requirements"></a>
+### Requirements <a id="Requirements"></a>
 
 - PHP 7
     - shell_exec
@@ -110,7 +110,7 @@ ____________________________________________________________________
     /application/templates_c
     ~~~
 
-#### Libraries via Composer Packages <a name="Libraries_via_Composer_Packages"></a>
+#### Libraries via Composer Packages <a id="Libraries_via_Composer_Packages"></a>
 
 To install Libraries manually:  
 
@@ -125,24 +125,24 @@ Further Information about Composer / JSON Config File and Handling
 - https://getcomposer.org/doc/01-basic-usage.md
 - https://www.digitalocean.com/community/articles/how-to-install-and-use-composer-on-your-vps-running-ubuntu
 
-#### Libs <a name="Libs"></a>
+#### Libs <a id="Libs"></a>
 
 _Less_  
 
 - http://leafo.net/lessphp/
 - http://lessphp.gpeasy.com/#transitioning-from-leafolessphp
 
-#### Autoloading / PSR-0 <a name="Autoloading"></a>
+#### Autoloading / PSR-0 <a id="Autoloading"></a>
 
 As of 2014-10-21 PSR-0 has been marked as deprecated. @see http://www.php-fig.org/psr/psr-0/
 
 ____________________________________________________________________
 
-## Setup <a name="Setup"></a>
+## Setup <a id="Setup"></a>
 
-### Configurations <a name="Configurations"></a>
+### Configurations <a id="Configurations"></a>
 
-#### main config <a name="main_config"></a>
+#### main config <a id="main_config"></a>
 
 ~~~
 /application/config/staging/{stage}/*
@@ -152,7 +152,7 @@ ____________________________________________________________________
 
 if you have set `MVC_ENV` to 'developAtHome', the folder /application/config/staging/developAtHome/ would then be created automatically at runtime if it doesn't exist. Therefore a copy from folder `/application/config/staging/develop.sample/*` and its contents will be done.
 
-#### custom config <a name="custom_config"></a>
+#### custom config <a id="custom_config"></a>
 
 ~~~
 /config/{whatever}.php
@@ -162,9 +162,9 @@ Any file in this directory which has suffix .php will be required automatically 
 
 ____________________________________________________________________
 
-## Usage <a name="Usage"></a>
+## Usage <a id="Usage"></a>
 
-### MVC <a name="MVC"></a>
+### MVC <a id="MVC"></a>
 
 _Request Examples_  
 
@@ -191,9 +191,9 @@ GET Param `a`
 
 -	JSON which will be given to the target method  `/modules/default/Controller/Index.php -> index()`
 
-### Controller <a name="Controller"></a>
+### Controller <a id="Controller"></a>
 
-#### __preconstruct <a name="__preconstruct"></a>
+#### __preconstruct <a id="__preconstruct"></a>
 
 Name of method to be executed in the Target Controller Class before session, and other main functionalities. It will be called in `/application/library/MVC/Application.php`:
 
@@ -212,7 +212,7 @@ $aConfig['MVC_METHODNAME_PRECONSTRUCT'] = '__preconstruct';
     
 Each Controller *must* have a method named `__preconstruct` "MVC_BEFORE" (see main config) which one is called by MVC_Application::__construct() in a very early stage.
 
-#### Examples <a name="Examples"></a>
+#### Examples <a id="Examples"></a>
 
 _Override the whitelisting behaviour of the request object:_  
 
@@ -239,7 +239,7 @@ _Register Event Bindings_
 ~~~
 
 
-### Registry <a name="Registry"></a>
+### Registry <a id="Registry"></a>
 
 The complete configuration is saved to the Registry and so it is systemwide available. 
 
@@ -255,7 +255,7 @@ _Setting a Value to Registry_
 \MVC\Registry::set('MY_KEY_NAME', $mMyValue);
 ~~~
 
-### Events <a name="Events"></a>
+### Events <a id="Events"></a>
 
 You can listen to Events in 2 ways:
 
@@ -263,7 +263,7 @@ You can listen to Events in 2 ways:
 2. Class::method
 
 
-#### 1. Event Names <a name="EventNames"></a>
+#### 1. Event Names <a id="EventNames"></a>
 
 you can easily run an individual event.  
 Just note the event name and pass an `DTArrayObject` Object with Infos.
@@ -281,7 +281,7 @@ Event::RUN('module.controller.method.action',
 );
 ~~~
 
-#### 2. Class::method <a name="Class_method"></a>
+#### 2. Class::method <a id="Class_method"></a>
 
 Using a Concrete Controller::method  of User's Application. Instead of an Event-Name to listen to you can always address a certain Method of a Controller. That gives you even more flexibility.
 
@@ -297,7 +297,7 @@ _Example_
 });
 ~~~
 
-#### BIND and RUN <a name="BIND_and_RUN"></a>
+#### BIND and RUN <a id="BIND_and_RUN"></a>
 
 _Bind to an Event_  
 
@@ -324,7 +324,7 @@ _Run an Event and deploy a Package which could be read inside the Bind/Closure_
 
 
 
-#### myMVC Standard Events <a name="myMVCStandardEvents"></a>
+#### myMVC Standard Events <a id="myMVCStandardEvents"></a>
 
 In chronological order;  
 The path shows where the event is going to be called (RUN)
@@ -725,7 +725,7 @@ The path shows where the event is going to be called (RUN)
 
 
 
-#### Events myMVC is listening to <a name="myMVCEventsListening"></a>
+#### Events myMVC is listening to <a id="myMVCEventsListening"></a>
 
 - mvc.view.echoOut.off
 	~~~
@@ -754,7 +754,7 @@ The path shows where the event is going to be called (RUN)
 	
 
 
-#### Helper Methods <a name="Helper_Methods"></a>
+#### Helper Methods <a id="Helper_Methods"></a>
 
 _Detect a Closure_  
 
@@ -768,7 +768,7 @@ call_user_func ($oPackage)
 ~~~
 
 
-### Logging <a name="Logging"></a>
+### Logging <a id="Logging"></a>
 ~~~
     Standard
         \MVC\Log::WRITE('My Message');
