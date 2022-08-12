@@ -13,7 +13,7 @@ Create a config file "policy.php"
 - globally in `/config/` folder
 - **or** in your module's config folder `/modules/{moduleName}/etc/config/{moduleName}/config/`
 
-See  [/configuration/](/configuration/) for more Information.  
+See  [/configuration/](/2.x/configuration) for more Information.  
 Inside this file you define your policies.
 
 ~~~php

@@ -3,13 +3,13 @@
 
 - [Creating a Route](#Creating-a-Route)
     - [Wildcard routing](#wildcard-routing)
-    - [The reserved routing file `.myMVC.json`](#.myMVC.json)
+    - [The reserved routing file `.myMVC.json`](#myMVC-json)
 - [Get/Set Information](#Get-Information)
     - [Routing](#Get-Information-Routing)
         - [Get complete Routing as Array](#get-complete-Routing)
         - [Get complete Routing as JSON](#complete-Routing-as-JSON)
         - [Get current Routing as Array](#Get-current-Routing-as-Array)
-        - [Get Route Index On Key](#getRouteIndeeOnKey)
+        - [Get Route Index On Key](#getRouteIndexOnKey)
     - [Request](#Request)
         - [Get Current Request](#Get-Current-Request)
         - [Get whitelisted Parameters as Array](#Get-whitelisted-Parameters)
@@ -22,7 +22,7 @@
 
 ---
 
-<a name="Creating-a-Route"></a>
+<a id="Creating-a-Route"></a>
 ## Creating a Route 
 
 _Place of routing files_  
@@ -74,7 +74,7 @@ _route example: adding route `/foo/`_
 }
 ~~~
 
-<a name="wildcard-routing"></a>
+<a id="wildcard-routing"></a>
 ### Wildcard routing   
 
 **per default all routings are restricitv**  
@@ -90,7 +90,7 @@ e.g. the route `/foo/*`
 - you can call `/foo/bar/baz/...`
 
 
-<a name=".myMVC.json"></a>
+<a id="myMVC-json"></a>
 ### The reserved routing file `.myMVC.json` 
 
 - myMVC ist just looking for one file in the folder: `.myMVC.json`
@@ -110,13 +110,13 @@ _This is myMVC default behaviour: Activating by Event Listener_
 
 ---
 
-<a name="Get-Information"></a>
+<a id="Get-Information"></a>
 ## Get Information 
 
-<a name="Get-Information-Routing"></a>
+<a id="Get-Information-Routing"></a>
 ### Routing 
 
-<a name="get-complete-Routing"></a>
+<a id="get-complete-Routing"></a>
 #### Get complete Routing as Array 
 
 _command_ 
@@ -184,7 +184,7 @@ array(1) {
 }
 ~~~
 
-<a name="complete-Routing-as-JSON"></a>
+<a id="complete-Routing-as-JSON"></a>
 #### Get complete Routing as JSON 
 
 _command_  
@@ -202,7 +202,7 @@ _result_
 string(523) "{"\/":{"query":"module=Foo&c=index&m=index","title":"Foo","template":{"layout":"Frontend\/layout\/index.tpl","var":{"set":{"sCss":"","sJs":""},"load":{"sMainmenu":"Frontend\/layout\/menu.tpl","sContent":"Frontend\/content\/index.tpl","sHeader":"Frontend\/layout\/header.tpl","sNoscript":"Frontend\/content\/_noscript.tpl","sCookieConsent":"Frontend\/content\/_cookieConsent.tpl","sFooter":"Frontend\/layout\/footer.tpl"}},"sStyle":[],"sScript":[]},"path":"\/","class":"Foo\\Controller\\Index","method":"index"}}"
 ~~~
 
-<a name="Get-current-Routing-as-Array"></a>
+<a id="Get-current-Routing-as-Array"></a>
 #### Get current Routing as Array 
 
 _command_  
@@ -267,7 +267,7 @@ array(6) {
 }
 ~~~
 
-<a name="getRouteIndexOnKey"></a>
+<a id="getRouteIndexOnKey"></a>
 #### Get Route Index On Key 
 
 _command_  
@@ -286,10 +286,10 @@ string(1) "/"
 
 ---
 
-<a name="Request"></a>
+<a id="Request"></a>
 ### Request 
 
-<a name="Get-Current-Request"></a>
+<a id="Get-Current-Request"></a>
 #### Get Current Request 
 
 _command_  
@@ -315,7 +315,7 @@ array(6) {
 }
 ~~~
 
-<a name="Get-whitelisted-Parameters"></a>
+<a id="Get-whitelisted-Parameters"></a>
 #### Get whitelisted Parameters as Array 
 
 _command_  
@@ -360,7 +360,7 @@ array(1) {
 }
 ~~~
 
-<a name="Set-whitelisted-Parameters"></a>
+<a id="Set-whitelisted-Parameters"></a>
 #### Set whitelisted Parameters as Array 
 
 here you can define filters vor variables - what to allow to pass through.
@@ -391,7 +391,7 @@ Request::setWhitelistParamArray($aParam);
 ~~~
 
 
-<a name="Get-Query"></a>
+<a id="Get-Query"></a>
 #### Get Query 
 
 _command_  
@@ -424,10 +424,10 @@ array(3) {
 
 ---
 
-<a name="Path"></a>
+<a id="Path"></a>
 ### Path 
 
-<a name="Get-Path"></a>
+<a id="Get-Path"></a>
 #### Get Path 
 
 example: `https://example.com/foo/bar/baz/?a=1`
@@ -442,7 +442,7 @@ _result_
 string(13) "/foo/bar/baz/"
 ~~~
 
-<a name="Get-Path-Array"></a>
+<a id="Get-Path-Array"></a>
 #### Get Path Array 
  
 example: `https://example.com/foo/bar/baz/?a=1`
@@ -464,7 +464,7 @@ array(3) {
 }
 ~~~
 
-<a name="Get-Request-Uri"></a>
+<a id="Get-Request-Uri"></a>
 #### Get Requerst Uri 
 
 example: `https://example.com/foo/bar/baz/?a=1`

@@ -3,15 +3,15 @@
 - [Events](#Events)
 	- [EventNames](#EventNames)
 	- [Class::method](#Class_method)
-- [BIND and RUN](#BIND_and_RUN)
+- [`bind` and `run`](#BIND_and_RUN)
 - [myMVC Standard Events](#myMVCStandardEvents)
 - [Events myMVC is listening to](#myMVCEventsListening)
 - [Helper Methods](#Helper_Methods)
 
 ---
 
-<a name="Events"></a>
-### Events 
+<a id="Events"></a>
+## Events 
 
 You can listen to Events in 2 ways:
 
@@ -19,8 +19,8 @@ You can listen to Events in 2 ways:
 2. Class::method
 
 
-<a name="EventNames"></a>
-#### 1. Event Names 
+<a id="EventNames"></a>
+### 1. Event Names 
 
 you can easily run an individual event.  
 Just note the event name and pass an `DTArrayObject` Object with Infos.
@@ -38,14 +38,14 @@ Event::RUN('module.controller.method.action',
 );
 ~~~
 
-<a name="Class_method"></a>
-#### 2. Class::method 
+<a id="Class_method"></a>
+### 2. Class::method 
 
 Using a Concrete Controller::method  of User's Application. Instead of an Event-Name to listen to you can always address a certain Method of a Controller. That gives you even more flexibility.
 
 Example: If you want to listen to when the Method "\Standard\Controller\Index::home" is being called, simply note the method as the event name. Make sure to write it as the method was a static one, even it is not.
 
-_Example_
+_Example_  
 ~~~php
 /*
  * redirect if explicitly if the method "foo" is requested
@@ -55,41 +55,56 @@ _Example_
 });
 ~~~
 
-<a name="BIND_and_RUN"></a>
-### BIND and RUN 
+<a id="BIND_and_RUN"></a>
+## `bind` and `run`
 
-_Bind to an Event_  
+first you `bind` to an event, then you `run` the event. 
 
+
+### `bind`
+
+with `bind` you create a Listener to an expected event;
+you _bind_ a closure to the expected event.
+
+_syntax_  
+~~~
+\MVC\Event::bind ('eventName', {closure} );
+~~~
+
+_example: bind a closure to the Event 'foo'_  
 ~~~php
-\MVC\Event::BIND ('mvc.session', function() {
-
-        $oPackage = \MVC\Event::$aPackage['mvc.session'];
-        // see if there is a package relating to that event
-        \MVC\Helper::DISPLAY ($oPackage);
+\MVC\Event::bind ('foo', function($oDTArrayObject) {
+        \MVC\Helper::DISPLAY ($oDTArrayObject);
 });
 ~~~
+- if the event 'foo' is triggered, the closure will be executed: the content of `$oDTArrayObject` will be displayed on screen
+
+### `run`
+
+with `run` you trigger an event.
 
 _Run an Event_  
-
 ~~~php
-\MVC\Event::RUN ('mvc.session');
+\MVC\Event::run ('foo');
 ~~~
 
-_Run an Event and deploy a Package which could be read inside the Bind/Closure_  
-
+_Run an Event and deploy a Package which could be read inside the Bind/Closure_   
 ~~~php
-\MVC\Event::RUN ('mvc.session', $oPackage);
+$oDTArrayObject = DTArrayObject::create()->add_aKeyValue(
+	DTKeyValue::create()->set_sKey('foo')->set_sValue('bar')
+);
+\MVC\Event::run ('foo', $oDTArrayObject);
 ~~~
 
 
-<a name="myMVCStandardEvents"></a>
-### myMVC Standard Events 
+<a id="myMVCStandardEvents"></a>
+## myMVC Standard Events 
 
 In chronological order;  
 The path shows where the event is going to be called (RUN)
 
+- `mvc.request.saveRequest.after`
 
-- mvc.request.saveRequest.after
 	~~~
 	MVC/Request.php
 
@@ -106,7 +121,8 @@ The path shows where the event is going to be called (RUN)
 			)
 	);
 	~~~
-- mvc.request.prepareQueryVarsForUsage.after
+- `mvc.request.prepareQueryVarsForUsage.after`
+
 	~~~
 	MVC/Request.php
 	~~~
@@ -118,7 +134,8 @@ The path shows where the event is going to be called (RUN)
 			)
 	);
 	~~~
-- mvc.runTargetClassPreconstruct.after
+- `mvc.runTargetClassPreconstruct.after`
+
 	~~~
 	MVC/Application.php
 
@@ -135,14 +152,16 @@ The path shows where the event is going to be called (RUN)
 			)
 	);
 	~~~
-- mvc.application.setSession.before
+- `mvc.application.setSession.before`
+
 	~~~
 	MVC/Application.php
 	~~~
 	~~~
 	Event::RUN ('mvc.application.setSession.before', DTArrayObject::create());
 	~~~
-- mvc.application.setSession.after
+- `mvc.application.setSession.after`
+
 	~~~
 	MVC/Application.php
 	Session Object is built and copied to the registry
@@ -155,7 +174,8 @@ The path shows where the event is going to be called (RUN)
 			)
 	);
 	~~~
-- mvc.policy.apply.execute
+- `mvc.policy.apply.execute`
+
 	~~~
 	MVC/Policy.php
 	~~~
@@ -170,14 +190,16 @@ The path shows where the event is going to be called (RUN)
 			)
 	);
 	~~~
-- mvc.controller.init.before
+- `mvc.controller.init.before`
+
 	~~~
 	MVC/Controller.php
 	~~~
 	~~~
 	Event::RUN ('mvc.controller.init.before', DTArrayObject::create());
 	~~~
-- mvc.reflex.reflect.before
+- `mvc.reflex.reflect.before`
+
 	~~~
 	MVC/Reflex.php
 	~~~
@@ -189,7 +211,8 @@ The path shows where the event is going to be called (RUN)
 			)
 	);
 	~~~
-- mvc.reflex.reflect.targetObject.before
+- `mvc.reflex.reflect.targetObject.before`
+
 	~~~
 	MVC/Reflex.php
 
@@ -212,7 +235,8 @@ The path shows where the event is going to be called (RUN)
 			)
 	);
 	~~~
-- $sControllerClassName . '::' . $sMethod
+- `$sControllerClassName . '::' . $sMethod`
+
 	~~~
 	MVC/Reflex.php
 
@@ -240,7 +264,8 @@ The path shows where the event is going to be called (RUN)
 			)
 	);
 	~~~
-- mvc.reflex.reflect.targetObject.after
+- `mvc.reflex.reflect.targetObject.after`
+
 	~~~
 	MVC/Reflex.php
 
@@ -262,7 +287,8 @@ The path shows where the event is going to be called (RUN)
 			)
 	);
 	~~~
-- mvc.controller.construct.after
+- `mvc.controller.construct.after`
+
 	~~~
 	MVC/Controller.php
 	~~~
@@ -274,7 +300,8 @@ The path shows where the event is going to be called (RUN)
 			)
 	);
 	~~~
-- mvc.view.render.before
+- `mvc.view.render.before`
+
 	~~~
 	MVC/View.php
 	~~~
@@ -286,7 +313,8 @@ The path shows where the event is going to be called (RUN)
 			)
 	);
 	~~~
-- mvc.view.renderString.before
+- `mvc.view.renderString.before`
+
 	~~~
 	MVC/View.php
 	~~~
@@ -298,7 +326,8 @@ The path shows where the event is going to be called (RUN)
 			)
 	);
 	~~~
-- mvc.view.renderString.after
+- `mvc.view.renderString.after`
+
 	~~~
 	MVC/View.php
 	~~~
@@ -316,7 +345,8 @@ The path shows where the event is going to be called (RUN)
 			)
 	);
 	~~~
-- mvc.view.render.after
+- `mvc.view.render.after`
+
 	~~~
 	MVC/View.php
 	~~~
@@ -331,7 +361,8 @@ The path shows where the event is going to be called (RUN)
 			)
 	);
 	~~~
-- mvc.reflex.destruct.before
+- `mvc.reflex.destruct.before`
+
 	~~~
 	MVC/Reflex.php
 	~~~
@@ -343,7 +374,8 @@ The path shows where the event is going to be called (RUN)
 			)
 	);
 	~~~
-- mvc.controller.destruct.before
+- `mvc.controller.destruct.before`
+
 	~~~
 	MVC/Controller.php
 	~~~
@@ -355,14 +387,16 @@ The path shows where the event is going to be called (RUN)
 			)
 	);
 	~~~
-- mvc.application.construct.after
+- `mvc.application.construct.after`
+
 	~~~
 	MVC/Application.php
 	~~~
 	~~~
 	Event::run ('mvc.application.construct.after', DTArrayObject::create());
 	~~~
-- mvc.application.destruct.before
+- `mvc.application.destruct.before`
+
 	~~~
 	MVC/Application.php
 	~~~
@@ -379,7 +413,8 @@ The path shows where the event is going to be called (RUN)
 **other**
 
 
-- mvc.helper.stop.after
+- `mvc.helper.stop.after`
+
 	~~~
 	MVC/Helper.php
 	~~~
@@ -397,7 +432,8 @@ The path shows where the event is going to be called (RUN)
 			)
 	);
 	~~~
-- mvc.lock.create
+- `mvc.lock.create`
+
 	~~~
 	MVC/Lock.php
 	~~~
@@ -408,7 +444,8 @@ The path shows where the event is going to be called (RUN)
 		->add_aKeyValue(DTKeyValue::create()->set_sKey('sFile')->set_sValue($sFile))
 	);
 	~~~
-- mvc.error
+- `mvc.error`
+
 	~~~
 	MVC/Policy.php
 	~~~
@@ -447,10 +484,11 @@ The path shows where the event is going to be called (RUN)
 	~~~	
 
 
-<a name="myMVCEventsListening"></a>
-### Events myMVC is listening to 
+<a id="myMVCEventsListening"></a>
+## Events myMVC is listening to 
 
-- mvc.view.echoOut.off
+- `mvc.view.echoOut.off`
+
 	~~~
 	MVC/View.php
 
@@ -462,7 +500,8 @@ The path shows where the event is going to be called (RUN)
 		MVC_View::$bEchoOut = false;
 	});	
 	~~~
-- mvc.view.echoOut.on
+- `mvc.view.echoOut.on`
+
 	~~~
 	MVC/View.php
 
@@ -476,11 +515,10 @@ The path shows where the event is going to be called (RUN)
 	~~~
 	
 
-<a name="Helper_Methods"></a>
-### Helper Methods 
+<a id="Helper_Methods"></a>
+## Helper Methods 
 
 _Detect a Closure_  
-
 ~~~php
 \MVC\Helper::isClosure($oExpectedClosure))
 ~~~

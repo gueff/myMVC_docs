@@ -6,7 +6,7 @@
 
 ---
 
-<a name="Requesting-a-route"></a>
+<a id="Requesting-a-route"></a>
 **Requesting a route**
 
 myMVC serves simple CLI Requests.
@@ -29,7 +29,7 @@ $ export MVC_ENV="develop"; php index.php '/about/?a={"foo":"bar"}'
 
 ---
 
-<a name="Requesting-Controller-directly"></a>
+<a id="Requesting-Controller-directly"></a>
 **Requesting Controller directly; without a route**
 
 myMVC allows calling via CLI without any need of a "/route/" (see below "Requesting routes").

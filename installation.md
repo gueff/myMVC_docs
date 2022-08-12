@@ -7,7 +7,7 @@
 
 ---
 
-<a name="Get-myMVC"></a>
+<a id="Get-myMVC"></a>
 ## Get myMVC
 
 make sure that your local machine has PHP >=7.4 and Composer2 installed. After you have installed PHP and Composer, you can create a new myMVC project via the Composer create-project command  
@@ -34,7 +34,8 @@ setup checking
 ................Installation completed.
 ~~~
 
-**Run myMVC** <a name="Run_myMVC"></a>    
+<a id="Run_myMVC"></a>
+**Run myMVC**    
 
 Now start myMVC's local development server.  
 - run myMVC.phar, it will show you a menu with some options.
@@ -66,7 +67,7 @@ Now you can call your application in your web browser at [http://127.0.0.1:1969]
 
 ---
 
-<a name="Requirements"></a>
+<a id="Requirements"></a>
 ## Requirements
 
 ### PHP

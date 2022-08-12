@@ -4,7 +4,7 @@
 myMVC makes use of the robust Smarty Template Engine.  
 All Templates you define in your module's template folder.
 
-myMVC provides a standard set of template files when you create your module via myMVC.phar (see: [Creating a Module](/creating-a-module/)]). Below you can see the directory structure of the standard set of templates.
+myMVC provides a standard set of template files when you create your module via myMVC.phar (see: [Creating a Module](/2.x/creating-a-module)]). Below you can see the directory structure of the standard set of templates.
 
 _templates directory structure_  
 ~~~

@@ -14,7 +14,7 @@
 
 ---
 
-<a name="application"></a>
+<a id="application"></a>
 ### application/ 
 
 The application directory contains core code of myMVC Framework and also working directories like `cache`, `log`, `session` and `templates_c`.
@@ -44,7 +44,7 @@ application/
 - `composer.phar`: a standalone composer script; no need to install composer
 
 
-<a name="application-library"></a>
+<a id="application-library"></a>
 #### application/library/ 
 
 This directory contains the core code of myMVC Framework inside the folder `MVC`.
@@ -88,7 +88,7 @@ application/library/
     └── View.php
 ~~~
 
-<a name="modules-moduleName"></a>
+<a id="modules-moduleName"></a>
 ## modules/{moduleName}/ 
 
 In the modules folder you create your own module (here in this example it is the module `Foo`).  
@@ -170,7 +170,7 @@ modules/Foo/
 └── publish.sh
 ~~~
 
-<a name="modules-moduleName-templates"></a>
+<a id="modules-moduleName-templates"></a>
 ## modules/{moduleName}/templates 
 
 _templates directory structure of a module `Foo`_  
@@ -188,4 +188,4 @@ modules/Foo/templates/
         ├── index.tpl
         └── menu.tpl
 ~~~
-- you may find further Information in Topic [Frontend](/frontend/)
+- you may find further Information in Topic [Frontend](/2.x/frontend)

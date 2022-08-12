@@ -21,7 +21,7 @@ After you defined it, just run the Generator and it will create the Class for yo
 -->
 
 <!--
-<a name="Instantiation"></a>
+<a id="Instantiation"></a>
 ## Instantiation
 
 _PHP auto detect compatible_
@@ -44,14 +44,14 @@ _PHP 7.3 compatible_
 $oDTGenerator = \MVC\Generator\DataType::create(73);
 ~~~
 
-<a name="init_object"></a>
+<a id="init_object"></a>
 ## Init with Config: Object
 ~~~php
 $oDTGenerator = \MVC\Generator\DataType::create(56)->initConfigObject($oDTConfig);
 ~~~
 -->
 
-<a name="object_config"></a>
+<a id="object_config"></a>
 ### Configuration as Object
 
 _Example_  
@@ -97,14 +97,14 @@ $oDTGenerator = \MVC\Generator\DataType::create()->initConfigObject($oDTConfig);
 ~~~
 
 <!--
-<a name="init_array"></a>
+<a id="init_array"></a>
 ## Init with Config: array
 ~~~php
 $oDTGenerator = \MVC\Generator\DataType::create()->initConfigArray($aConfig['MODULE_DATATYPE_CONFIG']);
 ~~~
 -->
 
-<a name="array_config"></a>
+<a id="array_config"></a>
 ### Configuration as Array
 
 _Example_  
@@ -177,11 +177,11 @@ $aConfigDataType = array(
 $oDTGenerator = \MVC\Generator\DataType::create()->initConfigArray(aConfigDataType);
 ~~~
 
-<a name="Hint"></a>
+<a id="Hint"></a>
 ## Hint
 - use `bool`, not `boolean`
 - use `int`, not `integer`
 
-<a name="Valid_types"></a>
+<a id="Valid_types"></a>
 ## Valid types
 - https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration
