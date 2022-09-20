@@ -18,6 +18,7 @@
     - [Accessing Path Params / Variables](#Accessing-Path-Params-Variables)
         - [Get all Variables](#Get-all-Variables)
         - [Get a certain Variable](#Get-a-certain-Variable)
+        - [Get the overlapping string on wildcard route paths](#Get-the-overlapping-string-on-wildcard-route-paths")
     - [Accessing additional context information](#Accessing-additional-context-information)
         - [Get the additional context information of the current route](#Get-the-additional-context-information-of-the-current-route)
         - [Get the additional context information of _any_ route](#Get-the-additional-context-information-of-any-route)
@@ -179,16 +180,30 @@ _Example route_
 ### Wildcard routing
 
 **per default all routings are restricitv**  
-e.g. the route `/foo/`
-- you can only call `/foo/`
-- you can not call `/foo/bar/`
+
+_Example_  
+~~~php
+\MVC\Route::get('/foo/', 'module=Foo&c=Index&m=foo');
+~~~
+
+you can only request  
+- `/foo/`
+
+you cannot request e.g.  
+- `/foo/bar/`
 
 **activating wildcard routing**  
-therefore, just add `*` after the route.  
-e.g. the route `/foo/*`
-- you can call `/foo/`
-- you can call `/foo/bar/`
-- you can call `/foo/bar/baz/...`
+therefore, just add `*` after the path: `'/foo/*'`.  
+
+~~~php
+\MVC\Route::get('/foo/*', 'module=Foo&c=Index&m=foo');
+~~~
+
+now you can request each of these url paths
+- `/foo/`
+- `/foo/bar/`
+- `/foo/bar/baz/...`
+
 
 <a id="path-params"></a>
 ### Routing with Path Params / Variables
@@ -235,7 +250,7 @@ _Command_
 $aRoute = Route::$aRoute;
 ~~~
 
-_Example Result (shortened)_
+_Example Result of `$aRoute` (shortened)_
 ~~~
 array(2) {
   ["/"]=>
@@ -264,25 +279,19 @@ Access the public property `$aMethod` to get an array of route indeces stacked b
 
 _Command_
 ~~~php
-Route::$aMethod;
+$aMethod = Route::$aMethod;
 ~~~
 
-_Example Result_
+_Example Result of `$aMethod`_
 ~~~
 array(2) {
-  ["put"]=>
-  array(1) {
-    [0]=>
-    string(20) "/api/1.0.0/user/:id/"
+  ["put"]=>array(1) {
+    [0]=>string(20) "/api/1.0.0/user/:id/"
   }
-  ["get"]=>
-  array(3) {
-    [0]=>
-    string(1) "/"
-    [1]=>
-    string(5) "/404/"
-    [2]=>
-    string(25) "/api/:id/:name/:address/*"
+  ["get"]=>array(3) {
+    [0]=>string(1) "/"
+    [1]=>string(5) "/404/"
+    [2]=>string(25) "/api/:id/:name/:address/*"
   }
 }
 ~~~
@@ -300,41 +309,32 @@ _Example request_
 
 _Command_
 ~~~php
-Route::getCurrent();
+$oDTRoute = Route::getCurrent();
 ~~~
 
-_Result_
+_Example Result of `$oDTRoute`_
 ~~~
 object(MVC\DataType\DTRoute)#19 (9) {
-  ["path":protected]=>
-  string(25) "/api/:id/:name/:address/*"
-  ["method":protected]=>
-  string(3) "GET"
-  ["query":protected]=>
-  string(30) "module=Foo&c=Api&m=index"
-  ["class":protected]=>
-  string(24) "Foo\Controller\Api"
-  ["classFile":protected]=>
-  string(128) "/var/www/myMVC/modules/Foo/Controller/Api.php"
-  ["module":protected]=>
-  string(7) "Foo"
-  ["c":protected]=>
-  string(5) "Index"
-  ["m":protected]=>
-  string(5) "index"
-  ["additional":protected]=>
-  string(727) "{"sTitle":"API","sLayout":"Frontend\/layout\/index.tpl","sMainmenu":"Frontend\/layout\/menu.tpl","sContent":"Frontend\/content\/foo.tpl","sHeader":"Frontend\/layout\/header.tpl","sNoscript":"Frontend\/content\/_noscript.tpl","sCookieConsent":"Frontend\/content\/_cookieConsent.tpl","sFooter":"Frontend\/layout\/footer.tpl","aStyle":["\/myMVC\/assets\/bootstrap-4.4.1-dist\/css\/bootstrap.min.css","\/myMVC\/assets\/font-awesome-4.7.0\/css\/font-awesome.min.css","\/myMVC\/styles\/myMVC.min.css"],"aScript":["\/myMVC\/assets\/jquery\/3.4.1\/jquery-3.4.1.min.js","\/myMVC\/assets\/jquery-cookie\/1.4.1\/jquery.cookie.min.js","\/myMVC\/assets\/bootstrap-4.4.1-dist\/js\/bootstrap.min.js","\/myMVC\/scripts\/cookieConsent.min.js"]}"
+  ["path":protected]=>string(25) "/api/:id/:name/:address/*"
+  ["method":protected]=>string(3) "GET"
+  ["query":protected]=>string(30) "module=Foo&c=Api&m=index"
+  ["class":protected]=>string(24) "Foo\Controller\Api"
+  ["classFile":protected]=>string(128) "/var/www/myMVC/modules/Foo/Controller/Api.php"
+  ["module":protected]=>string(7) "Foo"
+  ["c":protected]=>string(5) "Index"
+  ["m":protected]=>string(5) "index"
+  ["additional":protected]=>string(727) "{"sTitle":"API","sLayout":"Frontend\/layout\/index.tpl","sMainmenu":"Frontend\/layout\/menu.tpl","sContent":"Frontend\/content\/foo.tpl","sHeader":"Frontend\/layout\/header.tpl","sNoscript":"Frontend\/content\/_noscript.tpl","sCookieConsent":"Frontend\/content\/_cookieConsent.tpl","sFooter":"Frontend\/layout\/footer.tpl","aStyle":["\/myMVC\/assets\/bootstrap-4.4.1-dist\/css\/bootstrap.min.css","\/myMVC\/assets\/font-awesome-4.7.0\/css\/font-awesome.min.css","\/myMVC\/styles\/myMVC.min.css"],"aScript":["\/myMVC\/assets\/jquery\/3.4.1\/jquery-3.4.1.min.js","\/myMVC\/assets\/jquery-cookie\/1.4.1\/jquery.cookie.min.js","\/myMVC\/assets\/bootstrap-4.4.1-dist\/js\/bootstrap.min.js","\/myMVC\/scripts\/cookieConsent.min.js"]}"
 }
 ~~~
 
 As the Result is an object of type `MVC\DataType\DTRoute` you can access all its properties by getter.
 
-_Example_
+_Example_ 
 ~~~php
-Route::getCurrent()->get_class();
+$sClass = Route::getCurrent()->get_class();
 ~~~
 
-_Result_
+_Example Result of `$sClass`_  
 ~~~
 Foo\Controller\Api
 ~~~
@@ -350,38 +350,29 @@ _Command_
 $oRoute = Route::$aRoute['/404/'];
 ~~~
 
-_Result_
+_Example Result of `$oRoute`_  
 ~~~
 object(MVC\DataType\DTRoute)#17 (9) {
-  ["path":protected]=>
-  string(5) "/404/"
-  ["method":protected]=>
-  string(3) "GET"
-  ["query":protected]=>
-  string(33) "module=Foo&c=Index&m=notFound"
-  ["class":protected]=>
-  string(24) "Foo\Controller\Index"
-  ["classFile":protected]=>
-  string(128) "/var/www/myMVC/modules/Foo/Controller/Index.php"
-  ["module":protected]=>
-  string(7) "Foo"
-  ["c":protected]=>
-  string(5) "Index"
-  ["m":protected]=>
-  string(8) "notFound"
-  ["additional":protected]=>
-  string(727) "{"sTitle":"404","sLayout":"Frontend\/layout\/index.tpl","sMainmenu":"Frontend\/layout\/menu.tpl","sContent":"Frontend\/content\/404.tpl","sHeader":"Frontend\/layout\/header.tpl","sNoscript":"Frontend\/content\/_noscript.tpl","sCookieConsent":"Frontend\/content\/_cookieConsent.tpl","sFooter":"Frontend\/layout\/footer.tpl","aStyle":["\/myMVC\/assets\/bootstrap-4.4.1-dist\/css\/bootstrap.min.css","\/myMVC\/assets\/font-awesome-4.7.0\/css\/font-awesome.min.css","\/myMVC\/styles\/myMVC.min.css"],"aScript":["\/myMVC\/assets\/jquery\/3.4.1\/jquery-3.4.1.min.js","\/myMVC\/assets\/jquery-cookie\/1.4.1\/jquery.cookie.min.js","\/myMVC\/assets\/bootstrap-4.4.1-dist\/js\/bootstrap.min.js","\/myMVC\/scripts\/cookieConsent.min.js"]}"
+  ["path":protected]=>string(5) "/404/"
+  ["method":protected]=>string(3) "GET"
+  ["query":protected]=>string(33) "module=Foo&c=Index&m=notFound"
+  ["class":protected]=>string(24) "Foo\Controller\Index"
+  ["classFile":protected]=>string(128) "/var/www/myMVC/modules/Foo/Controller/Index.php"
+  ["module":protected]=>string(7) "Foo"
+  ["c":protected]=>string(5) "Index"
+  ["m":protected]=>string(8) "notFound"
+  ["additional":protected]=>string(727) "{"sTitle":"404","sLayout":"Frontend\/layout\/index.tpl","sMainmenu":"Frontend\/layout\/menu.tpl","sContent":"Frontend\/content\/404.tpl","sHeader":"Frontend\/layout\/header.tpl","sNoscript":"Frontend\/content\/_noscript.tpl","sCookieConsent":"Frontend\/content\/_cookieConsent.tpl","sFooter":"Frontend\/layout\/footer.tpl","aStyle":["\/myMVC\/assets\/bootstrap-4.4.1-dist\/css\/bootstrap.min.css","\/myMVC\/assets\/font-awesome-4.7.0\/css\/font-awesome.min.css","\/myMVC\/styles\/myMVC.min.css"],"aScript":["\/myMVC\/assets\/jquery\/3.4.1\/jquery-3.4.1.min.js","\/myMVC\/assets\/jquery-cookie\/1.4.1\/jquery.cookie.min.js","\/myMVC\/assets\/bootstrap-4.4.1-dist\/js\/bootstrap.min.js","\/myMVC\/scripts\/cookieConsent.min.js"]}"
 }
 ~~~
 
 As the Result is an object of type `MVC\DataType\DTRoute` you can access all its properties by getter.
 
-_Example_
+_Example_  
 ~~~php
-Route::$aRoute['/404/']->get_class();
+$sClass = Route::$aRoute['/404/']->get_class();
 ~~~
 
-_Result_
+_Example Result of `$sClass`_  
 ~~~
 Foo\Controller\Index
 ~~~
@@ -403,20 +394,16 @@ _Example Request_
 
 _Command_
 ~~~php
-Request::getPathParam();
+$aPathParam = Request::getPathParam();
 ~~~
 
-_Result_
+_Example Result of `$aPathParam`_  
 ~~~
 array(4) {
-  ["id"]=>
-  string(1) "1"
-  ["name"]=>
-  string(3) "Foo"
-  ["address"]=>
-  string(3) "Bar"
-  ["_tail"]=>
-  string(10) "what/else/"
+  ["id"]=>string(1) "1"
+  ["name"]=>string(3) "Foo"
+  ["address"]=>string(3) "Bar"
+  ["_tail"]=>string(10) "what/else/"
 }
 ~~~
 
@@ -425,12 +412,50 @@ array(4) {
 
 _Command_
 ~~~php
-Request::getPathParam('name')
+$sPathParam = Request::getPathParam('name')
 ~~~
 
-_Result_
+_Example Result of `$sPathParam`_  
 ~~~
 Foo
+~~~
+
+<a id="Get-the-overlapping-string-on-wildcard-route-paths"></a>
+**Get the overlapping string on wildcard route paths**
+
+say you have a wildcard route and you want to get the overlapping path string after `*`. 
+
+_Example route_
+~~~php
+\MVC\Route::get('/foo/*', 'module=Foo&c=Index&m=foo');
+~~~
+
+_Example Request_
+- `/foo/bar/baz/`
+
+_Command_  
+~~~php
+$sTail = $sRequest::getPathParam()['_tail'];
+~~~
+
+_Result of `$sTail`_  
+~~~
+bar/baz/
+~~~
+
+_If you want the Result as an array_  
+~~~php
+$aTail = Request::getPathArray(
+    Request::getPathParam()['_tail']
+);
+~~~
+
+_Result of `$aTail`_  
+~~~
+array(3) {
+  [0]=>string(3) "bar"
+  [1]=>string(1) "baz"
+}
 ~~~
 
 
@@ -442,10 +467,10 @@ Foo
 
 _Command_
 ~~~php
-Route::getCurrent()->get_additional()
+$sAdditional = Route::getCurrent()->get_additional()
 ~~~
 
-_Result JSON_
+_Example Result of `$sAdditional` (JSON)_  
 ~~~json
 {"sTitle":"Foo","sLayout":"Frontend\/layout\/index.tpl","sMainmenu":"Frontend\/layout\/menu.tpl","sContent":"Frontend\/content\/index.tpl","sHeader":"Frontend\/layout\/header.tpl","sNoscript":"Frontend\/content\/_noscript.tpl","sCookieConsent":"Frontend\/content\/_cookieConsent.tpl","sFooter":"Frontend\/layout\/footer.tpl","aStyle":["\/myMVC\/assets\/bootstrap-4.4.1-dist\/css\/bootstrap.min.css","\/myMVC\/assets\/font-awesome-4.7.0\/css\/font-awesome.min.css","\/myMVC\/styles\/myMVC.min.css"],"aScript":["\/myMVC\/assets\/jquery\/3.4.1\/jquery-3.4.1.min.js","\/myMVC\/assets\/jquery-cookie\/1.4.1\/jquery.cookie.min.js","\/myMVC\/assets\/bootstrap-4.4.1-dist\/js\/bootstrap.min.js","\/myMVC\/scripts\/cookieConsent.min.js"]}
 ~~~
@@ -457,10 +482,10 @@ Therefore access the public property `$aRoute` directly with the path of the rou
 
 _Command_
 ~~~php
-Route::$aRoute['/404/']->get_additional()
+$sAdditional =Route::$aRoute['/404/']->get_additional()
 ~~~
 
-_Result JSON_
+_Example Result of `$sAdditional` (JSON)_
 ~~~json
 {"sTitle":"404","sLayout":"Frontend\/layout\/index.tpl","sMainmenu":"Frontend\/layout\/menu.tpl","sContent":"Frontend\/content\/404.tpl","sHeader":"Frontend\/layout\/header.tpl","sNoscript":"Frontend\/content\/_noscript.tpl","sCookieConsent":"Frontend\/content\/_cookieConsent.tpl","sFooter":"Frontend\/layout\/footer.tpl","aStyle":["\/myMVC\/assets\/bootstrap-4.4.1-dist\/css\/bootstrap.min.css","\/myMVC\/assets\/font-awesome-4.7.0\/css\/font-awesome.min.css","\/myMVC\/styles\/myMVC.min.css"],"aScript":["\/myMVC\/assets\/jquery\/3.4.1\/jquery-3.4.1.min.js","\/myMVC\/assets\/jquery-cookie\/1.4.1\/jquery.cookie.min.js","\/myMVC\/assets\/bootstrap-4.4.1-dist\/js\/bootstrap.min.js","\/myMVC\/scripts\/cookieConsent.min.js"]}
 ~~~
@@ -473,49 +498,34 @@ Then put that array into its DataType create method.
 
 _Command_
 ~~~php
-DTRoutingAdditional::create(
+$oDTRoutingAdditional = DTRoutingAdditional::create(
     json_decode(Route::$aRoute['/404/']->get_additional(), true)
 )
 ~~~
 
-_Result_
+_Example Result of `$oDTRoutingAdditional`_  
 ~~~
 object(Foo\DataType\DTRoutingAdditional)#66 (10) {
-  ["sTitle":protected]=>
-  string(3) "404"
-  ["sLayout":protected]=>
-  string(25) "Frontend/layout/index.tpl"
-  ["sMainmenu":protected]=>
-  string(24) "Frontend/layout/menu.tpl"
-  ["sContent":protected]=>
-  string(24) "Frontend/content/404.tpl"
-  ["sHeader":protected]=>
-  string(26) "Frontend/layout/header.tpl"
-  ["sNoscript":protected]=>
-  string(30) "Frontend/content/_noscript.tpl"
-  ["sCookieConsent":protected]=>
-  string(35) "Frontend/content/_cookieConsent.tpl"
-  ["sFooter":protected]=>
-  string(26) "Frontend/layout/footer.tpl"
+  ["sTitle":protected]=>string(3) "404"
+  ["sLayout":protected]=>string(25) "Frontend/layout/index.tpl"
+  ["sMainmenu":protected]=>string(24) "Frontend/layout/menu.tpl"
+  ["sContent":protected]=>string(24) "Frontend/content/404.tpl"
+  ["sHeader":protected]=>string(26) "Frontend/layout/header.tpl"
+  ["sNoscript":protected]=>string(30) "Frontend/content/_noscript.tpl"
+  ["sCookieConsent":protected]=>string(35) "Frontend/content/_cookieConsent.tpl"
+  ["sFooter":protected]=>string(26) "Frontend/layout/footer.tpl"
   ["aStyle":protected]=>
   array(3) {
-    [0]=>
-    string(56) "/myMVC/assets/bootstrap-4.4.1-dist/css/bootstrap.min.css"
-    [1]=>
-    string(57) "/myMVC/assets/font-awesome-4.7.0/css/font-awesome.min.css"
-    [2]=>
-    string(27) "/myMVC/styles/myMVC.min.css"
+    [0]=>string(56) "/myMVC/assets/bootstrap-4.4.1-dist/css/bootstrap.min.css"
+    [1]=>string(57) "/myMVC/assets/font-awesome-4.7.0/css/font-awesome.min.css"
+    [2]=>string(27) "/myMVC/styles/myMVC.min.css"
   }
   ["aScript":protected]=>
   array(4) {
-    [0]=>
-    string(46) "/myMVC/assets/jquery/3.4.1/jquery-3.4.1.min.js"
-    [1]=>
-    string(54) "/myMVC/assets/jquery-cookie/1.4.1/jquery.cookie.min.js"
-    [2]=>
-    string(54) "/myMVC/assets/bootstrap-4.4.1-dist/js/bootstrap.min.js"
-    [3]=>
-    string(35) "/myMVC/scripts/cookieConsent.min.js"
+    [0]=>string(46) "/myMVC/assets/jquery/3.4.1/jquery-3.4.1.min.js"
+    [1]=>string(54) "/myMVC/assets/jquery-cookie/1.4.1/jquery.cookie.min.js"
+    [2]=>string(54) "/myMVC/assets/bootstrap-4.4.1-dist/js/bootstrap.min.js"
+    [3]=>string(35) "/myMVC/scripts/cookieConsent.min.js"
   }
 }
 ~~~
