@@ -435,7 +435,7 @@ _Example Request_
 
 _Command_  
 ~~~php
-$sTail = $sRequest::getPathParam()['_tail'];
+$sTail = Request::getPathParam()['_tail'];
 ~~~
 
 _Result of `$sTail`_  
