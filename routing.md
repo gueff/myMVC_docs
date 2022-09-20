@@ -15,10 +15,6 @@
     - [Get a route](#Get-a-route)
         - [Get current route](#Get-current-route)
         - [Get any route](#Get-any-route)
-    - [Accessing Path Params / Variables](#Accessing-Path-Params-Variables)
-        - [Get all Variables](#Get-all-Variables)
-        - [Get a certain Variable](#Get-a-certain-Variable)
-        - [Get the overlapping string on wildcard route paths](#Get-the-overlapping-string-on-wildcard-route-paths)
     - [Accessing additional context information](#Accessing-additional-context-information)
         - [Get the additional context information of the current route](#Get-the-additional-context-information-of-the-current-route)
         - [Get the additional context information of _any_ route](#Get-the-additional-context-information-of-any-route)
@@ -32,7 +28,7 @@
 <a id="Routing-files"></a>
 ### Routing files
 
-all routing information are written in php files in your module's routing folder.
+All routing information are written in php files in your module's routing folder. All `*.php` files in the routing folder will be load at start.
 
 _Schema_
 ~~~
@@ -55,6 +51,7 @@ you can create you own `*.php` routing file, for example `foo.php` and edit your
 
 If you want to create routes for an API, it then makes sense to create a file called `api.php` and write all your api routes inside that file.
 
+
 <a id="writing-a-Route"></a>
 ### writing a Route
 
@@ -62,7 +59,7 @@ _You declare a route with Command `\MVC\Route`:_
 ~~~
 \MVC\Route::{METHOD}(path, targetController, additionalInformation)
 ~~~
-- `{METHOD}`: one of the RESTful request methods `get`, `post`, `put`, `delete`; you declare which RESTful request method is expected for this route
+- `{METHOD}`: one of the RESTful request methods `GET`, `POST`, `PUT`, `DELETE`; you declare which RESTful request method is expected for this route
 - `path`: url path
 - `targetController`: the `Controller::method` the route leads to
 - `additionalInformation` [optional]: any information you may need to process in your target controller (or elsewhere)
@@ -73,14 +70,14 @@ Open the file `frontend.php` - beneath the existing rule, add your own.
 
 _example: already existing route `'/'`_
 ~~~php
-\MVC\Route::get('/', 'module=Foo&c=Index&m=index', $oDTRoutingAdditional->getPropertyJson());
+\MVC\Route::GET('/', 'module=Foo&c=Index&m=index', $oDTRoutingAdditional->getPropertyJson());
 ~~~
 
 To keep it simple at start, just copy the existing route of `'/'` and add it beneath as route `'/foo/'`.
 
 _add new route `'/foo/'`_
 ~~~php
-\MVC\Route::get('/foo/', 'module=Foo&c=Index&m=index', $oDTRoutingAdditional->getPropertyJson());
+\MVC\Route::GET('/foo/', 'module=Foo&c=Index&m=index', $oDTRoutingAdditional->getPropertyJson());
 ~~~
 
 Assuming you are running myMVC's local development server, you can then call the url `http://127.0.0.1:1969/foo/`
@@ -89,53 +86,53 @@ Assuming you are running myMVC's local development server, you can then call the
 <a id="Naming-the-target-controller"></a>
 ### Naming the target controller
 
-you can name the target controller in two ways.
+You can name the target controller in two ways.
 
 **query notation**
 
 historically conditioned you can still name it with the myMVC's query notation
 
 ~~~php
-\MVC\Route::get('/foo/', 'module=Foo&c=Index&m=index');
+\MVC\Route::GET('/foo/', 'module=Foo&c=Index&m=index');
 ~~~
-- request method here is `get`
+- request method here is `GET`
 - path is `/foo/`
-- targetController: leads to => Module `Foo` (module), Controller `Index` (c), Method `index` (m)
+- targetController: leads to => Module `Foo` (module), Controller `Index` (c), Method `index` (m) => (which is Class::method `\Foo\Controller\Index::index`)
 
 **controller::method notation**
 
-you can also name the target controller and method info by its class and method names itself.  
+You can also name the target controller and method info by its class and method names itself.  
 ⚠ Requirement: It has to be a MVC Controller.
 
 ~~~php
-\MVC\Route::get('/foo/', '\Foo\Controller\Index::index');
+\MVC\Route::GET('/foo/', '\Foo\Controller\Index::index');
 ~~~
-- request method here is `get`
+- request method here is `GET`
 - path is `/foo/`
 - targetController: leads to Class::method `\Foo\Controller\Index::index`
 
 <a id="adding-additional-context-information-to-route"></a>
 ### Adding additional context information to route
 
-you can add any information to the route as long as it is a string or any other type that could be encoded to JSON - type `array` for example.
+You can add any information to the route as long as it is a string or any other type that could be encoded to JSON - type `array` for example.
 
 The information you add to your route will be `json_encode()` and therefore stored as JSON. When you read the additional information you get JSON.
 
 **Simple Examples**
 
 ~~~php
-\MVC\Route::get('/foo/', '\Foo\Controller\Index::index', 'Hello World');
+\MVC\Route::GET('/foo/', '\Foo\Controller\Index::index', 'Hello World');
 ~~~
 ~~~php
-\MVC\Route::get('/foo/', '\Foo\Controller\Index::index', [1, 'foo', 'bar']);
+\MVC\Route::GET('/foo/', '\Foo\Controller\Index::index', [1, 'foo', 'bar']);
 ~~~
 
 **More complex Example**
 
 In the example `frontend.php` you see a DataType Class `$oDTRoutingAdditional` of Type `\Foo\DataType\DTRoutingAdditional`.
-This is a class is generated by myMVC's DataType Generator; see [/3.x/generating-datatype-classes](/3.x/generating-datatype-classes) for more Information.
+This class is generated by myMVC's DataType Generator; see [/3.x/generating-datatype-classes](/3.x/generating-datatype-classes) for more Information.
 
-The information stored in this DataType Class are will be accessed by the View Class as they contain necessary information for setting up the View correctly.
+The information stored in this DataType Class will be accessed by the View Class as they are necessary for setting up the View correctly.
 
 As we noted earlier, the additional information you want to add to your route have to be string or any other type that could be encoded to JSON.
 Luckily the DataType class per default has a method to serve its contents as JSON:
@@ -169,7 +166,7 @@ $oDTRoutingAdditional = \Foo\DataType\DTRoutingAdditional::create()
 
 _Example route_
 ~~~php
-\MVC\Route::get(
+\MVC\Route::GET(
     '/foo/', 
     '\Foo\Controller\Index::index', 
     $oDTRoutingAdditional->getPropertyJson()
@@ -183,7 +180,7 @@ _Example route_
 
 _Example_  
 ~~~php
-\MVC\Route::get('/foo/', 'module=Foo&c=Index&m=foo');
+\MVC\Route::GET('/foo/', 'module=Foo&c=Index&m=foo');
 ~~~
 
 you can only request  
@@ -196,7 +193,7 @@ you cannot request e.g.
 therefore, just add `*` after the path: `'/foo/*'`.  
 
 ~~~php
-\MVC\Route::get('/foo/*', 'module=Foo&c=Index&m=foo');
+\MVC\Route::GET('/foo/*', 'module=Foo&c=Index&m=foo');
 ~~~
 
 now you can request each of these url paths
@@ -213,7 +210,7 @@ If you want to declare the variable `id` you write `:id`.  All variables you dec
 
 _Example_
 ~~~php
-\MVC\Route::get('/api/:id/:name/:address/', 'module=Foo&c=Api&m=index');
+\MVC\Route::GET('/api/:id/:name/:address/', 'module=Foo&c=Api&m=index');
 ~~~
 
 Valid Requests:
@@ -222,14 +219,15 @@ Valid Requests:
 
 _Example with activating wildcard routing_
 ~~~php
-\MVC\Route::get('/api/:id/:name/:address/*', 'module=Foo&c=Api&m=index');
+\MVC\Route::GET('/api/:id/:name/:address/*', 'module=Foo&c=Api&m=index');
 ~~~
 
 Valid Requests:
 - `/api/1/Foo/Bar/what/else/`
 - `/api/1969/FooBar/Somwhere%20else/what/else/`
 
-see also: [Accessing Path Params / Variables](#Accessing-Path-Params-Variables)
+_Access the Variables_  
+- see `Request`: [Accessing Path Params / Variables](/3.x/request#Accessing-Path-Params-Variables)
 
 ---
 
@@ -375,87 +373,6 @@ $sClass = Route::$aRoute['/404/']->get_class();
 _Example Result of `$sClass`_  
 ~~~
 Foo\Controller\Index
-~~~
-
-
-<a id="Accessing-Path-Params-Variables"></a>
-### Accessing Path Params / Variables
-
-_Example route_
-~~~php
-\MVC\Route::get('/api/:id/:name/:address/*', 'module=Foo&c=Api&m=index');
-~~~
-
-_Example Request_
-- `/api/1/Foo/Bar/what/else/`
-
-<a id="Get-all-Variables"></a>
-**Get all Variables**
-
-_Command_
-~~~php
-$aPathParam = Request::getPathParam();
-~~~
-
-_Example Result of `$aPathParam`_  
-~~~
-array(4) {
-  ["id"]=>string(1) "1"
-  ["name"]=>string(3) "Foo"
-  ["address"]=>string(3) "Bar"
-  ["_tail"]=>string(10) "what/else/"
-}
-~~~
-
-<a id="Get-a-certain-Variable"></a>
-**Get a certain Variable**
-
-_Command_
-~~~php
-$sPathParam = Request::getPathParam('name')
-~~~
-
-_Example Result of `$sPathParam`_  
-~~~
-Foo
-~~~
-
-<a id="Get-the-overlapping-string-on-wildcard-route-paths"></a>
-**Get the overlapping string on wildcard route paths**
-
-say you have a wildcard route and you want to get the overlapping path string after `*`. 
-
-_Example route_
-~~~php
-\MVC\Route::get('/foo/*', 'module=Foo&c=Index&m=foo');
-~~~
-
-_Example Request_
-- `/foo/bar/baz/`
-
-_Command_  
-~~~php
-$sTail = Request::getPathParam()['_tail'];
-~~~
-
-_Result of `$sTail`_  
-~~~
-bar/baz/
-~~~
-
-_If you want the Result as an array_  
-~~~php
-$aTail = Request::getPathArray(
-    Request::getPathParam()['_tail']
-);
-~~~
-
-_Result of `$aTail`_  
-~~~
-array(2) {
-  [0]=>string(3) "bar"
-  [1]=>string(1) "baz"
-}
 ~~~
 
 
