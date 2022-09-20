@@ -2,40 +2,178 @@
 # Routing
 
 - [Creating a Route](#Creating-a-Route)
-    - [Wildcard routing](#wildcard-routing)
-    - [Routing with Path Params](#path-params)
+  - [Routing files](#Routing-files) 
+  - [writing a Route](#writing-a-Route)
+  - [Naming the target controller](#Naming-the-target-controller)
+  - [Adding additional context information to route](#adding-additional-context-information-to-route)
+  - [Wildcard routing](#wildcard-routing)
+  - [Routing with Path Params / Variables](#path-params)
+- [Working with Routes](#Working-with-Routes)
+  - [Get all routes](#Get-all-routes)
+    - [Get routes array](#get-routes-array)
+    - [Get array stacked by request methods](#Get-array-stacked-by-request-methods)
+  - [Get a route](#Get-a-route)
+    - [Get current route](#Get-current-route)
+    - [Get any route](#Get-any-route)
+  - [Accessing Path Params / Variables](#Accessing-Path-Params-Variables)
+    - [Get all Variables](#Get-all-Variables)
+    - [Get a certain Variable](#Get-a-certain-Variable)
+  - [Accessing additional context information](#Accessing-additional-context-information)
+    - [Get the additional context information of the current route](#Get-the-additional-context-information-of-the-current-route)
+    - [Get the additional context information of _any_ route](#Get-the-additional-context-information-of-any-route)
+    - [Converting JSON back to object](#Converting-JSON-back-to-object)
 
 ---
 
 <a id="Creating-a-Route"></a>
 ## Creating a Route 
 
-_Place of routing files_  
+<a id="Routing-files"></a>
+### Routing files
+
+all routing information are written in php files in your module's routing folder.
+
+_Schema_  
 ~~~
 modules/{Module}/etc/routing/
 ~~~
 
-so if your moudule is `Foo`, open your routing folder like this
-~~~bash
+If your module is `Foo`, then this is your routing folder  
+~~~
 modules/Foo/etc/routing/;
 ~~~
 
-open the file `frontend.php` - beneath the existing rule, add your own.
-
-- To keep it simple at start, just copy the existing rule of `"/"` and add it beneath as route `"/foo/"` - see route example.
-- then you can call the url `http://{whatever}/foo/`
+per default you see these contents  
+~~~
+modules/Foo/etc/routing/
+└── frontend.php
+~~~
 
 _individual routing files_  
 you can create you own `*.php` routing file, for example `foo.php` and edit your route in that file.
 
 If you want to create routes for an API, it then makes sense to create a file called `api.php` and write all your api routes inside that file.
 
-_route examples: adding route `/foo/`_  
+<a id="writing-a-Route"></a>
+### writing a Route
+
+_You declare a route with Command `\MVC\Route`:_  
+~~~
+\MVC\Route::{METHOD}(path, targetController, additionalInformation)
+~~~
+- `{METHOD}`: one of the RESTful request methods `get`, `post`, `put`, `delete`; you declare which RESTful request method is expected for this route
+- `path`: url path
+- `targetController`: the `Controller::method` the route leads to
+- `additionalInformation` [optional]: any information you may need to process in your target controller (or elsewhere)
+
+_Example_
+
+Open the file `frontend.php` - beneath the existing rule, add your own.
+
+_example: already existing route `'/'`_  
+~~~php
+\MVC\Route::get('/', 'module=Foo&c=Index&m=index', $oDTRoutingAdditional->getPropertyJson());
+~~~
+
+To keep it simple at start, just copy the existing route of `'/'` and add it beneath as route `'/foo/'`.
+
+_add new route `'/foo/'`_
+~~~php
+\MVC\Route::get('/foo/', 'module=Foo&c=Index&m=index', $oDTRoutingAdditional->getPropertyJson());
+~~~
+
+Assuming you are running myMVC's local development server, you can then call the url `http://127.0.0.1:1969/foo/`
+
+
+<a id="Naming-the-target-controller"></a>
+### Naming the target controller
+
+you can name the target controller in two ways.
+
+**query notation**
+
+historically conditioned you can still name it with the myMVC's query notation
+
 ~~~php
 \MVC\Route::get('/foo/', 'module=Foo&c=Index&m=index');
 ~~~
-- Route `/foo/`
-- leads to => Module `Foo`, Controller `Index`, Method `index`
+- request method here is `get`
+- path is `/foo/`
+- targetController: leads to => Module `Foo` (module), Controller `Index` (c), Method `index` (m)
+
+**controller::method notation**
+
+you can also name the target controller and method info by its class and method names itself.  
+⚠ Requirement: It has to be a MVC Controller.
+
+~~~php
+\MVC\Route::get('/foo/', '\Foo\Controller\Index::index');
+~~~
+- request method here is `get`
+- path is `/foo/`
+- targetController: leads to Class::method `\Foo\Controller\Index::index`
+
+<a id="adding-additional-context-information-to-route"></a>
+### Adding additional context information to route
+
+you can add any information to the route as long as it is a string or any other type that could be encoded to JSON - type `array` for example.
+
+The information you add to your route will be `json_encode()` and therefore stored as JSON. When you read the additional information you get JSON.
+
+**Simple Examples**
+
+~~~php
+\MVC\Route::get('/foo/', '\Foo\Controller\Index::index', 'Hello World');
+~~~
+~~~php
+\MVC\Route::get('/foo/', '\Foo\Controller\Index::index', [1, 'foo', 'bar']);
+~~~
+
+**More complex Example**
+
+In the example `frontend.php` you see a DataType Class `$oDTRoutingAdditional` of Type `\Foo\DataType\DTRoutingAdditional`.
+This is a class is generated by myMVC's DataType Generator; see [/3.x/generating-datatype-classes](/3.x/generating-datatype-classes) for more Information.
+
+The information stored in this DataType Class are will be accessed by the View Class as they contain necessary information for setting up the View correctly.
+
+As we noted earlier, the additional information you want to add to your route have to be string or any other type that could be encoded to JSON.
+Luckily the DataType class per default has a method to serve its contents as JSON:  
+~~~php 
+$oDTRoutingAdditional->getPropertyJson()
+~~~
+
+_Example object DTRoutingAdditional_  
+~~~php
+$oDTRoutingAdditional = \Foo\DataType\DTRoutingAdditional::create()
+    ->set_sTitle('Foo')
+    ->set_sLayout('Frontend/layout/index.tpl')
+    ->set_sMainmenu('Frontend/layout/menu.tpl')
+    ->set_sContent('Frontend/content/index.tpl')
+    ->set_sHeader('Frontend/layout/header.tpl')
+    ->set_sNoscript('Frontend/content/_noscript.tpl')
+    ->set_sCookieConsent('Frontend/content/_cookieConsent.tpl')
+    ->set_sFooter('Frontend/layout/footer.tpl')
+    ->set_aStyle(array (
+        '/myMVC/assets/bootstrap-4.4.1-dist/css/bootstrap.min.css',
+        '/myMVC/assets/font-awesome-4.7.0/css/font-awesome.min.css',
+        '/myMVC/styles/myMVC.min.css',
+    ))
+    ->set_aScript(array (
+        '/myMVC/assets/jquery/3.4.1/jquery-3.4.1.min.js',
+        '/myMVC/assets/jquery-cookie/1.4.1/jquery.cookie.min.js',
+        '/myMVC/assets/bootstrap-4.4.1-dist/js/bootstrap.min.js',
+        '/myMVC/scripts/cookieConsent.min.js',
+    ));
+~~~
+
+_Example route_  
+~~~php
+\MVC\Route::get(
+    '/foo/', 
+    '\Foo\Controller\Index::index', 
+    $oDTRoutingAdditional->getPropertyJson()
+);
+~~~
 
 <a id="wildcard-routing"></a>
 ### Wildcard routing   
@@ -53,33 +191,332 @@ e.g. the route `/foo/*`
 - you can call `/foo/bar/baz/...`
 
 <a id="path-params"></a>
-### Routing with Path Params
+### Routing with Path Params / Variables
 
-You can define Routes with Variables, which you simply write with a leading `:`
+You can define Routes with Variables. Therefore name them with a leading `:` .  
+If you want to declare the variable `id` you write `:id`.  All variables you declare in your route are accessible by name.
 
 _Example_  
 ~~~php
-\MVC\Route::get('/api/:id/:name/:address/*', 'module=Webbixx&c=Api&m=foo');
+\MVC\Route::get('/api/:id/:name/:address/', 'module=Foo&c=Api&m=index');
 ~~~
 
-Valid Requests are:
-- `/api/1/Guido/Wallenhorst/`
+Valid Requests:
+- `/api/1/Foo/Bar/`
 - `/api/1969/FooBar/Somwhere%20else/`
 
-and as long as we add an asterisk `*` at the end, the declared route becomes wildcard.    
-So, these are also valid Requests:  
-- `/api/1/Guido/Wallenhorst/foo/bar/`
-- `/api/1969/FooBar/Somwhere%20else/foo/bar/john/doe/`
-
-**Requesting the Variables** 
-
-_get all  Variables_  
+_Example with activating wildcard routing_  
 ~~~php
-Request::getPathParam(); # array
+\MVC\Route::get('/api/:id/:name/:address/*', 'module=Foo&c=Api&m=index');
 ~~~
 
-_get a certain Variable_  
+Valid Requests:  
+- `/api/1/Foo/Bar/what/else/`
+- `/api/1969/FooBar/Somwhere%20else/what/else/`
+
+see also: [Accessing Path Params / Variables](#Accessing-Path-Params-Variables)
+
+---
+
+<a id="Working-with-Routes"></a>
+## Working with Routes
+
+<a id="Get-all-routes"></a>
+### Get all routes
+
+<a id="get-routes-array"></a>
+**Get routes array**
+
+Simply access the public property `$aRoute` of class `Route`. It will give you an associative array where its values are objects of type `MVC\DataType\DTRoute`.  
+
+_Command_  
 ~~~php
-Request::getPathParam( $sKey ) # string
+/** @var MVC\DataType\DTRoute[] $aRoute */
+$aRoute = Route::$aRoute;
+~~~
+
+_Example Result (shortened)_
+~~~
+array(2) {
+  ["/"]=>
+  object(MVC\DataType\DTRoute)#15 (9) {
+    ["path":protected]=>string(1) "/"
+    ["method":protected]=>string(3) "GET"
+    ["query":protected]=>string(30) "module=Foo&c=Index&m=index"
+    ["class":protected]=>string(24) "Foo\Controller\Index"
+    ["classFile":protected]=>string(128) "/var/www/myMVC/modules/Foo/Controller/Index.php"
+    ["module":protected]=>string(7) "Foo"
+    ["c":protected]=>string(5) "Index"
+    ["m":protected]=>string(5) "index"
+    ["additional":protected]=>string(733) "{"sTitle":"Foo","sLayout":"Frontend\/layout\/index.tpl","sMainmenu":"Frontend\/layout\/menu.tpl","sContent":"Frontend\/content\/index.tpl","sHeader":"Frontend\/layout\/header.tpl","sNoscript":"Frontend\/content\/_noscript.tpl","sCookieConsent":"Frontend\/content\/_cookieConsent.tpl","sFooter":"Frontend\/layout\/footer.tpl","aStyle":["\/myMVC\/assets\/bootstrap-4.4.1-dist\/css\/bootstrap.min.css","\/myMVC\/assets\/font-awesome-4.7.0\/css\/font-awesome.min.css","\/myMVC\/styles\/myMVC.min.css"],"aScript":["\/myMVC\/assets\/jquery\/3.4.1\/jquery-3.4.1.min.js","\/myMVC\/assets\/jquery-cookie\/1.4.1\/jquery.cookie.min.js","\/myMVC\/assets\/bootstrap-4.4.1-dist\/js\/bootstrap.min.js","\/myMVC\/scripts\/cookieConsent.min.js"]}"
+  }
+  ["/404/"]=>
+  object(MVC\DataType\DTRoute)#17 (9) {
+   ...
+ }
+}
+~~~
+
+<a id="get-array-stacked-by-request-methods"></a>
+**Get array stacked by request methods**
+
+Access the public property `$aMethod` to get an array of route indeces stacked by request method.
+
+_Command_
+~~~php
+Route::$aMethod;
+~~~
+
+_Example Result_  
+~~~
+array(2) {
+  ["put"]=>
+  array(1) {
+    [0]=>
+    string(20) "/api/1.0.0/user/:id/"
+  }
+  ["get"]=>
+  array(3) {
+    [0]=>
+    string(1) "/"
+    [1]=>
+    string(5) "/404/"
+    [2]=>
+    string(25) "/api/:id/:name/:address/*"
+  }
+}
+~~~
+
+<a id="Get-a-route"></a>
+### Get a route
+
+<a id="Get-current-route"></a>
+#### Get current route
+
+this will give you the current route object to the requested url path.
+
+_Example request_  
+- `/api/1/Foo/Bar/what/else/`
+
+_Command_
+~~~php
+Route::getCurrent();
+~~~
+
+_Result_  
+~~~
+object(MVC\DataType\DTRoute)#19 (9) {
+  ["path":protected]=>
+  string(25) "/api/:id/:name/:address/*"
+  ["method":protected]=>
+  string(3) "GET"
+  ["query":protected]=>
+  string(30) "module=Foo&c=Api&m=index"
+  ["class":protected]=>
+  string(24) "Foo\Controller\Api"
+  ["classFile":protected]=>
+  string(128) "/var/www/myMVC/modules/Foo/Controller/Api.php"
+  ["module":protected]=>
+  string(7) "Foo"
+  ["c":protected]=>
+  string(5) "Index"
+  ["m":protected]=>
+  string(5) "index"
+  ["additional":protected]=>
+  string(727) "{"sTitle":"API","sLayout":"Frontend\/layout\/index.tpl","sMainmenu":"Frontend\/layout\/menu.tpl","sContent":"Frontend\/content\/foo.tpl","sHeader":"Frontend\/layout\/header.tpl","sNoscript":"Frontend\/content\/_noscript.tpl","sCookieConsent":"Frontend\/content\/_cookieConsent.tpl","sFooter":"Frontend\/layout\/footer.tpl","aStyle":["\/myMVC\/assets\/bootstrap-4.4.1-dist\/css\/bootstrap.min.css","\/myMVC\/assets\/font-awesome-4.7.0\/css\/font-awesome.min.css","\/myMVC\/styles\/myMVC.min.css"],"aScript":["\/myMVC\/assets\/jquery\/3.4.1\/jquery-3.4.1.min.js","\/myMVC\/assets\/jquery-cookie\/1.4.1\/jquery.cookie.min.js","\/myMVC\/assets\/bootstrap-4.4.1-dist\/js\/bootstrap.min.js","\/myMVC\/scripts\/cookieConsent.min.js"]}"
+}
+~~~
+
+As the Result is an object of type `MVC\DataType\DTRoute` you can access all its properties by getter.
+
+_Example_  
+~~~php
+Route::getCurrent()->get_class();
+~~~
+
+_Result_    
+~~~
+Foo\Controller\Api
+~~~
+
+<a id="Get-any-route"></a>
+#### Get any route
+
+you can get any route object by accessing public `$aRoute` from class `Route`.
+
+_Command_
+~~~php
+// we want the route object of route /404/
+$oRoute = Route::$aRoute['/404/'];
+~~~
+
+_Result_
+~~~
+object(MVC\DataType\DTRoute)#17 (9) {
+  ["path":protected]=>
+  string(5) "/404/"
+  ["method":protected]=>
+  string(3) "GET"
+  ["query":protected]=>
+  string(33) "module=Foo&c=Index&m=notFound"
+  ["class":protected]=>
+  string(24) "Foo\Controller\Index"
+  ["classFile":protected]=>
+  string(128) "/var/www/myMVC/modules/Foo/Controller/Index.php"
+  ["module":protected]=>
+  string(7) "Foo"
+  ["c":protected]=>
+  string(5) "Index"
+  ["m":protected]=>
+  string(8) "notFound"
+  ["additional":protected]=>
+  string(727) "{"sTitle":"404","sLayout":"Frontend\/layout\/index.tpl","sMainmenu":"Frontend\/layout\/menu.tpl","sContent":"Frontend\/content\/404.tpl","sHeader":"Frontend\/layout\/header.tpl","sNoscript":"Frontend\/content\/_noscript.tpl","sCookieConsent":"Frontend\/content\/_cookieConsent.tpl","sFooter":"Frontend\/layout\/footer.tpl","aStyle":["\/myMVC\/assets\/bootstrap-4.4.1-dist\/css\/bootstrap.min.css","\/myMVC\/assets\/font-awesome-4.7.0\/css\/font-awesome.min.css","\/myMVC\/styles\/myMVC.min.css"],"aScript":["\/myMVC\/assets\/jquery\/3.4.1\/jquery-3.4.1.min.js","\/myMVC\/assets\/jquery-cookie\/1.4.1\/jquery.cookie.min.js","\/myMVC\/assets\/bootstrap-4.4.1-dist\/js\/bootstrap.min.js","\/myMVC\/scripts\/cookieConsent.min.js"]}"
+}
+~~~
+
+As the Result is an object of type `MVC\DataType\DTRoute` you can access all its properties by getter.
+
+_Example_
+~~~php
+Route::$aRoute['/404/']->get_class();
+~~~
+
+_Result_
+~~~
+Foo\Controller\Index
+~~~
+
+
+<a id="Accessing-Path-Params-Variables"></a>
+### Accessing Path Params / Variables
+
+_Example route_
+~~~php
+\MVC\Route::get('/api/:id/:name/:address/*', 'module=Foo&c=Api&m=index');
+~~~
+
+_Example Request_  
+- `/api/1/Foo/Bar/what/else/`
+
+<a id="Get-all-Variables"></a>
+**Get all Variables**  
+
+_Command_  
+~~~php
+Request::getPathParam();
+~~~
+
+_Result_  
+~~~
+array(4) {
+  ["id"]=>
+  string(1) "1"
+  ["name"]=>
+  string(3) "Foo"
+  ["address"]=>
+  string(3) "Bar"
+  ["_tail"]=>
+  string(10) "what/else/"
+}
+~~~
+
+<a id="Get-a-certain-Variable"></a>
+**Get a certain Variable**  
+
+_Command_  
+~~~php
+Request::getPathParam('name')
+~~~
+
+_Result_  
+~~~
+Foo
+~~~
+
+
+<a id="Accessing-additional-context-information"></a>
+### Accessing additional context information
+
+<a id="Get-the-additional-context-information-of-the-current-route"></a>
+**Get the additional context information of the current route**
+
+_Command_  
+~~~php
+Route::getCurrent()->get_additional()
+~~~
+
+_Result JSON_  
+~~~json
+{"sTitle":"Foo","sLayout":"Frontend\/layout\/index.tpl","sMainmenu":"Frontend\/layout\/menu.tpl","sContent":"Frontend\/content\/index.tpl","sHeader":"Frontend\/layout\/header.tpl","sNoscript":"Frontend\/content\/_noscript.tpl","sCookieConsent":"Frontend\/content\/_cookieConsent.tpl","sFooter":"Frontend\/layout\/footer.tpl","aStyle":["\/myMVC\/assets\/bootstrap-4.4.1-dist\/css\/bootstrap.min.css","\/myMVC\/assets\/font-awesome-4.7.0\/css\/font-awesome.min.css","\/myMVC\/styles\/myMVC.min.css"],"aScript":["\/myMVC\/assets\/jquery\/3.4.1\/jquery-3.4.1.min.js","\/myMVC\/assets\/jquery-cookie\/1.4.1\/jquery.cookie.min.js","\/myMVC\/assets\/bootstrap-4.4.1-dist\/js\/bootstrap.min.js","\/myMVC\/scripts\/cookieConsent.min.js"]}
+~~~
+
+<a id="Get-the-additional-context-information-of-any-route"></a>
+**Get the additional context information of _any_ route**
+
+Therefore access the public property `$aRoute` directly with the path of the route of your interest. It will give you an object of Type `MVC\DataType\DTRoute`, which allows you to access its method `get_additional()`.
+
+_Command_  
+~~~php
+Route::$aRoute['/404/']->get_additional()
+~~~
+
+_Result JSON_
+~~~json
+{"sTitle":"404","sLayout":"Frontend\/layout\/index.tpl","sMainmenu":"Frontend\/layout\/menu.tpl","sContent":"Frontend\/content\/404.tpl","sHeader":"Frontend\/layout\/header.tpl","sNoscript":"Frontend\/content\/_noscript.tpl","sCookieConsent":"Frontend\/content\/_cookieConsent.tpl","sFooter":"Frontend\/layout\/footer.tpl","aStyle":["\/myMVC\/assets\/bootstrap-4.4.1-dist\/css\/bootstrap.min.css","\/myMVC\/assets\/font-awesome-4.7.0\/css\/font-awesome.min.css","\/myMVC\/styles\/myMVC.min.css"],"aScript":["\/myMVC\/assets\/jquery\/3.4.1\/jquery-3.4.1.min.js","\/myMVC\/assets\/jquery-cookie\/1.4.1\/jquery.cookie.min.js","\/myMVC\/assets\/bootstrap-4.4.1-dist\/js\/bootstrap.min.js","\/myMVC\/scripts\/cookieConsent.min.js"]}
+~~~
+
+<a id="Converting-JSON-back-to-object"></a>
+**Converting JSON back to object**
+
+You first have to convert that JSON Result into array.  
+Then put that array into its DataType create method. 
+
+_Command_  
+~~~php
+DTRoutingAdditional::create(
+    json_decode(Route::$aRoute['/404/']->get_additional(), true)
+)
+~~~
+
+_Result_  
+~~~
+object(Foo\DataType\DTRoutingAdditional)#66 (10) {
+  ["sTitle":protected]=>
+  string(3) "404"
+  ["sLayout":protected]=>
+  string(25) "Frontend/layout/index.tpl"
+  ["sMainmenu":protected]=>
+  string(24) "Frontend/layout/menu.tpl"
+  ["sContent":protected]=>
+  string(24) "Frontend/content/404.tpl"
+  ["sHeader":protected]=>
+  string(26) "Frontend/layout/header.tpl"
+  ["sNoscript":protected]=>
+  string(30) "Frontend/content/_noscript.tpl"
+  ["sCookieConsent":protected]=>
+  string(35) "Frontend/content/_cookieConsent.tpl"
+  ["sFooter":protected]=>
+  string(26) "Frontend/layout/footer.tpl"
+  ["aStyle":protected]=>
+  array(3) {
+    [0]=>
+    string(56) "/myMVC/assets/bootstrap-4.4.1-dist/css/bootstrap.min.css"
+    [1]=>
+    string(57) "/myMVC/assets/font-awesome-4.7.0/css/font-awesome.min.css"
+    [2]=>
+    string(27) "/myMVC/styles/myMVC.min.css"
+  }
+  ["aScript":protected]=>
+  array(4) {
+    [0]=>
+    string(46) "/myMVC/assets/jquery/3.4.1/jquery-3.4.1.min.js"
+    [1]=>
+    string(54) "/myMVC/assets/jquery-cookie/1.4.1/jquery.cookie.min.js"
+    [2]=>
+    string(54) "/myMVC/assets/bootstrap-4.4.1-dist/js/bootstrap.min.js"
+    [3]=>
+    string(35) "/myMVC/scripts/cookieConsent.min.js"
+  }
+}
 ~~~
 
