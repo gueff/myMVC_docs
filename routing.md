@@ -452,7 +452,7 @@ $aTail = Request::getPathArray(
 
 _Result of `$aTail`_  
 ~~~
-array(3) {
+array(2) {
   [0]=>string(3) "bar"
   [1]=>string(1) "baz"
 }
@@ -482,7 +482,7 @@ Therefore access the public property `$aRoute` directly with the path of the rou
 
 _Command_
 ~~~php
-$sAdditional =Route::$aRoute['/404/']->get_additional()
+$sAdditional = Route::$aRoute['/404/']->get_additional()
 ~~~
 
 _Example Result of `$sAdditional` (JSON)_
