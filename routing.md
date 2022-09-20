@@ -18,7 +18,7 @@
     - [Accessing Path Params / Variables](#Accessing-Path-Params-Variables)
         - [Get all Variables](#Get-all-Variables)
         - [Get a certain Variable](#Get-a-certain-Variable)
-        - [Get the overlapping string on wildcard route paths](#Get-the-overlapping-string-on-wildcard-route-paths")
+        - [Get the overlapping string on wildcard route paths](#Get-the-overlapping-string-on-wildcard-route-paths)
     - [Accessing additional context information](#Accessing-additional-context-information)
         - [Get the additional context information of the current route](#Get-the-additional-context-information-of-the-current-route)
         - [Get the additional context information of _any_ route](#Get-the-additional-context-information-of-any-route)
