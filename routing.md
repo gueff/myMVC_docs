@@ -307,7 +307,7 @@ _Example request_
 
 _Command_
 ~~~php
-$oDTRoute = Route::getCurrent();
+$oDTRoute = \MVC\Route::getCurrent();
 ~~~
 
 _Example Result of `$oDTRoute`_
@@ -329,7 +329,7 @@ As the Result is an object of type `MVC\DataType\DTRoute` you can access all its
 
 _Example_ 
 ~~~php
-$sClass = Route::getCurrent()->get_class();
+$sClass = \MVC\Route::getCurrent()->get_class();
 ~~~
 
 _Example Result of `$sClass`_  
@@ -345,7 +345,7 @@ you can get any route object by accessing public `$aRoute` from class `Route`.
 _Command_
 ~~~php
 // we want the route object of route /404/
-$oRoute = Route::$aRoute['/404/'];
+$oRoute = \MVC\Route::$aRoute['/404/'];
 ~~~
 
 _Example Result of `$oRoute`_  
@@ -367,7 +367,7 @@ As the Result is an object of type `MVC\DataType\DTRoute` you can access all its
 
 _Example_  
 ~~~php
-$sClass = Route::$aRoute['/404/']->get_class();
+$sClass = \MVC\Route::$aRoute['/404/']->get_class();
 ~~~
 
 _Example Result of `$sClass`_  
@@ -384,7 +384,7 @@ Foo\Controller\Index
 
 _Command_
 ~~~php
-$sAdditional = Route::getCurrent()->get_additional()
+$sAdditional = \MVC\Route::getCurrent()->get_additional()
 ~~~
 
 _Example Result of `$sAdditional` (JSON)_  
@@ -399,7 +399,7 @@ Therefore access the public property `$aRoute` directly with the path of the rou
 
 _Command_
 ~~~php
-$sAdditional = Route::$aRoute['/404/']->get_additional()
+$sAdditional = \MVC\Route::$aRoute['/404/']->get_additional()
 ~~~
 
 _Example Result of `$sAdditional` (JSON)_
@@ -415,8 +415,8 @@ Then put that array into its DataType create method.
 
 _Command_
 ~~~php
-$oDTRoutingAdditional = DTRoutingAdditional::create(
-    json_decode(Route::$aRoute['/404/']->get_additional(), true)
+$oDTRoutingAdditional = \Foo\DataType\DTRoutingAdditional::create(
+    json_decode(\MVC\Route::$aRoute['/404/']->get_additional(), true)
 )
 ~~~
 
