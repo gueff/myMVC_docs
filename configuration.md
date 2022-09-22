@@ -83,38 +83,38 @@ This also means that a later loaded configuration beats (overrides) an earlier l
 <a id="Access-MVC-config-values"></a>
 ## Access `MVC_*` config values 
 
-You can access MVC configurations via the `Config` Class. For each variable there is an identical getter.
+You can access MVC configurations via the `\MVC\Config` Class. For each variable there is an identical getter.
 
 _syntax_  
 ~~~
-$mVar = Config::get_{MVC_VARIABLE}();
+$mVar = \MVC\Config::get_{MVC_VARIABLE}();
 ~~~
 
 _example_  
 ~~~php
-$sMvcBasePath = Config::get_MVC_BASE_PATH();
+$sMvcBasePath = \MVC\Config::get_MVC_BASE_PATH();
 ~~~
 
-Alternativley you can access all MVC Configs via Registry.
+Alternativley you can access all MVC Configs via `\MVC\Registry`.
 
 _alternative_  
 ~~~php
-$sMvcBasePath = Registry::get('MVC_BASE_PATH');
+$sMvcBasePath = \MVC\Registry::get('MVC_BASE_PATH');
 ~~~
 
 <a id="Access-module-config-values"></a>
 ## Access module config values 
 
-You can access module configuration array via the `Config` Class. 
+You can access module configuration array via the `\MVC\Config` Class. 
 
 _example_
 ~~~php
-$aModule = Config::MODULE();
+$aModule = \MVC\Config::MODULE();
 ~~~
 
-Alternativley you can access the module configuration array via Registry.
+Alternativley you can access the module configuration array via `\MVC\Registry`.
 
 _alternative_
 ~~~php
-$aModule = Registry::get('MODULE');
+$aModule = \MVC\Registry::get('MODULE');
 ~~~
