@@ -188,4 +188,4 @@ modules/Foo/templates/
         └── menu.tpl
 
 ~~~
-- you may find further Information in Topic [Frontend](/2.x/frontend)
+- You may find further Information in Topic [Frontend](/3.x/frontend)
