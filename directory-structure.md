@@ -59,19 +59,25 @@ application/library/
     │   ├── DTConstant.php
     │   ├── DTKeyValue.php
     │   ├── DTProperty.php
+    │   ├── DTRequestCurrent.php
     │   └── DTRoute.php
     ├── Generator/
     │   └── DataType.php
     ├── MVCInterface/
     │   ├── Controller.php
-    │   ├── RouterJsonBuilder.php
-    │   └── RouterJson.php
+    ├── templates
+    │   └── infoTool.tpl    
     ├── Application.php
+    ├── Cache.php
+    ├── Closure.php
+    ├── Config.php
     ├── Controller.php
+    ├── Convert.php
+    ├── Debug.php
     ├── Error.php
     ├── Event.php
     ├── File.php
-    ├── Helper.php
+    ├── InfoTool.php
     ├── Lock.php
     ├── Log.php
     ├── Minify.php
@@ -80,11 +86,9 @@ application/library/
     ├── Reflex.php
     ├── Registry.php
     ├── Request.php
-    ├── RouterJsonBuilder.php
-    ├── RouterJsonfile.php
-    ├── RouterJson.php
-    ├── Router.php
+    ├── Route.php
     ├── Session.php
+    ├── Strings.php    
     └── View.php
 ~~~
 
@@ -103,7 +107,6 @@ modules/Foo/
 ├── Policy/  
 ├── [templates/](#modules-moduleName-templates)  
 ├── View/  
-├── generateDataTypes.php  
 ├── install.sh  
 └── publish.sh  
 
@@ -115,7 +118,6 @@ modules/Foo/
 - `Policy/`: classes for Policy
 - `templates/`: smarty template files
 - `View/`: View classes
-- `generateDataTypes.php`: script to generate datatype classes, defined in `modules/Foo/etc/config/DataType/*.php`
 - `install.sh`: helper bash script to install files from `modules/Foo/etc/_INSTALL/` to other places
 - `publish.sh`: helper bash script to copy files from `modules/Foo/etc/_INSTALL/public/` to `public/`
 
@@ -125,26 +127,24 @@ modules/Foo/
 ├── Controller/
 │   └── Index.php
 ├── DataType/
+│   └── DTRoutingAdditional.php
 ├── etc/
 │   ├── config/
 │   │   ├── DataType/
-│   │   │   └── MODULE_DATATYPE.php
+│   │   │   ├── datatype.php
+│   │   │   └── _generate.php
 │   │   ├── Foo/
 │   │   │   ├── config
 │   │   │   │   └── develop.php
 │   │   │   └── composer.json
-│   │   ├── Cachix.php
-│   │   ├── _init.php
-│   │   ├── _MVC.php
+│   │   ├── _myMVC.php
 │   │   └── policy.php
 │   ├── doc/
 │   ├── _INSTALL/
 │   │   └── public/
 │   │       └── robots.txt
 │   └── routing/
-│       ├── _createFinalJson.php
-│       ├── final.json
-│       └── frontend.json
+│       └── frontend.php
 ├── Event/
 │   └── Index.php
 ├── Model/
@@ -154,18 +154,17 @@ modules/Foo/
 ├── templates/
 │   └── Frontend/
 │       ├── content/
-│       │   ├── 404.tpl
 │       │   ├── _cookieConsent.tpl
+│       │   ├── _noscript.tpl
+│       │   ├── 404.tpl
 │       │   ├── index.tpl
-│       │   └── _noscript.tpl
+│       │   └──  info.tpl
 │       └── layout/
 │           ├── footer.tpl
-│           ├── header.tpl
 │           ├── index.tpl
 │           └── menu.tpl
 ├── View/
 │   └── Index.php
-├── generateDataTypes.php
 ├── install.sh
 └── publish.sh
 ~~~
@@ -181,11 +180,12 @@ modules/Foo/templates/
     │   ├── 404.tpl
     │   ├── _cookieConsent.tpl
     │   ├── index.tpl
+    │   ├── info.tpl
     │   └── _noscript.tpl
     └── layout
         ├── footer.tpl
-        ├── header.tpl
         ├── index.tpl
         └── menu.tpl
+
 ~~~
 - you may find further Information in Topic [Frontend](/2.x/frontend)
