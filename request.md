@@ -18,7 +18,7 @@ http://mymvc.ueffing.local/foo/bar/?a=1;b=2;c=3
 
 _Command_  
 ~~~php
-$oDTRequestCurrent = Request::getCurrentRequest()
+$oDTRequestCurrent = \MVC\Request::getCurrentRequest()
 ~~~
 
 _Example Result of `$oDTRequestCurrent`_
@@ -40,8 +40,8 @@ As it gives you an object of type `MVC\DataType\DTRequestCurrent`, you can acces
 
 _For example_  
 ~~~
-$sPath = Request::getCurrentRequest()->get_path();
-$sQuery = Request::getCurrentRequest()->get_query();
+$sPath = \MVC\Request::getCurrentRequest()->get_path();
+$sQuery = \MVC\Request::getCurrentRequest()->get_query();
 ~~~
 
 **check request method against route method**
@@ -49,17 +49,17 @@ $sQuery = Request::getCurrentRequest()->get_query();
 Check if request method equals the expecting one you declared in your route.
 
 ~~~
-Request::getServerRequestMethod() < = ? = > Route::getCurrent()->get_method()
+\MVC\Request::getServerRequestMethod() < = ? = > \MVC\Route::getCurrent()->get_method()
 ~~~
 
 _Example_  
 ~~~php 
-if (Request::getServerRequestMethod() !== Route::getCurrent()->get_method())
+if (\MVC\Request::getServerRequestMethod() !== \MVC\Route::getCurrent()->get_method())
 {
     die('wrong request method `' 
-        . Request::getServerRequestMethod() 
+        . \MVC\Request::getServerRequestMethod() 
         . '`. It has to be: `' 
-        . Route::getCurrent()->get_method() . '`'
+        . \MVC\Route::getCurrent()->get_method() . '`'
     );
 }
 ~~~
@@ -74,7 +74,7 @@ curl -X PUT http://mymvc.ueffing.local/api/1.0.0/user/1969/ -H "Content-Type: ap
 
 _Command_
 ~~~php
-$sInput = Request::getCurrentRequest()->get_input();
+$sInput = \MVC\Request::getCurrentRequest()->get_input();
 ~~~
 
 _Example Result_
@@ -101,7 +101,7 @@ _Example Request_
 
 _Command_
 ~~~php
-$aPathParam = Request::getPathParam();
+$aPathParam = \MVC\Request::getPathParam();
 ~~~
 
 _Example Result of `$aPathParam`_
@@ -119,7 +119,7 @@ array(4) {
 
 _Command_
 ~~~php
-$sPathParam = Request::getPathParam('name')
+$sPathParam = \MVC\Request::getPathParam('name')
 ~~~
 
 _Example Result of `$sPathParam`_
@@ -143,7 +143,7 @@ _Example Request_
 
 _Command_
 ~~~php
-$sTail = Request::getPathParam()['_tail'];
+$sTail = \MVC\Request::getPathParam()['_tail'];
 ~~~
 
 _Result of `$sTail`_
@@ -153,8 +153,8 @@ bar/baz/
 
 _If you want the Result as an array_
 ~~~php
-$aTail = Request::getPathArray(
-    Request::getPathParam()['_tail']
+$aTail = \MVC\Request::getPathArray(
+    \MVC\Request::getPathParam()['_tail']
 );
 ~~~
 
@@ -173,7 +173,7 @@ You can define rules for sanitizing any `$_GET`, `$_POST`, `$_COOKIE` parameter 
 
 *sanitizing `$_GET`, `$_POST`, `$_COOKIE`*  
 ~~~php 
-Request::sanitize('GET', array(
+\MVC\Request::sanitize('GET', array(
     // rules for parameter `a`
     'a' => array(
         /** @see https://www.regular-expressions.info/unicode.html */
@@ -185,7 +185,7 @@ Request::sanitize('GET', array(
 
 _sanitizing input (e.g. `PUT`)_  
 ~~~php 
-$oDTRequestCurrent = Request::getCurrentRequest();
+$oDTRequestCurrent = \MVC\Request::getCurrentRequest();
 
 // sanitizing
 $oDTRequestCurrent->set_input(
