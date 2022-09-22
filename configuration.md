@@ -9,7 +9,8 @@
   - [myMVC config folder](#myMVC-config-folder)
   - [Module's config folder](#Modules-config-folder)
   - [Module's environment config file](#Modules-environment-config-file)
-- [Access `MVC_*` config values](#access_config)
+- [Access `MVC_*` config values](#Access-MVC-config-values)
+- [Access module config values](#Access-module-config-values)
 
 ---
 
@@ -72,33 +73,48 @@ This also means that a later loaded configuration beats (overrides) an earlier l
     - Coverage: **module globally** - Configs placed here are valid to all environments of your module
    - By default, the following files are located here
       - `_myMVC.php`: further MVC configs. myMVC config variable names always begin with `MVC_`.
-      - `policy.php`: policy rules   
+      - `policy.php`: see [policy rules](/3.x/policy)   
 3. ⤓ Module's environment config file <a id="Modules-environment-config-file"></a>
    - Schema: `/modules/{moduleName}/etc/config/{moduleName}/config/{environment}.php`
      - Example: If your module is named `Foo` and you have set `MVC_ENV` to `'develop'`, your environment config file has to be `modules/Foo/etc/config/Foo/config/develop.php`. Make sure it exists.
    - Coverage: **module environment specific** - The concrete environment config file is loaded appropiate to your environment of your module you have set in `MVC_ENV`
 
 
-<a id="access_config"></a>
+<a id="Access-MVC-config-values"></a>
 ## Access `MVC_*` config values 
 
-you can access MVC configurations via `Config` Class.
-
-For each Variable there is an identical getter.
+You can access MVC configurations via the `Config` Class. For each variable there is an identical getter.
 
 _syntax_  
 ~~~
-Config::get_{MVC_VARIABLE}()
+$mVar = Config::get_{MVC_VARIABLE}();
 ~~~
 
 _example_  
 ~~~php
-Config::get_MVC_BASE_PATH()
+$sMvcBasePath = Config::get_MVC_BASE_PATH();
 ~~~
 
 Alternativley you can access all MVC Configs via Registry.
 
 _alternative_  
 ~~~php
-Registry::get('MVC_BASE_PATH');
+$sMvcBasePath = Registry::get('MVC_BASE_PATH');
+~~~
+
+<a id="Access-module-config-values"></a>
+## Access module config values 
+
+You can access module configuration array via the `Config` Class. 
+
+_example_
+~~~php
+$aModule = Config::MODULE();
+~~~
+
+Alternativley you can access the module configuration array via Registry.
+
+_alternative_
+~~~php
+$aModule = Registry::get('MODULE');
 ~~~
