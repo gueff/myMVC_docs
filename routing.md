@@ -205,12 +205,21 @@ now you can request each of these url paths
 <a id="path-params"></a>
 ### Routing with Path Params / Variables
 
-You can define Routes with Variables. Therefore name them with a leading `:` .  
-If you want to declare the variable `id` you write `:id`.  All variables you declare in your route are accessible by name.
+You can define Routes with Variables.  
+This you can do in one of two ways:
 
-_Example_
+1. `:var` notation: e.g. `'/api/:id/:name/:address/'`  
+2. `{var}` notation: e.g. `'/api/{id}/{name}/{address}/'`
+
+You cannot mix these notations; Use one or the other for defining your routes.  
+All variables you declare in your route are accessible by name.
+
+_Examples_
 ~~~php
+# :var notation
 \MVC\Route::GET('/api/:id/:name/:address/', 'module=Foo&c=Api&m=index');
+# {var} notation
+\MVC\Route::GET('/api/{id}/{name}/{address}/', 'module=Foo&c=Api&m=index');
 ~~~
 
 Valid Requests:
