@@ -103,37 +103,6 @@ $oDTArrayObject = DTArrayObject::create()->add_aKeyValue(
 In chronological order;  
 The path shows where the event is going to be called (RUN)
 
-- `mvc.request.saveRequest.after`
-
-	~~~
-	MVC/Request.php
-
-	request is prepared for usage
-	~~~
-	~~~
-	Event::RUN('mvc.request.saveRequest.after',
-		DTArrayObject::create()
-			->add_aKeyValue(
-				DTKeyValue::create()->set_sKey('_aQueryVar')->set_sValue($this->_aQueryVar)
-			)
-			->add_aKeyValue(
-				DTKeyValue::create()->set_sKey('_sRequestUri')->set_sValue($this->_sRequestUri)
-			)
-	);
-	~~~
-- `mvc.request.prepareQueryVarsForUsage.after`
-
-	~~~
-	MVC/Request.php
-	~~~
-	~~~
-	Event::RUN('mvc.request.prepareQueryVarsForUsage.after',
-		DTArrayObject::create()
-			->add_aKeyValue(
-				DTKeyValue::create()->set_sKey('_aQueryVar')->set_sValue($this->_aQueryVar)
-			)
-	);
-	~~~
 - `mvc.runTargetClassPreconstruct.after`
 
 	~~~
