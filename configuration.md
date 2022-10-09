@@ -73,7 +73,7 @@ This also means that a later loaded configuration beats (overrides) an earlier l
     - Coverage: **module globally** - Configs placed here are valid to all environments of your module
    - By default, the following files are located here
       - `_myMVC.php`: further MVC configs. myMVC config variable names always begin with `MVC_`.
-      - `policy.php`: see [policy rules](/3.x/policy)   
+      - `policy.php`: see [policy rules](/3.1.x/policy)   
 3. ⤓ Module's environment config file <a id="Modules-environment-config-file"></a>
    - Schema: `/modules/{moduleName}/etc/config/{moduleName}/config/{environment}.php`
      - Example: If your module is named `Foo` and you have set `MVC_ENV` to `'develop'`, your environment config file has to be `modules/Foo/etc/config/Foo/config/develop.php`. Make sure it exists.

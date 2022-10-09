@@ -91,7 +91,7 @@ _Example route_
 ~~~php
 \MVC\Route::get('/api/:id/:name/:address/*', 'module=Foo&c=Api&m=index');
 ~~~
-- _for more Information about setting up such routes, see [Routing with Path Params / Variables](/3.x/routing#path-params)_
+- _for more Information about setting up such routes, see [Routing with Path Params / Variables](/3.1.x/routing#path-params)_
 
 _Example Request_
 - `/api/1/Foo/Bar/what/else/`
@@ -136,7 +136,7 @@ _Example route_
 ~~~php
 \MVC\Route::get('/foo/*', 'module=Foo&c=Index&m=foo');
 ~~~
-- _see [Wildcard routing](/3.x/routing#wildcard-routing)_
+- _see [Wildcard routing](/3.1.x/routing#wildcard-routing)_
 
 _Example Request_
 - `/foo/bar/baz/`
