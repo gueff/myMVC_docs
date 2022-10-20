@@ -3,7 +3,7 @@
 
 - [Creating a Route](#Creating-a-Route)
     - [Routing files](#Routing-files)
-    - [writing a Route](#writing-a-Route)
+    - [Writing a Route](#writing-a-Route)
     - [Naming the target controller](#Naming-the-target-controller)
     - [Adding additional context information to route](#adding-additional-context-information-to-route)
     - [Wildcard routing](#wildcard-routing)
@@ -53,13 +53,15 @@ If you want to create routes for an API, it then makes sense to create a file ca
 
 
 <a id="writing-a-Route"></a>
-### writing a Route
+### Writing a Route
 
 _You declare a route with Command `\MVC\Route`:_
 ~~~
 \MVC\Route::{METHOD}(path, targetController, additionalInformation)
 ~~~
-- `{METHOD}`: one of the RESTful request methods `GET`, `POST`, `PUT`, `DELETE`; you declare which RESTful request method is expected for this route
+- `{METHOD}`: 
+  - one of the RESTful request methods `GET`, `POST`, `PUT`, `DELETE`; you declare which RESTful request method is expected for this route
+  - `ANY` using this you do not assign a certain request method as expected
 - `path`: url path
 - `targetController`: the `Controller::method` the route leads to
 - `additionalInformation` [optional]: any information you may need to process in your target controller (or elsewhere)
@@ -82,6 +84,19 @@ _add new route `'/foo/'`_
 
 Assuming you are running myMVC's local development server, you can then call the url `http://127.0.0.1:1969/foo/`
 
+**Mixed Request Methods**  
+
+_Assign more than one method to the route with `MIX`_  
+~~~php
+\MVC\Route::MIX(['GET', 'POST'], '/foo/', 'module=Foo&c=Index&m=index', $oDTRoutingAdditional->getPropertyJson());
+~~~
+
+**Any Request Method**
+
+_Using `ANY` you leave it open which method should apply_   
+~~~php
+\MVC\Route::ANY('/foo/', 'module=Foo&c=Index&m=index', $oDTRoutingAdditional->getPropertyJson());
+~~~
 
 <a id="Naming-the-target-controller"></a>
 ### Naming the target controller
