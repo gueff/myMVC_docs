@@ -2,6 +2,7 @@
 # Request
 
 - [Get current Request](#Get-current-Request)
+  - [Check request method against route method](#check-request-method-against-route-method)
 - [Get data from body of current Request](#Get-data-from-body-of-current-Request)
 - [Accessing Path Params / Variables](#Accessing-Path-Params-Variables)
 - [Sanitizing](#Sanitizing)
@@ -44,22 +45,29 @@ $sPath = \MVC\Request::getCurrentRequest()->get_path();
 $sQuery = \MVC\Request::getCurrentRequest()->get_query();
 ~~~
 
-**check request method against route method**
+<a id="check-request-method-against-route-method"></a>
+**Check request method against route method**
 
 Check if request method equals the expecting one you declared in your route.
 
-~~~
-\MVC\Request::getServerRequestMethod() < = ? = > \MVC\Route::getCurrent()->get_method()
+_Check_    
+~~~php 
+$bMethodMatch = (
+    // any request method is allowed
+    '*' === \MVC\Route::getCurrent()->get_method() ||
+    // request method does match route method
+    \MVC\Request::getServerRequestMethod() === \MVC\Route::getCurrent()->get_method()
+) ? true : false;
 ~~~
 
-_Example_  
-~~~php 
-if (\MVC\Request::getServerRequestMethod() !== \MVC\Route::getCurrent()->get_method())
+_Evaluate and React_  
+~~~
+if (false === $bMethodMatch)
 {
     die('wrong request method `' 
         . \MVC\Request::getServerRequestMethod() 
-        . '`. It has to be: `' 
-        . \MVC\Route::getCurrent()->get_method() . '`'
+        . '`. It has to be one of: `' 
+        . implode('|', Route::getCurrent()->get_methodsAssigned()) . '`'
     );
 }
 ~~~
@@ -91,7 +99,7 @@ _Example route_
 ~~~php
 \MVC\Route::get('/api/:id/:name/:address/*', 'module=Foo&c=Api&m=index');
 ~~~
-- _for more Information about setting up such routes, see [Routing with Path Params / Variables](/3.x/routing#path-params)_
+- _for more Information about setting up such routes, see [Routing with Path Params / Variables](/3.1.x/routing#path-params)_
 
 _Example Request_
 - `/api/1/Foo/Bar/what/else/`
@@ -136,7 +144,7 @@ _Example route_
 ~~~php
 \MVC\Route::get('/foo/*', 'module=Foo&c=Index&m=foo');
 ~~~
-- _see [Wildcard routing](/3.x/routing#wildcard-routing)_
+- _see [Wildcard routing](/3.1.x/routing#wildcard-routing)_
 
 _Example Request_
 - `/foo/bar/baz/`
