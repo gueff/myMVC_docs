@@ -86,14 +86,14 @@ Assuming you are running myMVC's local development server, you can then call the
 
 **Mixed Request Methods**  
 
-_Assign more than one method to the route with `MIX`_  
+_Assign more than one request method to the route with `MIX`_  
 ~~~php
 \MVC\Route::MIX(['GET', 'POST'], '/foo/', 'module=Foo&c=Index&m=index', $oDTRoutingAdditional->getPropertyJson());
 ~~~
 
 **Any Request Method**
 
-_Using `ANY` you leave it open which method should apply_   
+_Using `ANY` you leave it open which request method should apply_   
 ~~~php
 \MVC\Route::ANY('/foo/', 'module=Foo&c=Index&m=index', $oDTRoutingAdditional->getPropertyJson());
 ~~~
