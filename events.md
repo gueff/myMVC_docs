@@ -74,7 +74,7 @@ _syntax_
 _example: bind a closure to the Event 'foo'_  
 ~~~php
 \MVC\Event::bind ('foo', function($oDTArrayObject) {
-        \MVC\Helper::DISPLAY ($oDTArrayObject);
+        \MVC\Debug:display($oDTArrayObject);
 });
 ~~~
 - if the event 'foo' is triggered, the closure will be executed: the content of `$oDTArrayObject` will be displayed on screen

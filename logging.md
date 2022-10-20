@@ -53,7 +53,7 @@ _Example_
         }
 ) --> called in: /modules/Webbixx/Event/Index.php, 48
 2022-10-04 08:50:02     mymvc.ueffing.local     develop 127.0.0.1       633bd79a39b6e   ...........no session...........        8       /application/library/MVC/Event.php, 54  BIND (mvc.reflex.reflect.targetObject.before, function (oDTArrayObject $oDTArrayObject){
-//            \MVC\Helper::debug($oDTArrayObject);
+//            \MVC\Debug::debug($oDTArrayObject);
             \MVC\Minify::init();
         }
 ) --> called in: /modules/Webbixx/Event/Index.php, 48
@@ -96,7 +96,7 @@ _Example_
         });
 ) --> called in: /application/library/MVC/View.php, 108
 2022-10-04 08:50:02     mymvc.ueffing.local     develop 127.0.0.1       633bd79a39b6e   2e68203502766860bd3a982f97a5cebe        19      /application/library/MVC/Event.php, 110 RUN+ (mvc.reflex.reflect.targetObject.before) --> called in: /application/library/MVC/Reflex.php, 131 --> bonded by `/modules/Webbixx/Event/Index.php, 48, try to run its Closure: function (oDTArrayObject $oDTArrayObject){
-//            \MVC\Helper::debug($oDTArrayObject);
+//            \MVC\Debug::debug($oDTArrayObject);
             \MVC\Minify::init();
         }
 
