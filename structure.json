@@ -8,6 +8,7 @@
   },
   "Basics": {
     "Routing":"routing.md",
+    "Request":"request.md",
     "Events":"events.md",
     "Logging":"logging.md",
     "Policy":"policy.md",

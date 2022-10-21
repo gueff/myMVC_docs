@@ -44,11 +44,11 @@ press enter key to continue
 unMVC:~$  
 ~~~
 
-Now [🏁 run local development server](/2.x/installation#Run_myMVC) again.  
+Now [🏁 run local development server](/3.1.x/installation#Run_myMVC) again.  
 Call http://127.0.0.1:1969/ and you will see your new created module frontend
 
 ![myMVC Creating a Module](/doc/getting-started/mymvc-creating-a-module.png)
 
 
 _directory structure of the created module `Foo`_  
-- see: [Directory Structure](/2.x/directory-structure)
+- see: [Directory Structure](/3.1.x/directory-structure)

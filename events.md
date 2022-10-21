@@ -27,7 +27,7 @@ Just note the event name and pass an `DTArrayObject` Object with Infos.
 
 _Example_  
 ~~~php
-Event::RUN('module.controller.method.action',
+\MVC\Event::RUN('module.controller.method.action',
 	DTArrayObject::create()
 		->add_aKeyValue(
 			DTKeyValue::create()->set_sKey('_aQueryVar')->set_sValue($this->_aQueryVar)
@@ -74,7 +74,7 @@ _syntax_
 _example: bind a closure to the Event 'foo'_  
 ~~~php
 \MVC\Event::bind ('foo', function($oDTArrayObject) {
-        \MVC\Helper::DISPLAY ($oDTArrayObject);
+        \MVC\Debug:display($oDTArrayObject);
 });
 ~~~
 - if the event 'foo' is triggered, the closure will be executed: the content of `$oDTArrayObject` will be displayed on screen
@@ -90,8 +90,8 @@ _Run an Event_
 
 _Run an Event and deploy a Package which could be read inside the Bind/Closure_   
 ~~~php
-$oDTArrayObject = DTArrayObject::create()->add_aKeyValue(
-	DTKeyValue::create()->set_sKey('foo')->set_sValue('bar')
+$oDTArrayObject = \MVC\DataType\DTArrayObject::create()->add_aKeyValue(
+	\MVC\DataType\DTKeyValue::create()->set_sKey('foo')->set_sValue('bar')
 );
 \MVC\Event::run ('foo', $oDTArrayObject);
 ~~~
@@ -514,16 +514,3 @@ The path shows where the event is going to be called (RUN)
 	});	
 	~~~
 	
-
-<a id="Helper_Methods"></a>
-## Helper Methods 
-
-_Detect a Closure_  
-~~~php
-\MVC\Helper::isClosure($oExpectedClosure))
-~~~
-
-_Call a Closure_  
-~~~php
-call_user_func ($oPackage)
-~~~

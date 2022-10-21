@@ -80,6 +80,7 @@ $oDTConfig = \MVC\DataType\DTConfig::create()
                     ->set_value(true)
 
                     // optional property settings
+                    ->set_forceCasting(true)
                     ->set_visibility('protected')
                     ->set_static(false)
                     ->set_setter(true)
@@ -159,6 +160,7 @@ $aConfigDataType = array(
                     
                     // optional property settings
                     'value' => 'bar',
+                    'forceCasting' => true,
                     'visibility' => 'protected'                    
                     'static' => false,
                     'setter' => true,
