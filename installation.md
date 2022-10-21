@@ -14,7 +14,7 @@ make sure that your local machine has PHP >=7.4 and Composer2 installed. After y
 
 _get myMVC via composer_  
 ~~~bash
-composer create-project --no-install gueff/myMVC myMVC
+composer create-project --no-install gueff/myMVC myMVC 3.1.2
 ~~~
 
 cd into the root folder of myMVC, where the file myMVC.phar resides.

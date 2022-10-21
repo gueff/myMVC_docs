@@ -1,4 +1,4 @@
 backup
-_push.sh
+_gitPush.sh
 *.sh
 
