@@ -1,71 +1,112 @@
 
 # Generating DataType Classes
 
-with this Generator you can easily generate DataType Classes. Consider those Classes more than a Storage than a Logic Element.
+myMVC includes a Generator that you can use to generate DataType Classes. Consider those Classes more than a Storage than a Logic Element.  
+Define what name the class and which namespace it should have, which properties or constants it should provide.  
+Then just run the Generator and it will create the Class for you.
 
-You can easily define what name the class and which namespace it should have, which properties or constants it should provide.
+- [Configuration](#Configuration)
+  - [Array Notation](#array_config)
+  - [Object Notation](#object_config)
+- [Note regarding php data types](#Hint)
 
-After you defined it, just run the Generator and it will create the Class for you.
+---
 
+<a id="Configuration"></a>
+## Configuration
 
-<!--
-## Overview
+Write your own Configurations.
 
-- [Instantiation](#Instantiation)
-- [Init with Config: Object](#init_object)
-    - [Config `$oDTConfig`](#object_config)
-- [Init with Config: array](#init_array)
-    - [Config `$aDataTypeConfig`](#array_config)
-- [Hint](#HInt)
-- [Valid types](#Valid_types)
--->
-
-<!--
-<a id="Instantiation"></a>
-## Instantiation
-
-_PHP auto detect compatible_
-~~~php
-$oDTGenerator = \MVC\Generator\DataType::create();
+_Place for DataType Generating Configurations; (assuming module `Foo`)_  
+~~~
+/modules/Foo/etc/config/DataType/
 ~~~
 
-_PHP 5.3 compatible_
-~~~php
-$oDTGenerator = \MVC\Generator\DataType::create(53);
+There is already a Configuration file `datatype.php`
+
+~~~
+/modules/Foo/etc/config/DataType/datatype.php
 ~~~
 
-_PHP 7 and up compatible_
-~~~php
-$oDTGenerator = \MVC\Generator\DataType::create(7);
+Best way to start is to extend this file.  
+After you made your edits, just run the file on command line
+
+~~~bash
+cd /modules/Foo/etc/config/DataType;
+php myDataTypeClass.php
 ~~~
 
-_PHP 7.3 compatible_
-~~~php
-$oDTGenerator = \MVC\Generator\DataType::create(73);
-~~~
+<a id="array_config"></a>
+### Configuration as Array
 
-<a id="init_object"></a>
-## Init with Config: Object
+_Example_  
 ~~~php
-$oDTGenerator = \MVC\Generator\DataType::create(56)->initConfigObject($oDTConfig);
+$aDataType['class'][] = array(
+    // ! mandatory
+    'name' => 'DTFoo',
+    'file' => 'DTFoo.php',
+
+    // optional; no need to even note the key here if not used
+    'extends' => '',
+
+    // optional; no need to even note the key here if not used
+    'namespace' => \MVC\Config::get_MVC_MODULE_CURRENT_NAME() . '\DataType',
+
+    // optional; add some useful Helper Methods like '__toString()` method (default: true)
+    'createHelperMethods' => true,
+    
+    // optional; no need to even note the key here if not used
+    'constant' => array(
+        array(
+            'key' => 'FOO',
+            'value' => 'BAR',
+            'visibility' => 'public'
+        )
+    ),
+
+    // ! mandatory
+    'property' => array(
+        array('key' => 'sKey'               , 'var' => 'string'),
+        array('key' => 'deliverable'        , 'var' => 'int'),
+        array('key' => 'aJsonContext'       , 'var' => 'array'),
+        array('key' => 'bSuccess'           , 'var' => 'bool'),
+        array(
+            'key' => 'foo',
+            'var' => 'string', 
+            
+            // optional property settings
+            'value' => 'bar',
+            'forceCasting' => true,
+            'visibility' => 'protected'                    
+            'static' => false,
+            'setter' => true,
+            'getter' => true,
+            'explicitMethodForValue' => false,
+            'listProperty' => true,
+            'createStaticPropertyGetter' => true,
+            'setValueInConstructor' => true,
+        ),
+    )
+);
 ~~~
--->
 
 <a id="object_config"></a>
 ### Configuration as Object
 
-_Example_  
+You can also create a DataType class the object way. 
+
+_Example_
 ~~~php
 // config
 $oDTConfig = \MVC\DataType\DTConfig::create()
-    ->set_dir(\MVC\Config::get_MVC_MODULES() . '/Foo/DataType/')
+    ->set_dir(\MVC\Config::get_MVC_MODULES_DIR() . '/' . \MVC\Config::get_MVC_MODULE_CURRENT_NAME() . '/DataType/')
     ->set_unlinkDir(false)
     ->add_DTClass(
 
         \MVC\DataType\DTClass::create()
             ->set_name('DTFoo')
             ->set_file('DTFoo.php')
-            ->set_namespace('Foo\DataType')
+            ->set_namespace(\MVC\Config::get_MVC_MODULE_CURRENT_NAME() . '\DataType')
             ->set_createHelperMethods(true)
             ->add_DTConstant(
                 \MVC\DataType\DTConstant::create()
@@ -97,93 +138,10 @@ $oDTConfig = \MVC\DataType\DTConfig::create()
 $oDTGenerator = \MVC\Generator\DataType::create()->initConfigObject($oDTConfig);
 ~~~
 
-<!--
-<a id="init_array"></a>
-## Init with Config: array
-~~~php
-$oDTGenerator = \MVC\Generator\DataType::create()->initConfigArray($aConfig['MODULE_DATATYPE_CONFIG']);
-~~~
--->
-
-<a id="array_config"></a>
-### Configuration as Array
-
-_Example_  
-~~~php
-// config
-$aConfigDataType = array(
-
-    // where to place the DataType Class Files.
-    // folder will be created if not exists.
-    'dir' => $aConfig['MVC_MODULES'] . '/Foo/DataType/',
-
-    // remove dir and create for new each time config changes.
-    // you may want this during development.
-    // default is `false`, if not set here
-    'unlinkDir' => false,
-
-    // The Classes
-    'class' => array(
-
-        array(
-            // ! mandatory
-            'name' => 'DTFoo',
-            'file' => 'DTFoo.php',
-
-            // optional; no need to even note the key here if not used
-            'extends' => '',
-
-            // optional; no need to even note the key here if not used
-            'namespace' => 'Foo\DataType',
-
-            // optional; add some useful Helper Methods like '__toString()` method (default: true)
-            'createHelperMethods' => true,
-            
-            // optional; no need to even note the key here if not used
-            'constant' => array(
-                array(
-                    'key' => 'FOO',
-                    'value' => 'BAR',
-                    'visibility' => 'public'
-                )
-            ),
-
-            // ! mandatory
-            'property' => array(
-                array('key' => 'sKey'               , 'var' => 'string'),
-                array('key' => 'deliverable'        , 'var' => 'int'),
-                array('key' => 'aJsonContext'       , 'var' => 'array'),
-                array('key' => 'bSuccess'           , 'var' => 'bool'),
-                array(
-                    'key' => 'foo',
-                    'var' => 'string', 
-                    
-                    // optional property settings
-                    'value' => 'bar',
-                    'forceCasting' => true,
-                    'visibility' => 'protected'                    
-                    'static' => false,
-                    'setter' => true,
-                    'getter' => true,
-                    'explicitMethodForValue' => false,
-                    'listProperty' => true,
-                    'createStaticPropertyGetter' => true,
-                    'setValueInConstructor' => true,
-                ),
-            )
-        ),
-    )
-);
-
-// generate
-$oDTGenerator = \MVC\Generator\DataType::create()->initConfigArray(aConfigDataType);
-~~~
+---
 
 <a id="Hint"></a>
-## Hint
-- use `bool`, not `boolean`
-- use `int`, not `integer`
+## Note regarding php data types
 
-<a id="Valid_types"></a>
-## Valid types
-- https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration
+- use `bool`, not ~~`boolean`~~
+- use `int`, not ~~`integer`~~

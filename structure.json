@@ -14,7 +14,8 @@
     "Policy":"policy.md",
     "CLI Wrapping":"cli-wrapping.md"
   },
-  "Advanced": {
-    "Generating DataType Classes": "generating-datatype-classes.md"
+  "DataType": {
+    "Generating Classes": "generating-datatype-classes.md",
+    "myMVC DataType Classes": "datatype-classes.md"
   }
 }

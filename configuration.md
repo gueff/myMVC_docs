@@ -1,4 +1,3 @@
-<!--[:Getting Started]-->
 
 # Configuration
 
@@ -9,6 +8,7 @@
   - [myMVC config folder](#myMVC-config-folder)
   - [Module's config folder](#Modules-config-folder)
   - [Module's environment config file](#Modules-environment-config-file)
+- [Module's composer.json](#Modules-composer-json)
 - [Access `MVC_*` config values](#Access-MVC-config-values)
 - [Access module config values](#Access-module-config-values)
 
@@ -21,7 +21,8 @@
 **MVC_ENV**  
 In the `public/` folder you will find an `.env` file. There the variable `MVC_ENV` is declared. This variable declares what Environment is valid for myMVC.  
 You can name the value as you like - But common values are: `develop`, `test`, `production`.  
-Make sure, that the corresponding environment config file does exist in your module  
+
+Make sure the corresponding environment config file does exist in your module  
 (Schema: `/modules/{moduleName}/etc/config/{moduleName}/config/{environment}.php`).
 
 _Example_  
@@ -73,48 +74,70 @@ This also means that a later loaded configuration beats (overrides) an earlier l
     - Coverage: **module globally** - Configs placed here are valid to all environments of your module
    - By default, the following files are located here
       - `_myMVC.php`: further MVC configs. myMVC config variable names always begin with `MVC_`.
-      - `policy.php`: see [policy rules](/3.1.x/policy)   
 3. ⤓ Module's environment config file <a id="Modules-environment-config-file"></a>
    - Schema: `/modules/{moduleName}/etc/config/{moduleName}/config/{environment}.php`
      - Example: If your module is named `Foo` and you have set `MVC_ENV` to `'develop'`, your environment config file has to be `modules/Foo/etc/config/Foo/config/develop.php`. Make sure it exists.
    - Coverage: **module environment specific** - The concrete environment config file is loaded appropiate to your environment of your module you have set in `MVC_ENV`
 
 
+<a id="Modules-composer-json"></a>
+## Module's composer.json
+
+Extend your module with third libraries using composer. 
+
+Write your requirements into the composer.json file which you find here:
+
+_`composer.json`_  
+~~~
+/modules/{moduleName}/etc/config/{moduleName}/composer.json
+~~~
+
+The next time you run your myMVC Application, myMVC will automatically perform a `composer install`.  
+Alternatively you can of course also perform an installation by hand.
+
+_Installed vendor folder_  
+~~~
+/modules/{moduleName}/etc/config/{moduleName}/vendor
+~~~
+
+myMVC will automatically integrate all `/vendor/autoload.php` autoloaders from any myMVC module.
+
+
 <a id="Access-MVC-config-values"></a>
 ## Access `MVC_*` config values 
 
-You can access MVC configurations via the `\MVC\Config` Class. For each variable there is an identical getter.
+Access MVC configurations via the `\MVC\Config` Class. For each variable there is an identical getter.
 
-_syntax_  
+_Syntax_  
 ~~~
 $mVar = \MVC\Config::get_{MVC_VARIABLE}();
 ~~~
 
-_example_  
+_Example_  
 ~~~php
 $sMvcBasePath = \MVC\Config::get_MVC_BASE_PATH();
 ~~~
 
 Alternativley you can access all MVC Configs via `\MVC\Registry`.
 
-_alternative_  
-~~~php
+_Alternative_  
+~~~
 $sMvcBasePath = \MVC\Registry::get('MVC_BASE_PATH');
 ~~~
 
 <a id="Access-module-config-values"></a>
 ## Access module config values 
 
-You can access module configuration array via the `\MVC\Config` Class. 
+Access module configuration array via the `\MVC\Config` Class. 
 
-_example_
+_Example_
 ~~~php
 $aModule = \MVC\Config::MODULE();
 ~~~
 
 Alternativley you can access the module configuration array via `\MVC\Registry`.
 
-_alternative_
-~~~php
+_Alternative_
+~~~
 $aModule = \MVC\Registry::get('MODULE');
 ~~~

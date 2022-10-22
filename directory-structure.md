@@ -1,4 +1,3 @@
-<!--[:Getting Started]-->
 
 # Directory Structure
 
@@ -9,6 +8,7 @@
 ├── [modules/](#modules-moduleName)  
 ├── public/  
 ├── composer.json  
+├── LICENSE.md  
 ├── myMVC.phar  
 └── README.md  
 
@@ -22,7 +22,6 @@ The application directory contains core code of myMVC Framework and also working
 application/  
 ├── cache/  
 ├── config/  
-├── doc/  
 ├── [library/](#application-library)  
 ├── log/  
 ├── session/  
@@ -34,14 +33,13 @@ application/
 
 - `cache/`: place for caching files
 - `config/`: place for global config files
-- `doc/`: GNU GENERAL PUBLIC LICENSE
 - `log/`: logfile directory
 - `session/`: SessionIDs are stored here
 - `smartyPlugins/`: default smartyPlugin directory
 - `templates_c/`: home for compiled smarty templates
 - `vendor/`: third party libraries installed by composer
 - `composer.json`: list of third party libraries to install
-- `composer.phar`: a standalone composer script; no need to install composer
+- `composer.phar`: a standalone composer script
 
 
 <a id="application-library"></a>
@@ -57,6 +55,7 @@ application/library/
     │   ├── DTClass.php
     │   ├── DTConfig.php
     │   ├── DTConstant.php
+    │   ├── DTFileinfo.php
     │   ├── DTKeyValue.php
     │   ├── DTProperty.php
     │   ├── DTRequestCurrent.php
@@ -68,11 +67,13 @@ application/library/
     ├── templates
     │   └── infoTool.tpl    
     ├── Application.php
+    ├── Arr.php
     ├── Cache.php
     ├── Closure.php
     ├── Config.php
     ├── Controller.php
     ├── Convert.php
+    ├── Date.php
     ├── Debug.php
     ├── Error.php
     ├── Event.php
@@ -107,8 +108,8 @@ modules/Foo/
 ├── Policy/  
 ├── [templates/](#modules-moduleName-templates)  
 ├── View/  
-├── install.sh  
-└── publish.sh  
+├── _install.sh  
+└── _publish.sh  
 
 - `Controller/`: folder to place your Controller
 - `DataType/`: place for generated datatype classes
@@ -118,8 +119,8 @@ modules/Foo/
 - `Policy/`: classes for Policy
 - `templates/`: smarty template files
 - `View/`: View classes
-- `install.sh`: helper bash script to install files from `modules/Foo/etc/_INSTALL/` to other places
-- `publish.sh`: helper bash script to copy files from `modules/Foo/etc/_INSTALL/public/` to `public/`
+- `_install.sh`: helper bash script to e.g. install files from `modules/Foo/etc/_INSTALL/` to other places
+- `_publish.sh`: helper bash script to copy files from `modules/Foo/etc/_INSTALL/public/` to `public/`
 
 _example: complete extracted directory of a module `Foo`_  
 ~~~
@@ -129,22 +130,29 @@ modules/Foo/
 ├── DataType/
 │   └── DTRoutingAdditional.php
 ├── etc/
-│   ├── config/
-│   │   ├── DataType/
-│   │   │   ├── datatype.php
-│   │   │   └── _generate.php
-│   │   ├── Foo/
-│   │   │   ├── config
-│   │   │   │   └── develop.php
-│   │   │   └── composer.json
-│   │   ├── _myMVC.php
-│   │   └── policy.php
-│   ├── doc/
 │   ├── _INSTALL/
 │   │   └── public/
 │   │       └── robots.txt
+│   ├── config/
+│   │   ├── DataType/
+│   │   │   ├── datatype.php
+│   │   ├── Foo/
+│   │   │   ├── config
+│   │   │   │   └── _csp.php
+│   │   │   │   └── _session.php
+│   │   │   │   └── develop.php
+│   │   │   └── composer.json
+│   │   ├── _myMVC.php
+│   ├── doc/
+│   ├── event/
+│   │   ├── default.php
+│   │   ├── policy.php
+│   │   ├── request.php
+│   ├── policy/
+│   │   ├── policy.php
 │   └── routing/
 │       └── frontend.php
+│   └── smartyPlugins/
 ├── Event/
 │   └── Index.php
 ├── Model/
@@ -158,15 +166,16 @@ modules/Foo/
 │       │   ├── _noscript.tpl
 │       │   ├── 404.tpl
 │       │   ├── index.tpl
-│       │   └──  info.tpl
+│       │   └── info.tpl
 │       └── layout/
 │           ├── footer.tpl
+│           ├── header.tpl
 │           ├── index.tpl
 │           └── menu.tpl
 ├── View/
 │   └── Index.php
-├── install.sh
-└── publish.sh
+├── _install.sh
+└── _publish.sh
 ~~~
 
 <a id="modules-moduleName-templates"></a>
@@ -174,18 +183,19 @@ modules/Foo/
 
 _templates directory structure of a module `Foo`_  
 ~~~
-modules/Foo/templates/
-└── Frontend
-    ├── content
-    │   ├── 404.tpl
-    │   ├── _cookieConsent.tpl
-    │   ├── index.tpl
-    │   ├── info.tpl
-    │   └── _noscript.tpl
-    └── layout
-        ├── footer.tpl
-        ├── index.tpl
-        └── menu.tpl
-
+modules/Foo/
+├── templates/
+│   └── Frontend/
+│       ├── content/
+│       │   ├── _cookieConsent.tpl
+│       │   ├── _noscript.tpl
+│       │   ├── 404.tpl
+│       │   ├── index.tpl
+│       │   └── info.tpl
+│       └── layout/
+│           ├── footer.tpl
+│           ├── header.tpl
+│           ├── index.tpl
+│           └── menu.tpl
 ~~~
-- You may find further Information in Topic [Frontend](/3.1.x/frontend)
+- You may find further Information in Topic [Frontend](/3.2.x/frontend)
