@@ -1,4 +1,3 @@
-<!--[:Getting Started]-->
 
 # Creating a Module
 
@@ -15,7 +14,7 @@ _menu_
 ~~~bash
 ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 myMVC
-a php framework by G. Üffing
+the PHP Framework
 ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 0 = 🏁 run local development server
 1 = 📦 create a module
@@ -28,7 +27,7 @@ _Enter a modulename - in this example it is `Foo`_
 ~~~bash
 ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 myMVC
-a php framework by G. Üffing
+the PHP Framework
 ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 Enter Name of the new Module:  Foo
 
@@ -44,11 +43,11 @@ press enter key to continue
 unMVC:~$  
 ~~~
 
-Now [🏁 run local development server](/3.1.x/installation#Run_myMVC) again.  
+Now [🏁 run local development server](/3.2.x/installation#Run_myMVC) again.  
 Call http://127.0.0.1:1969/ and you will see your new created module frontend
 
 ![myMVC Creating a Module](/doc/getting-started/mymvc-creating-a-module.png)
 
 
 _directory structure of the created module `Foo`_  
-- see: [Directory Structure](/3.1.x/directory-structure)
+- see: [Directory Structure](/3.2.x/directory-structure)

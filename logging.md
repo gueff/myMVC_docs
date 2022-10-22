@@ -41,44 +41,44 @@ _Example_
                         \MVC\Error::addERROR ($oDTArrayObject);
                 });
 ) --> called in: /application/library/MVC/Error.php, 61
-2022-10-04 08:50:02     mymvc.ueffing.local     develop 127.0.0.1       633bd79a39b6e   ...........no session...........        3       /application/config/util/bootstrap.php, 221 >   AUTOLOADING     Webbixx/DataType/DTRoutingAdditional.php
-2022-10-04 08:50:02     mymvc.ueffing.local     develop 127.0.0.1       633bd79a39b6e   ...........no session...........        4       /application/config/util/bootstrap.php, 221 >   AUTOLOADING     Webbixx/Controller/Index.php
-2022-10-04 08:50:02     mymvc.ueffing.local     develop 127.0.0.1       633bd79a39b6e   ...........no session...........        5       /application/config/util/bootstrap.php, 221 >   AUTOLOADING     Webbixx/Event/Index.php
+2022-10-04 08:50:02     mymvc.ueffing.local     develop 127.0.0.1       633bd79a39b6e   ...........no session...........        3       /application/config/util/bootstrap.php, 221 >   AUTOLOADING     Foo/DataType/DTRoutingAdditional.php
+2022-10-04 08:50:02     mymvc.ueffing.local     develop 127.0.0.1       633bd79a39b6e   ...........no session...........        4       /application/config/util/bootstrap.php, 221 >   AUTOLOADING     Foo/Controller/Index.php
+2022-10-04 08:50:02     mymvc.ueffing.local     develop 127.0.0.1       633bd79a39b6e   ...........no session...........        5       /application/config/util/bootstrap.php, 221 >   AUTOLOADING     Foo/Event/Index.php
 2022-10-04 08:50:02     mymvc.ueffing.local     develop 127.0.0.1       633bd79a39b6e   ...........no session...........        6       /application/library/MVC/Event.php, 54  BIND (mvc.application.setSession.before, function (oDTArrayObject $oDTArrayObject){
-            \Webbixx\Event\Index::enableSession($oDTArrayObject);
+            \Foo\Event\Index::enableSession($oDTArrayObject);
         }
-) --> called in: /modules/Webbixx/Event/Index.php, 48
+	) --> called in: /modules/Foo/Event/Index.php, 48
 2022-10-04 08:50:02     mymvc.ueffing.local     develop 127.0.0.1       633bd79a39b6e   ...........no session...........        7       /application/library/MVC/Event.php, 54  BIND (mvc.controller.init.before, function (oDTArrayObject $oDTArrayObject){
             \Idolon\Event\Index::startIdolon($oDTArrayObject);
         }
-) --> called in: /modules/Webbixx/Event/Index.php, 48
+) --> called in: /modules/Foo/Event/Index.php, 48
 2022-10-04 08:50:02     mymvc.ueffing.local     develop 127.0.0.1       633bd79a39b6e   ...........no session...........        8       /application/library/MVC/Event.php, 54  BIND (mvc.reflex.reflect.targetObject.before, function (oDTArrayObject $oDTArrayObject){
 //            \MVC\Debug::debug($oDTArrayObject);
             \MVC\Minify::init();
         }
-) --> called in: /modules/Webbixx/Event/Index.php, 48
+) --> called in: /modules/Foo/Event/Index.php, 48
 2022-10-04 08:50:02     mymvc.ueffing.local     develop 127.0.0.1       633bd79a39b6e   ...........no session...........        9       /application/library/MVC/Event.php, 54  BIND (mvc.reflex.reflect.targetObject.after, function (oDTArrayObject $oDTArrayObject){
             if (true === Config::get_MVC_INFOTOOL_ENABLE())
             {
                 // switch on InfoTool
-                new \MVC\InfoTool(\Webbixx\View\Index::init());
+                new \MVC\InfoTool(\Foo\View\Index::init());
             }
         },
-) --> called in: /modules/Webbixx/Event/Index.php, 48
+) --> called in: /modules/Foo/Event/Index.php, 48
 2022-10-04 08:50:02     mymvc.ueffing.local     develop 127.0.0.1       633bd79a39b6e   ...........no session...........        10      /application/library/MVC/Event.php, 54  BIND (mvc.debug.stop.after, function (oDTArrayObject $oDTArrayObject){
             \MVC\Log::write("\n\n*** STOP ***\n" . print_r($oDTArrayObject->get_akeyvalue()[0]->get_sValue(), true));
         }
-) --> called in: /modules/Webbixx/Event/Index.php, 48
-2022-10-04 08:50:02     mymvc.ueffing.local     develop 127.0.0.1       633bd79a39b6e   ...........no session...........        11      /application/library/MVC/Event.php, 110 RUN+ (mvc.application.setSession.before) --> called in: /application/library/MVC/Application.php, 71 --> bonded by `/modules/Webbixx/Event/Index.php, 48, try to run its Closure: function (oDTArrayObject $oDTArrayObject){
-            \Webbixx\Event\Index::enableSession($oDTArrayObject);
+) --> called in: /modules/Foo/Event/Index.php, 48
+2022-10-04 08:50:02     mymvc.ueffing.local     develop 127.0.0.1       633bd79a39b6e   ...........no session...........        11      /application/library/MVC/Event.php, 110 RUN+ (mvc.application.setSession.before) --> called in: /application/library/MVC/Application.php, 71 --> bonded by `/modules/Foo/Event/Index.php, 48, try to run its Closure: function (oDTArrayObject $oDTArrayObject){
+            \Foo\Event\Index::enableSession($oDTArrayObject);
         }
 
-2022-10-04 08:50:02     mymvc.ueffing.local     develop 127.0.0.1       633bd79a39b6e   2e68203502766860bd3a982f97a5cebe        12      /application/library/MVC/Event.php, 110 RUN+ (mvc.controller.init.before) --> called in: /application/library/MVC/Controller.php, 28 --> bonded by `/modules/Webbixx/Event/Index.php, 48, try to run its Closure: function (oDTArrayObject $oDTArrayObject){
+2022-10-04 08:50:02     mymvc.ueffing.local     develop 127.0.0.1       633bd79a39b6e   2e68203502766860bd3a982f97a5cebe        12      /application/library/MVC/Event.php, 110 RUN+ (mvc.controller.init.before) --> called in: /application/library/MVC/Controller.php, 28 --> bonded by `/modules/Foo/Event/Index.php, 48, try to run its Closure: function (oDTArrayObject $oDTArrayObject){
             \Idolon\Event\Index::startIdolon($oDTArrayObject);
         }
 
 2022-10-04 08:50:02     mymvc.ueffing.local     develop 127.0.0.1       633bd79a39b6e   2e68203502766860bd3a982f97a5cebe        13      /application/config/util/bootstrap.php, 221 >   AUTOLOADING     Idolon/Event/Index.php
-2022-10-04 08:50:02     mymvc.ueffing.local     develop 127.0.0.1       633bd79a39b6e   2e68203502766860bd3a982f97a5cebe        14      /application/config/util/bootstrap.php, 221 >   AUTOLOADING     Webbixx/View/Index.php
+2022-10-04 08:50:02     mymvc.ueffing.local     develop 127.0.0.1       633bd79a39b6e   2e68203502766860bd3a982f97a5cebe        14      /application/config/util/bootstrap.php, 221 >   AUTOLOADING     Foo/View/Index.php
 2022-10-04 08:50:02     mymvc.ueffing.local     develop 127.0.0.1       633bd79a39b6e   2e68203502766860bd3a982f97a5cebe        15      /application/library/MVC/Event.php, 54  BIND (mvc.view.render.off, function (){
             \MVC\View::$bRender = false;
         });
@@ -95,16 +95,16 @@ _Example_
             \MVC\View::$bEchoOut = true;
         });
 ) --> called in: /application/library/MVC/View.php, 108
-2022-10-04 08:50:02     mymvc.ueffing.local     develop 127.0.0.1       633bd79a39b6e   2e68203502766860bd3a982f97a5cebe        19      /application/library/MVC/Event.php, 110 RUN+ (mvc.reflex.reflect.targetObject.before) --> called in: /application/library/MVC/Reflex.php, 131 --> bonded by `/modules/Webbixx/Event/Index.php, 48, try to run its Closure: function (oDTArrayObject $oDTArrayObject){
+2022-10-04 08:50:02     mymvc.ueffing.local     develop 127.0.0.1       633bd79a39b6e   2e68203502766860bd3a982f97a5cebe        19      /application/library/MVC/Event.php, 110 RUN+ (mvc.reflex.reflect.targetObject.before) --> called in: /application/library/MVC/Reflex.php, 131 --> bonded by `/modules/Foo/Event/Index.php, 48, try to run its Closure: function (oDTArrayObject $oDTArrayObject){
 //            \MVC\Debug::debug($oDTArrayObject);
             \MVC\Minify::init();
         }
 
-2022-10-04 08:50:02     mymvc.ueffing.local     develop 127.0.0.1       633bd79a39b6e   2e68203502766860bd3a982f97a5cebe        20      /application/library/MVC/Event.php, 110 RUN+ (mvc.reflex.reflect.targetObject.after) --> called in: /application/library/MVC/Reflex.php, 165 --> bonded by `/modules/Webbixx/Event/Index.php, 48, try to run its Closure: function (oDTArrayObject $oDTArrayObject){
+2022-10-04 08:50:02     mymvc.ueffing.local     develop 127.0.0.1       633bd79a39b6e   2e68203502766860bd3a982f97a5cebe        20      /application/library/MVC/Event.php, 110 RUN+ (mvc.reflex.reflect.targetObject.after) --> called in: /application/library/MVC/Reflex.php, 165 --> bonded by `/modules/Foo/Event/Index.php, 48, try to run its Closure: function (oDTArrayObject $oDTArrayObject){
             if (true === Config::get_MVC_INFOTOOL_ENABLE())
             {
                 // switch on InfoTool
-                new \MVC\InfoTool(\Webbixx\View\Index::init());
+                new \MVC\InfoTool(\Foo\View\Index::init());
             }
         },
 

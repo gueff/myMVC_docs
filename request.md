@@ -3,12 +3,14 @@
 
 - [Get current Request](#Get-current-Request)
   - [Check request method against route method](#check-request-method-against-route-method)
+- [Get data from header of current Request](#Get-data-from-header-of-current-Request)
+  - [Get all headers](#Get-all-headers)
+  - [Get a certain header](#Get-a-certain-header)
 - [Get data from body of current Request](#Get-data-from-body-of-current-Request)
 - [Accessing Path Params / Variables](#Accessing-Path-Params-Variables)
 - [Sanitizing](#Sanitizing)
 
----
-
+------------------------------------------------------------------------------------------------------------------------
 <a id="Get-current-Request"></a>
 ## Get current Request
 
@@ -21,26 +23,12 @@ _Command_
 ~~~php
 $oDTRequestCurrent = \MVC\Request::getCurrentRequest()
 ~~~
-
-_Example Result of `$oDTRequestCurrent`_
-~~~
-object(MVC\DataType\DTRequestCurrent)#65 (9) {
-  ["scheme":protected]=>string(4) "http"
-  ["host":protected]=>string(19) "mymvc.ueffing.local"
-  ["path":protected]=>string(9) "/foo/bar/"
-  ["query":protected]=>string(11) "a=1;b=2;c=3"
-  ["requesturi":protected]=>string(21) "/foo/bar/?a=1;b=2;c=3"
-  ["requestmethod":protected]=>string(3) "GET"
-  ["protocol":protected]=>string(7) "http://"
-  ["full":protected]=>string(47) "http://mymvc.ueffing.local/foo/bar/?a=1;b=2;c=3"
-  ["input":protected]=>string(0) ""
-}
-~~~
+- see [/3.2.x/datatype-classes#DTRequestCurrent](/3.2.x/datatype-classes#DTRequestCurrent)
 
 As it gives you an object of type `MVC\DataType\DTRequestCurrent`, you can access all key/values by a getter.
 
 _For example_  
-~~~
+~~~php
 $sPath = \MVC\Request::getCurrentRequest()->get_path();
 $sQuery = \MVC\Request::getCurrentRequest()->get_query();
 ~~~
@@ -61,7 +49,7 @@ $bMethodMatch = (
 ~~~
 
 _Evaluate and React_  
-~~~
+~~~php
 if (false === $bMethodMatch)
 {
     die('wrong request method `' 
@@ -72,6 +60,48 @@ if (false === $bMethodMatch)
 }
 ~~~
 
+------------------------------------------------------------------------------------------------------------------------
+<a id="Get-data-from-header-of-current-Request"></a>
+## Get data from header of current Request
+
+<a id="Get-all-headers"></a>
+**Get all headers** 
+
+_Command_
+~~~php
+$aHeader = \MVC\Request::getHeaderArray();
+~~~
+
+_Example Result_
+~~~
+array(10) {
+  ["Host"]=>string(23) "mymvcdoku.ueffing.local"
+  ["Connection"]=>string(10) "keep-alive"
+  ["Cache-Control"]=>string(9) "max-age=0"
+  ["Upgrade-Insecure-Requests"]=>string(1) "1"
+  ["User-Agent"]=>string(101) "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36"
+  ["Accept"]=>string(135) "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"
+  ["Referer"]=>string(44) "http://mymvcdoku.ueffing.local/3.2.x/request"
+  ["Accept-Encoding"]=>string(13) "gzip, deflate"
+  ["Accept-Language"]=>string(35) "de-DE,de;q=0.9,en-US;q=0.8,en;q=0.7"
+  ["Cookie"]=>string(58) "myMVC_cookieConsent=true; myMVC=0j6eatdmvbq8tqsnsoeph6kipd"
+}
+~~~
+
+<a id="Get-a-certain-header"></a>
+**Get a certain header**
+
+_Command_
+~~~php
+$aHeader = \MVC\Request::getHeader('Connection');
+~~~
+
+_Example Result_
+~~~
+string(10) "keep-alive"
+~~~
+
+------------------------------------------------------------------------------------------------------------------------
 <a id="Get-data-from-body-of-current-Request"></a>
 ## Get data from body of current Request
 
@@ -91,7 +121,7 @@ _Example Result_
 ~~~
 - As you can see here, `input` contains the values we PUT (`{"key": "value"}`)
 
-
+------------------------------------------------------------------------------------------------------------------------
 <a id="Accessing-Path-Params-Variables"></a>
 ## Accessing Path Params / Variables
 
@@ -99,7 +129,7 @@ _Example route_
 ~~~php
 \MVC\Route::get('/api/:id/:name/:address/*', 'module=Foo&c=Api&m=index');
 ~~~
-- _for more Information about setting up such routes, see [Routing with Path Params / Variables](/3.1.x/routing#path-params)_
+- _for more Information about setting up such routes, see [Routing with Path Params / Variables](/3.2.x/routing#path-params)_
 
 _Example Request_
 - `/api/1/Foo/Bar/what/else/`
@@ -144,7 +174,7 @@ _Example route_
 ~~~php
 \MVC\Route::get('/foo/*', 'module=Foo&c=Index&m=foo');
 ~~~
-- _see [Wildcard routing](/3.1.x/routing#wildcard-routing)_
+- _see [Wildcard routing](/3.2.x/routing#wildcard-routing)_
 
 _Example Request_
 - `/foo/bar/baz/`
@@ -174,6 +204,7 @@ array(2) {
 }
 ~~~
 
+------------------------------------------------------------------------------------------------------------------------
 <a id="Sanitizing"></a>
 ## Sanitizing
 
