@@ -9,12 +9,22 @@
 <a id="Get-myMVC"></a>
 ## Get myMVC
 
-make sure that your local machine has PHP >=7.4 and Composer2 installed. After you have installed PHP and Composer, you can create a new myMVC project via the Composer create-project command  
+make sure that your local machine has PHP >=7.4 installed. 
 
-_get myMVC via composer_  
-~~~bash
-composer create-project --no-install gueff/myMVC myMVC
-~~~
+you have several options to get myMVC:
+
+1. get the latest stable myMVC Release of myMVC: <a target="_blank" href="https://github.com/gueff/myMVC/releases/latest">https://github.com/gueff/myMVC/releases/latest</a>
+2. get the latest stable myMVC Release via composer _(make sure that your local machine has Composer2 installed)_  
+    ~~~bash
+    composer create-project --no-install gueff/myMVC myMVC;
+    ~~~
+3. get myMVC `3.2.x` branch head: https://github.com/gueff/myMVC/archive/refs/heads/3.2.x.zip 
+4. cloning the `3.2.x` repository branch - so you would have the possibility to perform updates (`git pull`) that are available for this branch
+    ~~~bash
+    git clone --branch 3.2.x https://github.com/gueff/myMVC.git myMVC;
+    ~~~
+
+---
 
 cd into the root folder of myMVC, where the file myMVC.phar resides.
 
