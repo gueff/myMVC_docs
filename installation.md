@@ -13,16 +13,20 @@ make sure that your local machine has PHP >=7.4 installed.
 
 you have several options to get myMVC:
 
-1. get the latest stable myMVC Release of myMVC: <a target="_blank" href="https://github.com/gueff/myMVC/releases/latest">https://github.com/gueff/myMVC/releases/latest</a>
-2. get the latest stable myMVC Release via composer _(make sure that your local machine has Composer2 installed)_  
-    ~~~bash
-    composer create-project --no-install gueff/myMVC myMVC;
-    ~~~
-3. get myMVC `3.2.x` branch head: https://github.com/gueff/myMVC/archive/refs/heads/3.2.x.zip 
-4. cloning the `3.2.x` repository branch - so you would have the possibility to perform updates (`git pull`) that are available for this branch
-    ~~~bash
-    git clone --branch 3.2.x https://github.com/gueff/myMVC.git myMVC;
-    ~~~
+- **preferred method**
+  - cloning the `3.2.x` repository branch - so you would have the possibility to perform updates (`git pull`) that are available for this branch
+      ~~~bash
+      git clone --branch 3.2.x https://github.com/gueff/myMVC.git myMVC;
+      ~~~
+- get the latest stable myMVC Release of myMVC
+  - <a target="_blank" href="https://github.com/gueff/myMVC/releases/latest">https://github.com/gueff/myMVC/releases/latest</a>
+- get the latest stable myMVC Release via
+  - _(make sure that your local machine has Composer2 installed)_  
+      ~~~bash
+      composer create-project --no-install gueff/myMVC myMVC;
+      ~~~
+- get myMVC `3.2.x` branch head
+  - https://github.com/gueff/myMVC/archive/refs/heads/3.2.x.zip 
 
 ---
 
