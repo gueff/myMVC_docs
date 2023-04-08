@@ -18,15 +18,15 @@ you have several options to get myMVC:
       ~~~bash
       git clone --branch 3.2.x https://github.com/gueff/myMVC.git myMVC;
       ~~~
-- get the latest stable myMVC Release of myMVC
+- get myMVC `3.2.x` branch head
+   - https://github.com/gueff/myMVC/archive/refs/heads/3.2.x.zip
+- get the `latest stable` myMVC Release of myMVC
   - <a target="_blank" href="https://github.com/gueff/myMVC/releases/latest">https://github.com/gueff/myMVC/releases/latest</a>
-- get the latest stable myMVC Release via
+- get the `latest stable` myMVC Release via
   - _(make sure that your local machine has Composer2 installed)_  
       ~~~bash
       composer create-project --no-install gueff/myMVC myMVC;
       ~~~
-- get myMVC `3.2.x` branch head
-  - https://github.com/gueff/myMVC/archive/refs/heads/3.2.x.zip 
 
 ---
 
