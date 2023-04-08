@@ -4,6 +4,8 @@
 - [Set a Policy Rule](#Set-a-Policy-Rule)
 - [Unset Policy Rules](#Unset-Policy-Rules)
 - [Bind a Policy Rule to a Route](#Bind-a-Policy-Rule-to-a-Route)
+- [Bind a Policy Rule to a Route](#Bind-a-Policy-Rule-to-a-Route)
+- [Unbind a Policy Rule from a Route](#Unbind-a-Policy-Rule-from-a-Route)
 - [Write methods to be executed by policy](#Write-methods-to-run)
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -92,7 +94,7 @@ _Example: bind policy `checkUserRights` to Route `/@delete`_
 
 ------------------------------------------------------------------------------------------------------------------------
 
-<a id="Bind-a-Policy-Rule-to-a-Route"></a>
+<a id="Unbind-a-Policy-Rule-from-a-Route"></a>
 ## Unbind a Policy Rule from a Route
 
 _Unbind a certain policy rule_  
