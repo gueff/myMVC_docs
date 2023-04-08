@@ -3,9 +3,11 @@
 
 - [Set a Policy Rule](#Set-a-Policy-Rule)
 - [Unset Policy Rules](#Unset-Policy-Rules)
+- [Bind a Policy Rule to a Route](#Bind-a-Policy-Rule-to-a-Route)
 - [Write methods to be executed by policy](#Write-methods-to-run)
 
 ------------------------------------------------------------------------------------------------------------------------
+
 <a id="Set-a-Policy-Rule"></a>
 ## Set a Policy Rule
 
@@ -24,7 +26,8 @@ Inside this file you define your policies.
 _Set a Rule to **any** method of a controller_   
 ~~~php
 \MVC\Policy::set(
-    '\Foo\Controller\Index', '*',
+    '\Foo\Controller\Index', 
+    '*',
     '\Foo\Policy\Index::requestMethodHasToMatchRouteMethod'
 );
 ~~~
@@ -34,7 +37,8 @@ _Set a Rule to **any** method of a controller_
 _Set a Rule to a **certain** method of a controller_
 ~~~php
 \MVC\Policy::set(
-    '\Foo\Controller\Index', 'index',
+    '\Foo\Controller\Index', 
+    'index',
     '\Foo\Policy\Index::requestMethodHasToMatchRouteMethod'
 );
 ~~~
@@ -49,26 +53,71 @@ _Set a Rule to a **certain** method of a controller_
 
 _Unset a certain target method_  
 ~~~php
-Policy::unset('\Foo\Controller\Index', 'index', '\Foo\Policy\Index::requestMethodHasToMatchRouteMethod');
+Policy::unset(
+    '\Foo\Controller\Index', 
+    'index', 
+    '\Foo\Policy\Index::requestMethodHasToMatchRouteMethod'
+);
 ~~~
 
 _Unset all target methods set to controller '\Foo\Controller\Index' and method 'index'_  
 ~~~php
-Policy::unset('\Foo\Controller\Index', 'index');
+Policy::unset(
+    '\Foo\Controller\Index', 
+    'index'
+);
 ~~~
 
 _Unset all rules set to controller '\Foo\Controller\Index'_
 ~~~php
-Policy::unset('\Foo\Controller\Index');
+Policy::unset(
+    '\Foo\Controller\Index'
+);
 ~~~
 
 ------------------------------------------------------------------------------------------------------------------------
+
+<a id="Bind-a-Policy-Rule-to-a-Route"></a>
+## Bind a Policy Rule to a Route
+
+You may find it is easier to bind a policy to a certain Route.
+
+_Example: bind policy `checkUserRights` to Route `/@delete`_    
+~~~php
+\MVC\Policy::bindOnRoute(
+    \MVC\Route::$aRoute['/foo/bar/'],
+    '\Blg\Policy\Index::checkUserRights'
+);
+~~~
+
+------------------------------------------------------------------------------------------------------------------------
+
+<a id="Bind-a-Policy-Rule-to-a-Route"></a>
+## Unbind a Policy Rule from a Route
+
+_Unbind a certain policy rule_  
+~~~php
+\MVC\Policy::unbindRoute(
+    \MVC\Route::$aRoute['/foo/bar/'],
+    '\Blg\Policy\Index::checkUserRights'
+);
+~~~
+
+_Unbind all policy rules bonded to a route_    
+~~~php
+\MVC\Policy::unbindRoute(
+    \MVC\Route::$aRoute['/foo/bar/']
+);
+~~~
+
+------------------------------------------------------------------------------------------------------------------------
+
 <a id="Write-methods-to-run"></a>
 ## Write methods to be executed by policy
 
 For a better overview, you note the required class::method not in "module/{module}/Model/" but in a separate folder.
 
-_Path to module's policy folder_
+_Path to module's policy folder_  
 ~~~
 module/{module}/Policy/
 ~~~
