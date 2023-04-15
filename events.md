@@ -4,10 +4,12 @@
 - [`\MVC\Event::run()`](#event-run)
 - [`\MVC\Event::bind()`](#event-bind)
   - [`\MVC\Event::processBindConfigStack()` - Bind to Events via config Stack](#processBindConfigStack)
+- [`\MVC\Event::delete()`](#event-delete) 
 - [Early Event bondings](#Early-Event-bondings)
 - [myMVC Standard Events](#myMVCStandardEvents)
 
 ------------------------------------------------------------------------------------------------------------------------
+
 <a id="event-run"></a>
 ## `\MVC\Event::run()` 
 
@@ -26,6 +28,7 @@ _Example: pass an `DTArrayObject` Object with Infos_
 ~~~
 
 ------------------------------------------------------------------------------------------------------------------------
+
 <a id="event-bind"></a>
 ## `\MVC\Event::bind()`
 
@@ -84,7 +87,28 @@ _Example: using config Stack to bind closures to Events_
     ],    
 ]);
 ~~~
+
 ------------------------------------------------------------------------------------------------------------------------
+
+<a id="event-delete"></a>
+## `\MVC\Event::delete()`
+
+delete one or all events. 
+
+⚠ If this parameter not is set, *all* events are going to be deleted.
+
+_Example: delete the certain Event named `foo.bar`_  
+~~~php
+\MVC\Event::delete('foo.bar');
+~~~
+
+_Example: delete *all* Events_  
+~~~php
+\MVC\Event::delete();
+~~~
+
+------------------------------------------------------------------------------------------------------------------------
+
 <a id="Early-Event-bondings"></a>
 ## Early Event bondings
 
