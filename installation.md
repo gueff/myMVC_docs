@@ -2,6 +2,7 @@
 # Installation
 
 - [Get myMVC](#Get-myMVC)
+- [Initialize myMVC](#Initialize_myMVC)
 - [Requirements](#Requirements)
 
 ---
@@ -9,37 +10,43 @@
 <a id="Get-myMVC"></a>
 ## Get myMVC
 
-make sure that your local machine has PHP >=7.4 installed. 
+make sure that your local machine has PHP >=8.0 installed. 
 
-you have several options to get myMVC:
+### preferred method 🗸
 
-- **preferred method**
-  - cloning the `3.2.x` repository branch - so you would have the possibility to perform updates (`git pull`) that are available for this branch
-      ~~~bash
-      git clone --branch 3.2.x https://github.com/gueff/myMVC.git myMVC;
-      ~~~
-- get myMVC `3.2.x` branch head
-   - https://github.com/gueff/myMVC/archive/refs/heads/3.2.x.zip
-- get the `latest stable` myMVC Release of myMVC
-  - <a target="_blank" href="https://github.com/gueff/myMVC/releases/latest">https://github.com/gueff/myMVC/releases/latest</a>
-- get the `latest stable` myMVC Release via
-  - _(make sure that your local machine has Composer2 installed)_  
-      ~~~bash
-      composer create-project --no-install gueff/myMVC myMVC;
-      ~~~
+requires `git` installed.
+
+clone the `3.3.x` repository branch - this way you have the possibility to perform patch-level updates via `git pull` command that are available for this branch.
+
+~~~bash
+git clone --branch 3.3.x https://github.com/gueff/myMVC.git myMVC_3.3.x;
+~~~
+
+**alternative methods**
+
+- get myMVC `3.3.x` **branch head**: 📥 https://github.com/gueff/myMVC/archive/refs/heads/3.3.x.zip
+- get the **latest stable** myMVC Release of myMVC _(🛈 latest stable Releases may be relate on other branches than `3.3.x`)_  
+  - Go to download page: <a href="https://github.com/gueff/myMVC/releases/latest" target="_blank">`https://github.com/gueff/myMVC/releases/latest`</a>
+  - Or install via Composer _(requires Composer2 installed)_  
+    ~~~bash
+    composer create-project --no-install gueff/myMVC myMVC;
+    ~~~
 
 ---
 
-cd into the root folder of myMVC, where the file myMVC.phar resides.
+<a id="Initialize_myMVC"></a>
+## Initialize myMVC    
 
-_run `myMVC.phar`_  
+cd into the root folder of myMVC and run `emvicy.php`
+
 ~~~bash
-cd myMVC; php myMVC.phar
+cd myMVC_3.3.x/; 
+php emvicy.php
 ~~~
 
 The Auto-Installer will instantly begin to install all necessary files. (In case of errors, a text will prompt up showing details about what went wrong). This may take a moment.
 
-~~~bash
+~~~
 setup checking
 • MVC_ENV is: develop
 • User/Group from /public/index.php: admin1(1000) / admin1(1000)
@@ -47,50 +54,39 @@ setup checking
 ................Installation completed.
 ~~~
 
-<a id="Run_myMVC"></a>
-**Run myMVC**    
+Start myMVC's local development server.
 
-Now start myMVC's local development server.  
-- run myMVC.phar, it will show you a menu with some options.
-- enter 0 (or just press the `<enter>`-key) to run local development server.
-
-_run `myMVC.phar`_    
 ~~~bash
-php myMVC.phar
+php emvicy.php s
 ~~~
 
-_menu_  
-~~~bash
-––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-myMVC
-the PHP Framework
-––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-0 = 🏁 run local development server
-1 = 📦 create a module
-8 = 🔍 check on errors (php lint recursively)
-9 = ⛔ exit
-myMVC:~$  [<enter> = 0]
-you entered: 0
-[Wed Jul 27 07:20:00 2022] PHP 7.4.3 Development Server (http://127.0.0.1:1969) started
+_example output_  
+~~~
+dev@linux:~/var/www/myMVC_3.3.x$ php emvicy.php s
+export MVC_ENV='develop'; /opt/lampp_8.2.0/bin/php-8.2.0 -S 127.0.0.1:1969 -t ./public/
+--------------------------------------------------------------------------------
+[Sun Jul 16 12:28:05 2023] PHP 8.2.0 Development Server (http://127.0.0.1:1969) started
 ~~~
 
-Now you can call your application in your web browser at [http://127.0.0.1:1969](http://127.0.0.1:1969).
 
-![myMVC Installation](/doc/getting-started/mymvc-installation.png)
+Now you can call your application in your web browser at <a href="http://127.0.0.1:1969" target="_blank">`http://127.0.0.1:1969`</a>.
+
+_You should see this Frontend_  
+![myMVC Installation](/doc/3.3.x/getting-started/mymvc-installation.png)
+
+---
+
+Next: <a class="btn btn-info" href="/3.3.x/creating-a-module"> >> Creating a Module </a>
 
 ---
 
 <a id="Requirements"></a>
 ## Requirements
 
-### PHP
+- Operating System: Linux
+- PHP Version: `>=8.0`
 
-You need to have the PHP Version >=7.4 installed. Also you need some PHP-Extensions installed and PHP-functions enabled as listed below.
-
-_PHP Version_  
-~~~
->=7.4
-~~~
+Also you need some PHP-Extensions installed and PHP-functions enabled as listed below.
 
 _Required PHP Extensions_  
 ~~~
@@ -118,12 +114,10 @@ _Required PHP Functions_
 ~~~
 mb_strlen
 iconv
-utf8_decode
 ~~~
 
-### Composer
+---
 
-You need to have the composer dependency manager installed.  
-Visit the project Website of composer for more details about how to set up composer.
+Next: <a class="btn btn-info" href="/3.3.x/creating-a-module"> >> Creating a Module </a>
 
-- https://getcomposer.org/
+---

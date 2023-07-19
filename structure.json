@@ -1,5 +1,6 @@
 {
   "Getting started": {
+    "Introduction": "introduction.md",
     "Installation": "installation.md",
     "Creating a Module":"creating-a-module.md",
     "Configuration":"configuration.md",
