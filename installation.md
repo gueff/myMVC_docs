@@ -10,7 +10,7 @@
 <a id="Get-myMVC"></a>
 ## Get myMVC
 
-make sure that your local machine has PHP >=8.0 installed. 
+make sure that your machine has PHP >=8.0 installed (see [Requirements](#Requirements)). 
 
 ### preferred method 🗸
 
@@ -76,10 +76,6 @@ _You should see this Frontend_
 
 ---
 
-Next: <a class="btn btn-info" href="/3.3.x/creating-a-module"> >> Creating a Module </a>
-
----
-
 <a id="Requirements"></a>
 ## Requirements
 
@@ -115,9 +111,3 @@ _Required PHP Functions_
 mb_strlen
 iconv
 ~~~
-
----
-
-Next: <a class="btn btn-info" href="/3.3.x/creating-a-module"> >> Creating a Module </a>
-
----

@@ -1,7 +1,7 @@
 
 # Configuration
 
-- [Environment `public/.env`](#Environment)
+- [Environment `/.env`](#Environment)
   - [MVC_ENV](#MVC_ENV)
   - [Custom .env variables](#custom-env-variables)
 - [Config files, -places and reading order](#Config-files-places-and-reading-order)
@@ -15,19 +15,20 @@
 ---
 
 <a id="Environment"></a>
-## Environment `public/.env`
+## Environment `/.env`
 
 <a id="MVC_ENV"></a>
 **MVC_ENV**  
-In the `public/` folder you will find an `.env` file. There the variable `MVC_ENV` is declared. This variable declares what Environment is valid for myMVC.  
-You can name the value as you like - But common values are: `develop`, `test`, `production`.  
+In the root folder of your myMVC copy you will find an `.env` file. There the variable `MVC_ENV` is declared. This variable declares what Environment is valid for myMVC.  
+You can name the value as you like - But common values are: `develop`, `test`, `production` or `live`.  
 
-Make sure the corresponding environment config file does exist in your module  
-(Schema: `/modules/{moduleName}/etc/config/{moduleName}/config/{environment}.php`).
+**corresponding environment config file**  
 
-_Example_  
-If your Module is named `Foo`, and you set `MVC_ENV=production`,  
-then the config file `/modules/Foo/etc/config/Foo/config/production.php` has to exist.
+Schema: `/modules/{moduleName}/etc/config/{moduleName}/config/{environment}.php`.
+
+- If you create a module by using emvicy.php (see: [Creating a primary Module](/3.3.x/creating-a-module#creating-a-primary-module)), the corresponding environment config file 
+will be generated automatically.
+- But if you change the value of that `MVC_ENV` variable afterwards, make sure the corresponding environment config file does exist in your primary module. Example: If your Module is named `Foo`, and you set `MVC_ENV=production`, then the config file `/modules/Foo/etc/config/Foo/config/production.php` has to exist.
 
 ~~~bash
 # Environment
@@ -36,7 +37,7 @@ MVC_ENV=production
 
 <a id="custom-env-variables"></a>
 **Custom .env variables**  
-You are free to set up any `key=value` declarations you want in that `public/.env` file. 
+You are free to set up any `key=value` declarations you want in that `/.env` file. 
 Any `key=value` pair found in the file will be set by `putenv()` at start and you can access those variables via php's `getenv()` command.
 
 _Example_  

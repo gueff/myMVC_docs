@@ -1,6 +1,4 @@
 
-
-
 # Creating a Module
 
 - [How it works](#how-it-works)
@@ -16,8 +14,7 @@ There is a distinction between `primary` and `secondary` modules.
 
 **Primary module**    
 You develop your application in a `primary` module.
-This `primary` module is also stored by name in the globally available config `$aConfig['MVC_MODULE_CURRENT_NAME']`.
-and is also available via `Config::get_MVC_MODULE_CURRENT_NAME()`.
+That `primary` module is also stored by name in the globally available config `$aConfig['MVC_MODULE_CURRENT_NAME']` and is also available via `Config::get_MVC_MODULE_CURRENT_NAME()`.
 
 Only the configurations from this module are loaded automatically.
 
@@ -49,8 +46,9 @@ Conclusion
 <a id="creating-a-primary-module"></a>
 ## Creating a `primary` Module
 
-You create a module by using `emvicy.php` on CLI. The creation of the necessary environment config file (e.g. 'develop.php') during this module creation process depends on which `MVC_ENV` is set in `/.env` (see [/3.3.x/configuration](/3.3.x/configuration)).
+You create a module by using `emvicy.php` on CLI. The creation of the necessary environment config file (e.g. 'develop.php') during this module creation process depends on which `MVC_ENV` is set in `/.env` (see [/3.3.x/configuration#Environment](/3.3.x/configuration#Environment)).
 
+_use one of the following commands to create a primary module_  
 ~~~bash
 php emvicy.php c module=foo;                       # creates primary module "Foo"; asks if modulename is correct
 ~~~
@@ -62,22 +60,7 @@ php emvicy.php c module=foo primary=yes force=no;  # same
 php emvicy.php c module=foo primary=yes force=yes; # no asking - instantly creating of primary module "Foo"
 ~~~
 
----
-
-<a id="creating-a-secondary-module"></a>
-## Creating a `secondary` Module
-
-~~~bash
-php emvicy.php c module=bar primary=no             # creates module "Bar" as a secondary module; asks if modulename is correct
-~~~
-~~~bash
-php emvicy.php c module=bar primary=no force=no;   # same
-php emvicy.php c module=bar primary=no force=yes;  # no asking - instantly creating of secondary module "Baz"
-~~~
-
----
-
-_Now start myMVC's local development server_
+_After creating a primary module, start myMVC's local development server_
 ~~~bash
 php emvicy.php s
 ~~~
@@ -85,3 +68,17 @@ php emvicy.php s
 Call http://127.0.0.1:1969/ and you will see your created module frontend
 
 ![myMVC Creating a Module](/doc/3.3.x/getting-started/mymvc-creating-a-module.png)
+
+---
+
+<a id="creating-a-secondary-module"></a>
+## Creating a `secondary` Module
+
+_use one of the following commands to create a secondary module_
+~~~bash
+php emvicy.php c module=bar primary=no             # creates module "Bar" as a secondary module; asks if modulename is correct
+~~~
+~~~bash
+php emvicy.php c module=bar primary=no force=no;   # same
+php emvicy.php c module=bar primary=no force=yes;  # no asking - instantly creating of secondary module "Baz"
+~~~
