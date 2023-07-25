@@ -11,7 +11,7 @@
 ## `DTRoute`
 
 - This Class is used to store Route Information.
-- An object of this class gets being returned by `Route::getCurrent()` (see [/3.2.x/routing#Get-current-route](/3.2.x/routing#Get-current-route))
+- An object of this class gets being returned by `Route::getCurrent()` (see [/3.3.x/routing#Get-current-route](/3.3.x/routing#Get-current-route))
 
 ~~~php
 /** @var \MVC\DataType\DTRoute $oDTRoute */
@@ -36,7 +36,7 @@ object(MVC\DataType\DTRoute)#15 (9) {
 ## `DTRequestCurrent`
 
 - This Class is used to store the current Request Information.
-- An object of this class gets being returned by `Request::getCurrentRequest()` (see [/3.2.x/request#Get-current-Request](/3.2.x/request#Get-current-Request))
+- An object of this class gets being returned by `Request::getCurrentRequest()` (see [/3.3.x/request#Get-current-Request](/3.3.x/request#Get-current-Request))
 
 ~~~php
 /** @var \MVC\DataType\DTRequestCurrent $oDTRequestCurrent */
@@ -46,13 +46,13 @@ $oDTRequestCurrent = \MVC\Request::getCurrentRequest();
 object(MVC\DataType\DTRequestCurrent)#17 (14) {
   ["scheme":protected]=>string(4) "http"
   ["host":protected]=>string(23) "mymvcdoku.ueffing.local"
-  ["path":protected]=>string(23) "/3.2.x/datatype-classes"
+  ["path":protected]=>string(23) "/3.3.x/datatype-classes"
   ["query":protected]=>string(0) ""
   ["queryArray":protected]=>array(0) {}
-  ["requesturi":protected]=>string(23) "/3.2.x/datatype-classes"
+  ["requesturi":protected]=>string(23) "/3.3.x/datatype-classes"
   ["requestmethod":protected]=>string(3) "GET"
   ["protocol":protected]=>string(7) "http://"
-  ["full":protected]=>string(53) "http://mymvcdoku.ueffing.local/3.2.x/datatype-classes"
+  ["full":protected]=>string(53) "http://mymvcdoku.ueffing.local/3.3.x/datatype-classes"
   ["input":protected]=>string(0) ""
   ["isSecure":protected]=>bool(false)
   ["headerArray":protected]=>
@@ -63,7 +63,7 @@ object(MVC\DataType\DTRequestCurrent)#17 (14) {
     ["Upgrade-Insecure-Requests"]=>string(1) "1"
     ["User-Agent"]=>string(101) "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36"
     ["Accept"]=>string(135) "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"
-    ["Referer"]=>string(64) "http://mymvcdoku.ueffing.local/3.2.x/generating-datatype-classes"
+    ["Referer"]=>string(64) "http://mymvcdoku.ueffing.local/3.3.x/generating-datatype-classes"
     ["Accept-Encoding"]=>string(13) "gzip, deflate"
     ["Accept-Language"]=>string(35) "de-DE,de;q=0.9,en-US;q=0.8,en;q=0.7"
     ["Cookie"]=>string(58) "myMVC_cookieConsent=true; myMVC=827rv9s19bfsk692j0pgje3kn2"

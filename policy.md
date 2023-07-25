@@ -1,35 +1,40 @@
 
-# Policy 
+# Policy
 
-- [Set a Policy Rule](#Set-a-Policy-Rule)
-- [Unset Policy Rules](#Unset-Policy-Rules)
-- [Bind a Policy Rule to a Route](#Bind-a-Policy-Rule-to-a-Route)
-- [Bind a Policy Rule to a Route](#Bind-a-Policy-Rule-to-a-Route)
-- [Unbind a Policy Rule from a Route](#Unbind-a-Policy-Rule-from-a-Route)
+- [Enabling Policy Rules](#writing-policy-rules)
+  - [Set a single Rule](#set-a-single-rule)
+  - [Setting multiple Rules](#setting-multiple-rules)
+  - [Bind a Policy Rule to a Route](#Bind-a-Policy-Rule-to-a-Route)
+- [Disabling Policy Rules](#disabling-policy-rules)
+  - [Unset a single Rule](#unset-a-single-rule)
+  - [Unset multiple Rules](#unset-multiple-rules)
+  - [Unbind a Policy Rule from a Route](#unbind-a-policy-rule-from-a-route)
 - [Write methods to be executed by policy](#Write-methods-to-run)
 
 ------------------------------------------------------------------------------------------------------------------------
 
-<a id="Set-a-Policy-Rule"></a>
-## Set a Policy Rule
+<a id="writing-policy-rules"></a>
+## Enabling Policy Rules
 
 Policies are bonded to a any/certain Controller::method.  
 And they are executed after all Routes are initialized by myMVC.
 
-_Path to module's policy configuration file_
+_Path to module's policy configuration files_
+~~~
+module/{module}/etc/config/policy/*.php
+~~~
 ~~~
 module/{module}/etc/config/policy/policy.php
 ~~~
 
-Inside this file you define your policies.
+------------------------------------------------------------------------------------------------------------------------
 
-### Examples 
+<a id="set-a-single-rule"></a>
+### Set a single Rule
 
-assuming module is "Foo"
+_(assuming module is "Foo")_
 
-#### Set a single Rule
-
-_Set a single Rule to **any** (`*`) method of a controller_   
+_Set a single Rule to **any** (`*`) method of a controller_
 ~~~php
 \MVC\Policy::set(
     '\Foo\Controller\Index', 
@@ -51,7 +56,8 @@ _Set a single Rule to a **certain** method of a controller_
 - when method `index` of controller `\Foo\Controller\Index` is being called
 - execute `\Foo\Policy\Index::requestMethodHasToMatchRouteMethod`
 
-#### Setting multiple Rules
+<a id="setting-multiple-rules"></a>
+### Setting multiple Rules
 
 simply wrap the rules into an array.
 
@@ -66,15 +72,32 @@ simply wrap the rules into an array.
 );
 ~~~
 
-------------------------------------------------------------------------------------------------------------------------
-<a id="Unset-Policy-Rules"></a>
-## Unset Policy Rules
+<a id="Bind-a-Policy-Rule-to-a-Route"></a>
+### Bind a Policy Rule to a Route
 
-### Examples
+You can also bind a policy to a certain Route.
+
+_Example: bind policies `checkUserRights` and `isAdmin` to Route `/foo/bar/`_
+~~~php
+\MVC\Policy::bindOnRoute(
+    \MVC\Route::$aRoute['/foo/bar/'], [
+        '\Blg\Policy\Index::checkUserRights',
+        '\Blg\Policy\Index::isAdmin'
+    ]
+);
+~~~
+
+------------------------------------------------------------------------------------------------------------------------
+
+<a id="disabling-policy-rules"></a>
+## Disabling Policy Rules
+
+<a id="unset-a-single-rule"></a>
+### Unset a single Rule
 
 assuming module is "Foo"
 
-_Unset the single rule `'\Foo\Policy\Index::requestMethodHasToMatchRouteMethod'` set to controller `\Foo\Controller\Index` and method `index`_    
+_Unset the single rule `'\Foo\Policy\Index::requestMethodHasToMatchRouteMethod'` set to controller `\Foo\Controller\Index` and method `index`_
 ~~~php
 Policy::unset(
     '\Foo\Controller\Index', 
@@ -83,7 +106,10 @@ Policy::unset(
 );
 ~~~
 
-_Unset certain, multiple rules set to controller `\Foo\Controller\Index` and method `index`_  
+<a id="unset-multiple-rules"></a>
+### Unset multiple Rules
+
+_Unset certain, multiple rules set to controller `\Foo\Controller\Index` and method `index`_
 ~~~php
 \MVC\Policy::unset(
     '\Foo\Controller\Index', 
@@ -95,7 +121,7 @@ _Unset certain, multiple rules set to controller `\Foo\Controller\Index` and met
 );
 ~~~
 
-_Unset all rules set to controller `\Foo\Controller\Index` and method `index`_  
+_Unset all rules set to controller `\Foo\Controller\Index` and method `index`_
 ~~~php
 Policy::unset(
     '\Foo\Controller\Index', 
@@ -110,29 +136,10 @@ Policy::unset(
 );
 ~~~
 
-------------------------------------------------------------------------------------------------------------------------
+<a id="unbind-a-policy-rule-from-a-route"></a>
+### Unbind a Policy Rule from a Route
 
-<a id="Bind-a-Policy-Rule-to-a-Route"></a>
-## Bind a Policy Rule to a Route
-
-You can also bind a policy to a certain Route.
-
-_Example: bind policies `checkUserRights` and `isAdmin` to Route `/foo/bar/`_    
-~~~php
-\MVC\Policy::bindOnRoute(
-    \MVC\Route::$aRoute['/foo/bar/'], [
-        '\Blg\Policy\Index::checkUserRights',
-        '\Blg\Policy\Index::isAdmin'
-    ]
-);
-~~~
-
-------------------------------------------------------------------------------------------------------------------------
-
-<a id="Unbind-a-Policy-Rule-from-a-Route"></a>
-## Unbind a Policy Rule from a Route
-
-_Unbind a certain policy rule_  
+_Unbind a certain policy rule_
 ~~~php
 \MVC\Policy::unbindRoute(
     \MVC\Route::$aRoute['/foo/bar/'], [
@@ -141,7 +148,7 @@ _Unbind a certain policy rule_
 );
 ~~~
 
-_Unbind all policy rules bonded to a route_    
+_Unbind all policy rules bonded to a route_
 ~~~php
 \MVC\Policy::unbindRoute(
     \MVC\Route::$aRoute['/foo/bar/']
@@ -155,12 +162,12 @@ _Unbind all policy rules bonded to a route_
 
 For a better overview, you note the required class::method not in "module/{module}/Model/" but in a separate folder.
 
-_Path to module's policy folder_  
+_Path to module's policy folder_
 ~~~
 module/{module}/Policy/
 ~~~
 
-_Example: file `module/Foo/Policy/Index.php`_  
+_Example: file `module/Foo/Policy/Index.php`_
 ~~~php
 <?php
 /**

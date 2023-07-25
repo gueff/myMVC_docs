@@ -23,7 +23,7 @@ _Command_
 ~~~php
 $oDTRequestCurrent = \MVC\Request::getCurrentRequest()
 ~~~
-- see [/3.2.x/datatype-classes#DTRequestCurrent](/3.2.x/datatype-classes#DTRequestCurrent)
+- see [/3.3.x/datatype-classes#DTRequestCurrent](/3.3.x/datatype-classes#DTRequestCurrent)
 
 As it gives you an object of type `MVC\DataType\DTRequestCurrent`, you can access all key/values by a getter.
 
@@ -81,7 +81,7 @@ array(10) {
   ["Upgrade-Insecure-Requests"]=>string(1) "1"
   ["User-Agent"]=>string(101) "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36"
   ["Accept"]=>string(135) "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"
-  ["Referer"]=>string(44) "http://mymvcdoku.ueffing.local/3.2.x/request"
+  ["Referer"]=>string(44) "http://mymvcdoku.ueffing.local/3.3.x/request"
   ["Accept-Encoding"]=>string(13) "gzip, deflate"
   ["Accept-Language"]=>string(35) "de-DE,de;q=0.9,en-US;q=0.8,en;q=0.7"
   ["Cookie"]=>string(58) "myMVC_cookieConsent=true; myMVC=0j6eatdmvbq8tqsnsoeph6kipd"
@@ -129,7 +129,7 @@ _Example route_
 ~~~php
 \MVC\Route::get('/api/:id/:name/:address/*', 'module=Foo&c=Api&m=index');
 ~~~
-- _for more Information about setting up such routes, see [Routing with Path Params / Variables](/3.2.x/routing#path-params)_
+- _for more Information about setting up such routes, see [Routing with Path Params / Variables](/3.3.x/routing#path-params)_
 
 _Example Request_
 - `/api/1/Foo/Bar/what/else/`
@@ -174,7 +174,7 @@ _Example route_
 ~~~php
 \MVC\Route::get('/foo/*', 'module=Foo&c=Index&m=foo');
 ~~~
-- _see [Wildcard routing](/3.2.x/routing#wildcard-routing)_
+- _see [Wildcard routing](/3.3.x/routing#wildcard-routing)_
 
 _Example Request_
 - `/foo/bar/baz/`

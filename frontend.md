@@ -5,7 +5,7 @@
 - [View](#View)
 - [Accessing Class methods and objects in smarty template](#Accessing-Class-methods-and-objects-in-smarty-template)
 
----
+------------------------------------------------------------------------------------------------------------------------
 
 <a id="Template-Engine-Smarty"></a>
 ## Template Engine Smarty
@@ -17,6 +17,8 @@
 
 _Smarty_  
 For more Information about how to code templates with powerful Smarty Template Engine please visit the official Website https://www.smarty.net/ 
+
+------------------------------------------------------------------------------------------------------------------------
 
 <a id="View"></a>
 ## View
@@ -36,7 +38,8 @@ In your template you can access that assigned variable this way:
 
 **autoAssign variables** 
 
-If you created your module via myMVC.phar (see: [Creating a Module](/3.3.x/creating-a-module)) or you added additional context information to your route by yourself, you can easily auto assign all [additional route infos](/3.3.x/routing#adding-additional-context-information-to-route): 
+If you created your module via myMVC.phar (see: [Creating a Module](/3.3.x/creating-a-module)) or you added additional 
+context information to your route by yourself, you can easily auto assign all [additional route infos](/3.3.x/routing#adding-additional-context-information-to-route): 
 
 _autoAssign variables to template (assuming module is `Foo`)_  
 ~~~php
@@ -51,6 +54,36 @@ _render the template (assuming module is `Foo`)_
 ~~~php
 \Foo\View\Index::init()->render();
 ~~~
+
+**controlling rendering**
+
+switch on/off rendering templates
+
+_render `off`_
+~~~php
+Event::run('mvc.view.render.off');
+~~~
+
+_render `on`_
+~~~php
+Event::run('mvc.view.render.on');
+~~~
+
+**controlling echo out**
+
+switch on/off  to echo out the rendered result
+
+_echoOut `off`_  
+~~~php
+Event::run('mvc.view.echoOut.off');
+~~~
+
+_echoOut `on`_
+~~~php
+Event::run('mvc.view.echoOut.on');
+~~~
+
+------------------------------------------------------------------------------------------------------------------------
 
 <a id="Accessing-Class-methods-and-objects-in-smarty-template"></a>
 ## Accessing Class methods and objects in smarty template

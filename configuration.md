@@ -12,6 +12,9 @@
 - [Access `MVC_*` config values](#Access-MVC-config-values)
 - [Access module config values](#Access-module-config-values)
 - [Appendix](#appendix)
+  - [`/config/_mvc.php`](#myMVC-config-folder-example)
+  - [Example `/modules/Foo/etc/config/_mvc.php`](#Modules-config-folder-example)
+  - [Example `/modules/Foo/etc/config/Foo/config/develop.php`](#Modules-environment-config-file-example)
 
 ---
 

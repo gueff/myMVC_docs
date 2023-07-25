@@ -305,7 +305,7 @@ array(2) {
     ["module":protected]=>string(7) "Foo"
     ["c":protected]=>string(5) "Index"
     ["m":protected]=>string(5) "index"
-    ["additional":protected]=>string(733) "{"sTitle":"Foo","sLayout":"Frontend\/layout\/index.tpl","sMainmenu":"Frontend\/layout\/menu.tpl","sContent":"Frontend\/content\/index.tpl","sHeader":"Frontend\/layout\/header.tpl","sNoscript":"Frontend\/content\/_noscript.tpl","sCookieConsent":"Frontend\/content\/_cookieConsent.tpl","sFooter":"Frontend\/layout\/footer.tpl","aStyle":["\/myMVC\/assets\/bootstrap-4.4.1-dist\/css\/bootstrap.min.css","\/myMVC\/assets\/font-awesome-4.7.0\/css\/font-awesome.min.css","\/myMVC\/styles\/myMVC.min.css"],"aScript":["\/myMVC\/assets\/jquery\/3.4.1\/jquery-3.4.1.min.js","\/myMVC\/assets\/jquery-cookie\/1.4.1\/jquery.cookie.min.js","\/myMVC\/assets\/bootstrap-4.4.1-dist\/js\/bootstrap.min.js","\/myMVC\/scripts\/cookieConsent.min.js"]}"
+    ["additional":protected]=>string(733) "{"sTitle":"Foo","sLayout":"Frontend\/layout\/index.tpl","sMainmenu":"Frontend\/layout\/menu.tpl","sContent":"Frontend\/content\/index.tpl","sHeader":"Frontend\/layout\/header.tpl","sNoscript":"Frontend\/content\/_noscript.tpl","sCookieConsent":"Frontend\/content\/_cookieConsent.tpl","sFooter":"Frontend\/layout\/footer.tpl","aStyle":["\/myMVC\/assets\/bootstrap-4.6.2-dist\/css\/bootstrap.min.css","\/myMVC\/assets\/font-awesome-4.7.0\/css\/font-awesome.min.css","\/myMVC\/styles\/myMVC.min.css"],"aScript":["\/myMVC\/assets\/jquery\/3.4.1\/jquery-3.4.1.min.js","\/myMVC\/assets\/jquery-cookie\/1.4.1\/jquery.cookie.min.js","\/myMVC\/assets\/bootstrap-4.6.2-dist\/js\/bootstrap.min.js","\/myMVC\/scripts\/cookieConsent.min.js"]}"
   }
   ["/404/"]=>
   object(MVC\DataType\DTRoute)#17 (9) {
@@ -366,7 +366,7 @@ object(MVC\DataType\DTRoute)#19 (9) {
   ["module":protected]=>string(7) "Foo"
   ["c":protected]=>string(5) "Index"
   ["m":protected]=>string(5) "index"
-  ["additional":protected]=>string(727) "{"sTitle":"API","sLayout":"Frontend\/layout\/index.tpl","sMainmenu":"Frontend\/layout\/menu.tpl","sContent":"Frontend\/content\/foo.tpl","sHeader":"Frontend\/layout\/header.tpl","sNoscript":"Frontend\/content\/_noscript.tpl","sCookieConsent":"Frontend\/content\/_cookieConsent.tpl","sFooter":"Frontend\/layout\/footer.tpl","aStyle":["\/myMVC\/assets\/bootstrap-4.4.1-dist\/css\/bootstrap.min.css","\/myMVC\/assets\/font-awesome-4.7.0\/css\/font-awesome.min.css","\/myMVC\/styles\/myMVC.min.css"],"aScript":["\/myMVC\/assets\/jquery\/3.4.1\/jquery-3.4.1.min.js","\/myMVC\/assets\/jquery-cookie\/1.4.1\/jquery.cookie.min.js","\/myMVC\/assets\/bootstrap-4.4.1-dist\/js\/bootstrap.min.js","\/myMVC\/scripts\/cookieConsent.min.js"]}"
+  ["additional":protected]=>string(727) "{"sTitle":"API","sLayout":"Frontend\/layout\/index.tpl","sMainmenu":"Frontend\/layout\/menu.tpl","sContent":"Frontend\/content\/foo.tpl","sHeader":"Frontend\/layout\/header.tpl","sNoscript":"Frontend\/content\/_noscript.tpl","sCookieConsent":"Frontend\/content\/_cookieConsent.tpl","sFooter":"Frontend\/layout\/footer.tpl","aStyle":["\/myMVC\/assets\/bootstrap-4.6.2-dist\/css\/bootstrap.min.css","\/myMVC\/assets\/font-awesome-4.7.0\/css\/font-awesome.min.css","\/myMVC\/styles\/myMVC.min.css"],"aScript":["\/myMVC\/assets\/jquery\/3.4.1\/jquery-3.4.1.min.js","\/myMVC\/assets\/jquery-cookie\/1.4.1\/jquery.cookie.min.js","\/myMVC\/assets\/bootstrap-4.6.2-dist\/js\/bootstrap.min.js","\/myMVC\/scripts\/cookieConsent.min.js"]}"
 }
 ~~~
 
@@ -408,7 +408,7 @@ object(MVC\DataType\DTRoute)#17 (9) {
   ["module":protected]=>string(7) "Foo"
   ["c":protected]=>string(5) "Index"
   ["m":protected]=>string(8) "notFound"
-  ["additional":protected]=>string(727) "{"sTitle":"404","sLayout":"Frontend\/layout\/index.tpl","sMainmenu":"Frontend\/layout\/menu.tpl","sContent":"Frontend\/content\/404.tpl","sHeader":"Frontend\/layout\/header.tpl","sNoscript":"Frontend\/content\/_noscript.tpl","sCookieConsent":"Frontend\/content\/_cookieConsent.tpl","sFooter":"Frontend\/layout\/footer.tpl","aStyle":["\/myMVC\/assets\/bootstrap-4.4.1-dist\/css\/bootstrap.min.css","\/myMVC\/assets\/font-awesome-4.7.0\/css\/font-awesome.min.css","\/myMVC\/styles\/myMVC.min.css"],"aScript":["\/myMVC\/assets\/jquery\/3.4.1\/jquery-3.4.1.min.js","\/myMVC\/assets\/jquery-cookie\/1.4.1\/jquery.cookie.min.js","\/myMVC\/assets\/bootstrap-4.4.1-dist\/js\/bootstrap.min.js","\/myMVC\/scripts\/cookieConsent.min.js"]}"
+  ["additional":protected]=>string(727) "{"sTitle":"404","sLayout":"Frontend\/layout\/index.tpl","sMainmenu":"Frontend\/layout\/menu.tpl","sContent":"Frontend\/content\/404.tpl","sHeader":"Frontend\/layout\/header.tpl","sNoscript":"Frontend\/content\/_noscript.tpl","sCookieConsent":"Frontend\/content\/_cookieConsent.tpl","sFooter":"Frontend\/layout\/footer.tpl","aStyle":["\/myMVC\/assets\/bootstrap-4.6.2-dist\/css\/bootstrap.min.css","\/myMVC\/assets\/font-awesome-4.7.0\/css\/font-awesome.min.css","\/myMVC\/styles\/myMVC.min.css"],"aScript":["\/myMVC\/assets\/jquery\/3.4.1\/jquery-3.4.1.min.js","\/myMVC\/assets\/jquery-cookie\/1.4.1\/jquery.cookie.min.js","\/myMVC\/assets\/bootstrap-4.6.2-dist\/js\/bootstrap.min.js","\/myMVC\/scripts\/cookieConsent.min.js"]}"
 }
 ~~~
 
@@ -438,7 +438,7 @@ $sAdditional = \MVC\Route::getCurrent()->get_additional()
 
 _Example Result of `$sAdditional` (JSON)_  
 ~~~json
-{"sTitle":"Foo","sLayout":"Frontend\/layout\/index.tpl","sMainmenu":"Frontend\/layout\/menu.tpl","sContent":"Frontend\/content\/index.tpl","sHeader":"Frontend\/layout\/header.tpl","sNoscript":"Frontend\/content\/_noscript.tpl","sCookieConsent":"Frontend\/content\/_cookieConsent.tpl","sFooter":"Frontend\/layout\/footer.tpl","aStyle":["\/myMVC\/assets\/bootstrap-4.4.1-dist\/css\/bootstrap.min.css","\/myMVC\/assets\/font-awesome-4.7.0\/css\/font-awesome.min.css","\/myMVC\/styles\/myMVC.min.css"],"aScript":["\/myMVC\/assets\/jquery\/3.4.1\/jquery-3.4.1.min.js","\/myMVC\/assets\/jquery-cookie\/1.4.1\/jquery.cookie.min.js","\/myMVC\/assets\/bootstrap-4.4.1-dist\/js\/bootstrap.min.js","\/myMVC\/scripts\/cookieConsent.min.js"]}
+{"sTitle":"Foo","sLayout":"Frontend\/layout\/index.tpl","sMainmenu":"Frontend\/layout\/menu.tpl","sContent":"Frontend\/content\/index.tpl","sHeader":"Frontend\/layout\/header.tpl","sNoscript":"Frontend\/content\/_noscript.tpl","sCookieConsent":"Frontend\/content\/_cookieConsent.tpl","sFooter":"Frontend\/layout\/footer.tpl","aStyle":["\/myMVC\/assets\/bootstrap-4.6.2-dist\/css\/bootstrap.min.css","\/myMVC\/assets\/font-awesome-4.7.0\/css\/font-awesome.min.css","\/myMVC\/styles\/myMVC.min.css"],"aScript":["\/myMVC\/assets\/jquery\/3.4.1\/jquery-3.4.1.min.js","\/myMVC\/assets\/jquery-cookie\/1.4.1\/jquery.cookie.min.js","\/myMVC\/assets\/bootstrap-4.6.2-dist\/js\/bootstrap.min.js","\/myMVC\/scripts\/cookieConsent.min.js"]}
 ~~~
 
 <a id="Get-the-additional-context-information-of-any-route"></a>
@@ -453,7 +453,7 @@ $sAdditional = \MVC\Route::$aRoute['/404/']->get_additional()
 
 _Example Result of `$sAdditional` (JSON)_
 ~~~json
-{"sTitle":"404","sLayout":"Frontend\/layout\/index.tpl","sMainmenu":"Frontend\/layout\/menu.tpl","sContent":"Frontend\/content\/404.tpl","sHeader":"Frontend\/layout\/header.tpl","sNoscript":"Frontend\/content\/_noscript.tpl","sCookieConsent":"Frontend\/content\/_cookieConsent.tpl","sFooter":"Frontend\/layout\/footer.tpl","aStyle":["\/myMVC\/assets\/bootstrap-4.4.1-dist\/css\/bootstrap.min.css","\/myMVC\/assets\/font-awesome-4.7.0\/css\/font-awesome.min.css","\/myMVC\/styles\/myMVC.min.css"],"aScript":["\/myMVC\/assets\/jquery\/3.4.1\/jquery-3.4.1.min.js","\/myMVC\/assets\/jquery-cookie\/1.4.1\/jquery.cookie.min.js","\/myMVC\/assets\/bootstrap-4.4.1-dist\/js\/bootstrap.min.js","\/myMVC\/scripts\/cookieConsent.min.js"]}
+{"sTitle":"404","sLayout":"Frontend\/layout\/index.tpl","sMainmenu":"Frontend\/layout\/menu.tpl","sContent":"Frontend\/content\/404.tpl","sHeader":"Frontend\/layout\/header.tpl","sNoscript":"Frontend\/content\/_noscript.tpl","sCookieConsent":"Frontend\/content\/_cookieConsent.tpl","sFooter":"Frontend\/layout\/footer.tpl","aStyle":["\/myMVC\/assets\/bootstrap-4.6.2-dist\/css\/bootstrap.min.css","\/myMVC\/assets\/font-awesome-4.7.0\/css\/font-awesome.min.css","\/myMVC\/styles\/myMVC.min.css"],"aScript":["\/myMVC\/assets\/jquery\/3.4.1\/jquery-3.4.1.min.js","\/myMVC\/assets\/jquery-cookie\/1.4.1\/jquery.cookie.min.js","\/myMVC\/assets\/bootstrap-4.6.2-dist\/js\/bootstrap.min.js","\/myMVC\/scripts\/cookieConsent.min.js"]}
 ~~~
 
 <a id="Converting-JSON-back-to-object"></a>
@@ -482,7 +482,7 @@ object(Foo\DataType\DTRoutingAdditional)#66 (10) {
   ["sFooter":protected]=>string(26) "Frontend/layout/footer.tpl"
   ["aStyle":protected]=>
   array(3) {
-    [0]=>string(56) "/myMVC/assets/bootstrap-4.4.1-dist/css/bootstrap.min.css"
+    [0]=>string(56) "/myMVC/assets/bootstrap-4.6.2-dist/css/bootstrap.min.css"
     [1]=>string(57) "/myMVC/assets/font-awesome-4.7.0/css/font-awesome.min.css"
     [2]=>string(27) "/myMVC/styles/myMVC.min.css"
   }
@@ -490,7 +490,7 @@ object(Foo\DataType\DTRoutingAdditional)#66 (10) {
   array(4) {
     [0]=>string(46) "/myMVC/assets/jquery/3.4.1/jquery-3.4.1.min.js"
     [1]=>string(54) "/myMVC/assets/jquery-cookie/1.4.1/jquery.cookie.min.js"
-    [2]=>string(54) "/myMVC/assets/bootstrap-4.4.1-dist/js/bootstrap.min.js"
+    [2]=>string(54) "/myMVC/assets/bootstrap-4.6.2-dist/js/bootstrap.min.js"
     [3]=>string(35) "/myMVC/scripts/cookieConsent.min.js"
   }
 }

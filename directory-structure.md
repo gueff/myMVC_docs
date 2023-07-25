@@ -60,15 +60,15 @@
 <a id="modules-moduleName-etc"></a>
 ## `/modules/{moduleName}/etc/`
 
-| Folder / File                               | Meaning                                                       |
-|---------------------------------------------|---------------------------------------------------------------|
-| 📁 _INSTALL                                 | place for files to install _(e.g. copy into `public` folder)_ |
-| 📁 [config](#modules-moduleName-etc-config) | Module's config files                                         |
-| 📁 doc                                      | place for any further Module documentation                    |
-| 📁 event                                    | Event Listeners                                               |
-| 📁 policy                                   | Policy Rules                                                  |
-| 📁 routing                                  | Routing files                                                 |
-| 📁 smartyPlugins                            | Smarty template PlugIn files                                  |
+| Folder / File                               | Meaning                                                                                                 |
+|---------------------------------------------|---------------------------------------------------------------------------------------------------------|
+| 📁 _INSTALL                                 | place for files to install _(e.g. copy into `public` folder)_                                           |
+| 📁 [config](#modules-moduleName-etc-config) | Module's config files                                                                                   |
+| 📁 doc                                      | place for any further Module documentation                                                              |
+| 📁 event                                    | place for Event Listeners. See [Registering Event Listeners](/3.3.x/events#registering-event-listeners) |
+| 📁 policy                                   | Policy Rules                                                                                            |
+| 📁 routing                                  | Routing files                                                                                           |
+| 📁 smartyPlugins                            | Smarty template PlugIn files                                                                            |
 
 
 <a id="modules-moduleName-etc-config"></a>
@@ -85,11 +85,11 @@
 <a id="modules-moduleName-etc-config-moduleName-config"></a>
 ## `/modules/{moduleName}/etc/config/{moduleName}/config/`
 
-| Folder / File | Meaning                           |
-|---------------|-----------------------------------|
-| _csp.php      | Content-Security-Policy rules     |
-| _session.php  | Where to enable & disable Session |
-| develop.php   | Module's environment config file  |
+| Folder / File | Meaning                                                                                                                                                        |
+|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| _csp.php      | Content-Security-Policy rules                                                                                                                                  |
+| _session.php  | Where to enable & disable Session                                                                                                                              |
+| develop.php   | Module's environment config file. See [Example `/modules/Foo/etc/config/Foo/config/develop.php`](/3.3.x/configuration#Modules-environment-config-file-example) |
 
 
 <a id="modules-moduleName-templates"></a>
