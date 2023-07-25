@@ -12,6 +12,8 @@
 
 There is a distinction between `primary` and `secondary` modules.
 
+You create a module by using `emvicy.php` on CLI. The creation of the necessary environment config file (e.g. 'develop.php') during this module creation process depends on which `MVC_ENV` is set in `/.env` (see [/3.3.x/configuration#Environment](/3.3.x/configuration#Environment)).
+
 **Primary module**    
 You develop your application in a `primary` module.
 That `primary` module is also stored by name in the globally available config `$aConfig['MVC_MODULE_CURRENT_NAME']` and is also available via `Config::get_MVC_MODULE_CURRENT_NAME()`.
@@ -46,8 +48,6 @@ Conclusion
 <a id="creating-a-primary-module"></a>
 ## Creating a `primary` Module
 
-You create a module by using `emvicy.php` on CLI. The creation of the necessary environment config file (e.g. 'develop.php') during this module creation process depends on which `MVC_ENV` is set in `/.env` (see [/3.3.x/configuration#Environment](/3.3.x/configuration#Environment)).
-
 _use one of the following commands to create a primary module_  
 ~~~bash
 php emvicy.php c module=foo;                       # creates primary module "Foo"; asks if modulename is correct
@@ -60,7 +60,7 @@ php emvicy.php c module=foo primary=yes force=no;  # same
 php emvicy.php c module=foo primary=yes force=yes; # no asking - instantly creating of primary module "Foo"
 ~~~
 
-_After creating a primary module, start myMVC's local development server_
+_After creating a primary module, you could start myMVC's local development server to test the module frontend_
 ~~~bash
 php emvicy.php s
 ~~~

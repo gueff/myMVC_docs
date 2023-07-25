@@ -1,189 +1,103 @@
 
 # Directory Structure
 
-## root
+- [`/`](#root)
+- [`/application/`](#application)
+- [`/modules/{moduleName}/`](#modules-moduleName)
+- [`/modules/{moduleName}/etc/`](#modules-moduleName-etc)
+- [`/modules/{moduleName}/etc/config/`](#modules-moduleName-etc-config)
+- [`/modules/{moduleName}/etc/config/{moduleName}/config/`](#modules-moduleName-etc-config-moduleName-config)
+- [`/modules/{moduleName}/templates/`](#modules-moduleName-templates)
 
-├── [application/](#application)  
-├── config/  
-├── [modules/](#modules-moduleName)  
-├── public/  
-├── composer.json  
-├── LICENSE.md  
-├── myMVC.phar  
-└── README.md  
+---
+
+<a id="root"></a>
+## `/`
+
+| Folder / File                                         | Meaning                                            |
+|-------------------------------------------------------|----------------------------------------------------|
+| 📁 [application](#application)                        | myMVC Framework and libraries, temporary files     |    
+| 📁 [config](/3.3.x/configuration#myMVC-config-folder) | top config folder; gobal                           |  
+| 📁 [modules](#modules-moduleName)                     | **&larr; in here you write your application code** |    
+| 📁 public                                             | any public files like `*.css`, `*.js`              | 
+| emvicy.php                                            | command line tool; helps to manage                 |  
 
 ---
 
 <a id="application"></a>
-### application/ 
+## `/application/` 
 
-The application directory contains core code of myMVC Framework and also working directories like `cache`, `log`, `session` and `templates_c`.
+| Folder / File    | Meaning                                     |
+|------------------|---------------------------------------------|
+| 📁 cache         | place for caching files                     |
+| 📁 init          | skeleton files and utilities                |
+| 📁 library       | Core Framework                              |  
+| 📁 log           | default logfile directory                   |
+| 📁 session       | SessionIDs are stored here by default       |
+| 📁 smartyPlugins | default smartyPlugin directory              |  
+| 📁 templates_c   | default home for compiled smarty templates  |  
+| 📁 vendor        | third party libraries installed by composer |
+| composer.json    | list of third party libraries to install    |  
+| composer.phar    | a standalone composer script                |  
 
-application/  
-├── cache/  
-├── config/  
-├── [library/](#application-library)  
-├── log/  
-├── session/  
-├── smartyPlugins/  
-├── templates_c/  
-├── vendor/  
-├── composer.json  
-└── composer.phar  
-
-- `cache/`: place for caching files
-- `config/`: place for global config files
-- `log/`: logfile directory
-- `session/`: SessionIDs are stored here
-- `smartyPlugins/`: default smartyPlugin directory
-- `templates_c/`: home for compiled smarty templates
-- `vendor/`: third party libraries installed by composer
-- `composer.json`: list of third party libraries to install
-- `composer.phar`: a standalone composer script
-
-
-<a id="application-library"></a>
-#### application/library/ 
-
-This directory contains the core code of myMVC Framework inside the folder `MVC`.
-
-~~~
-application/library/
-└── MVC/
-    ├── DataType/
-    │   ├── DTArrayObject.php
-    │   ├── DTClass.php
-    │   ├── DTConfig.php
-    │   ├── DTConstant.php
-    │   ├── DTFileinfo.php
-    │   ├── DTKeyValue.php
-    │   ├── DTProperty.php
-    │   ├── DTRequestCurrent.php
-    │   └── DTRoute.php
-    ├── Generator/
-    │   └── DataType.php
-    ├── MVCInterface/
-    │   ├── Controller.php
-    ├── templates
-    │   └── infoTool.tpl    
-    ├── Application.php
-    ├── Arr.php
-    ├── Cache.php
-    ├── Closure.php
-    ├── Config.php
-    ├── Controller.php
-    ├── Convert.php
-    ├── Date.php
-    ├── Debug.php
-    ├── Error.php
-    ├── Event.php
-    ├── File.php
-    ├── InfoTool.php
-    ├── Lock.php
-    ├── Log.php
-    ├── Minify.php
-    ├── phan.list
-    ├── Policy.php
-    ├── Reflex.php
-    ├── Registry.php
-    ├── Request.php
-    ├── Route.php
-    ├── Session.php
-    ├── Strings.php    
-    └── View.php
-~~~
 
 <a id="modules-moduleName"></a>
-## modules/{moduleName}/ 
+## `/modules/{moduleName}/` 
 
-In the modules folder you create your own module (here in this example it is the module `Foo`).  
-In your module you code your own application - You will find **Model**, **View**, **Controller** (MVC), but also some other directories.
+| Folder / File                                 | Meaning                                                                                             |
+|-----------------------------------------------|-----------------------------------------------------------------------------------------------------|
+| 📁 Controller                                 | Your Application Controller Classes                                                                 |
+| 📁 DataType                                   | Your generated DataType Classes                                                                     |
+| 📁 [etc](#modules-moduleName-etc)             | place for install- and config files, docs, routing and individual other stuff                       |
+| 📁 Model                                      | Your Application Model Classes                                                                      |
+| 📁 Policy                                     | Your Application Policy Classes                                                                     |
+| 📁 [templates](#modules-moduleName-templates) | Template files                                                                                      |
+| 📁 View                                       | Your Application View Classes                                                                       |
+| _install.sh                                   | helper bash script to e.g. install files from `modules/{moduleName}/etc/_INSTALL/` to other places  |
+| _publish.sh                                   | helper bash script to copy files from `modules/{moduleName}/etc/_INSTALL/public/` to `public/`      |
 
-modules/Foo/  
-├── Controller/  
-├── DataType/  
-├── etc/  
-├── Event/  
-├── Model/  
-├── Policy/  
-├── [templates/](#modules-moduleName-templates)  
-├── View/  
-├── _install.sh  
-└── _publish.sh  
 
-- `Controller/`: folder to place your Controller
-- `DataType/`: place for generated datatype classes
-- `etc/`: place for install- and config files, docs, routing and individual other stuff
-- `Event/`: place for classes dealing with events. This is optional;
-- `Model/`: place for Model classes
-- `Policy/`: classes for Policy
-- `templates/`: smarty template files
-- `View/`: View classes
-- `_install.sh`: helper bash script to e.g. install files from `modules/Foo/etc/_INSTALL/` to other places
-- `_publish.sh`: helper bash script to copy files from `modules/Foo/etc/_INSTALL/public/` to `public/`
+<a id="modules-moduleName-etc"></a>
+## `/modules/{moduleName}/etc/`
 
-_example: complete extracted directory of a module `Foo`_  
-~~~
-modules/Foo/
-├── Controller/
-│   └── Index.php
-├── DataType/
-│   └── DTRoutingAdditional.php
-├── etc/
-│   ├── _INSTALL/
-│   │   └── public/
-│   │       └── robots.txt
-│   ├── config/
-│   │   ├── DataType/
-│   │   │   ├── datatype.php
-│   │   ├── Foo/
-│   │   │   ├── config
-│   │   │   │   └── _csp.php
-│   │   │   │   └── _session.php
-│   │   │   │   └── develop.php
-│   │   │   └── composer.json
-│   │   ├── _myMVC.php
-│   ├── doc/
-│   ├── event/
-│   │   ├── default.php
-│   │   ├── policy.php
-│   │   ├── request.php
-│   ├── policy/
-│   │   ├── policy.php
-│   └── routing/
-│       └── frontend.php
-│   └── smartyPlugins/
-├── Event/
-│   └── Index.php
-├── Model/
-│   └── Index.php
-├── Policy/
-│   └── Index.php
-├── templates/
-│   └── Frontend/
-│       ├── content/
-│       │   ├── _cookieConsent.tpl
-│       │   ├── _noscript.tpl
-│       │   ├── 404.tpl
-│       │   ├── index.tpl
-│       │   └── info.tpl
-│       └── layout/
-│           ├── footer.tpl
-│           ├── header.tpl
-│           ├── index.tpl
-│           └── menu.tpl
-├── View/
-│   └── Index.php
-├── _install.sh
-└── _publish.sh
-~~~
+| Folder / File                               | Meaning                                                       |
+|---------------------------------------------|---------------------------------------------------------------|
+| 📁 _INSTALL                                 | place for files to install _(e.g. copy into `public` folder)_ |
+| 📁 [config](#modules-moduleName-etc-config) | Module's config files                                         |
+| 📁 doc                                      | place for any further Module documentation                    |
+| 📁 event                                    | Event Listeners                                               |
+| 📁 policy                                   | Policy Rules                                                  |
+| 📁 routing                                  | Routing files                                                 |
+| 📁 smartyPlugins                            | Smarty template PlugIn files                                  |
+
+
+<a id="modules-moduleName-etc-config"></a>
+## `/modules/{moduleName}/etc/config/`
+
+| Folder / File                                                     | Meaning                                                                  |
+|-------------------------------------------------------------------|--------------------------------------------------------------------------|
+| 📁 DataType                                                       | Module's DataType configuration files                                    |
+| 📁 {moduleName}                                                   |                                                                          |
+| └── 📁 [config](#modules-moduleName-etc-config-moduleName-config) | place for any further Module documentation                               |
+| _mvc.php                                                          | `primary` Module's config - a `secondary` module does not have this file |
+
+
+<a id="modules-moduleName-etc-config-moduleName-config"></a>
+## `/modules/{moduleName}/etc/config/{moduleName}/config/`
+
+| Folder / File | Meaning                           |
+|---------------|-----------------------------------|
+| _csp.php      | Content-Security-Policy rules     |
+| _session.php  | Where to enable & disable Session |
+| develop.php   | Module's environment config file  |
+
 
 <a id="modules-moduleName-templates"></a>
-## modules/{moduleName}/templates 
+## `/modules/{moduleName}/templates/` 
 
-_templates directory structure of a module `Foo`_  
+_templates directory structure_  
 ~~~
-modules/Foo/
+modules/{moduleName}/
 ├── templates/
 │   └── Frontend/
 │       ├── content/
@@ -198,4 +112,4 @@ modules/Foo/
 │           ├── index.tpl
 │           └── menu.tpl
 ~~~
-- You may find further Information in Topic [Frontend](/3.2.x/frontend)
+- You may find further Information in Topic [Frontend](/3.3.x/frontend)

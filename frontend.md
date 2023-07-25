@@ -10,29 +10,10 @@
 <a id="Template-Engine-Smarty"></a>
 ## Template Engine Smarty
 
-myMVC makes use of the robust Template Engine `Smarty` Version 4. 
-
-All Templates you define in your module's template folder.
-
-myMVC provides a standard set of template files if you create your module via myMVC.phar (see: [Creating a Module](/3.2.x/creating-a-module)). Below you can see the directory structure of the standard set of templates.
-
-_templates directory structure (assuming module is `Foo`)_  
-~~~
-modules/Foo/
-├── templates/
-│   └── Frontend/
-│       ├── content/
-│       │   ├── _cookieConsent.tpl
-│       │   ├── _noscript.tpl
-│       │   ├── 404.tpl
-│       │   ├── index.tpl
-│       │   └── info.tpl
-│       └── layout/
-│           ├── footer.tpl
-│           ├── header.tpl
-│           ├── index.tpl
-│           └── menu.tpl
-~~~
+- myMVC makes use of the robust Template Engine `Smarty` Version 4. 
+- All Templates you define in your module's template folder.
+- myMVC provides a standard set of template files if you create your module via `emvicy.php` (see: [Creating a Module](/3.3.x/creating-a-module)). 
+- See the directory structure of the standard set of templates: [/3.3.x/directory-structure#modules-moduleName-templates](/3.3.x/directory-structure#modules-moduleName-templates)
 
 _Smarty_  
 For more Information about how to code templates with powerful Smarty Template Engine please visit the official Website https://www.smarty.net/ 
@@ -55,7 +36,7 @@ In your template you can access that assigned variable this way:
 
 **autoAssign variables** 
 
-If you created your module via myMVC.phar (see: [Creating a Module](/3.2.x/creating-a-module)) or you added additional context information to your route by yourself, you can easily auto assign all [additional route infos](/3.2.x/routing#adding-additional-context-information-to-route): 
+If you created your module via myMVC.phar (see: [Creating a Module](/3.3.x/creating-a-module)) or you added additional context information to your route by yourself, you can easily auto assign all [additional route infos](/3.3.x/routing#adding-additional-context-information-to-route): 
 
 _autoAssign variables to template (assuming module is `Foo`)_  
 ~~~php

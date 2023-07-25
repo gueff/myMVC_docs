@@ -43,24 +43,26 @@ cd into the root folder of myMVC and run `emvicy.php`
 cd myMVC_3.3.x/; 
 php emvicy.php
 ~~~
+ 
+- A new Environment config file `/.env` will be created automatically containing `MVC_ENV=develop` (see [/3.3.x/configuration#Environment](/3.3.x/configuration#Environment)). 
+- The Auto-Installer begins to install all necessary files. (In case of errors, a text will prompt up showing details about what went wrong). This may take a moment.
 
-The Auto-Installer will instantly begin to install all necessary files. (In case of errors, a text will prompt up showing details about what went wrong). This may take a moment.
-
+_Example output_  
 ~~~
 setup checking
 • MVC_ENV is: develop
 • User/Group from /public/index.php: admin1(1000) / admin1(1000)
 • Installing required Main Application libraries via composer in Background with PID 84623. Please wait.
-................Installation completed.
+.......Installation completed.
 ~~~
 
-Start myMVC's local development server.
+After that, start myMVC's local development server.
 
 ~~~bash
 php emvicy.php s
 ~~~
 
-_example output_  
+_Example output_  
 ~~~
 dev@linux:~/var/www/myMVC_3.3.x$ php emvicy.php s
 export MVC_ENV='develop'; /opt/lampp_8.2.0/bin/php-8.2.0 -S 127.0.0.1:1969 -t ./public/
@@ -79,8 +81,14 @@ _You should see this Frontend_
 <a id="Requirements"></a>
 ## Requirements
 
-- Operating System: Linux
-- PHP Version: `>=8.0`
+**Operating System**
+
+- Linux
+- binaries available: `sed, find, grep, mv, xargs, rm, ps`
+
+**PHP**
+
+- Version: `>=8.0`
 
 Also you need some PHP-Extensions installed and PHP-functions enabled as listed below.
 
