@@ -33,7 +33,7 @@ Instead, extend your application code by the libraries of your favor if you need
 
 **Clean Code Development**  
 myMVC loves clean code, and therefore it tries to provide clean code under the hood as well following Clean Code concepts like <a href="https://www.php-fig.org/psr/psr-2/" target="_blank">PSR-2</a>, <a href="https://www.php-fig.org/psr/psr-12/" target="_blank">PSR-12</a>
-but also <a href="https://blog.ueffing.net/post/2023/07/21/php-better-way-to-name-variables-because-you-want-to-be-understood/" target="_blank">php: better way to name variables - because you want to be understood</a>
+but also <a href="https://blog.ueffing.net/post/2009/07/21/php-better-way-to-name-variables-because-you-want-to-be-understood/" target="_blank">php: better way to name variables - because you want to be understood</a>
 
 ---
 

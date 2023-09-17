@@ -51,9 +51,11 @@ Preferably change the settings in the [environment configuration file](/3.3.x/co
 
 _Settings for Logging_  
 ~~~php
-/**
- * Log
- */
+
+// force linebreaks in logfiles no matter what
+$aConfig['MVC_LOG_FORCE_LINEBREAK'] = false;
+
+// logfiles
 $aConfig['MVC_LOG_FILE_FOLDER'] = $aConfig['MVC_APPLICATION_PATH'] . '/log/';
 $aConfig['MVC_LOG_FILE_DEFAULT'] = $aConfig['MVC_LOG_FILE_FOLDER'] . 'default.log';
 $aConfig['MVC_LOG_FILE_ERROR'] = $aConfig['MVC_LOG_FILE_FOLDER'] . 'error.log';

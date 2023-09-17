@@ -64,15 +64,15 @@ This also means that a later loaded configuration beats (overrides) an earlier l
    - Any `*.php` file in this directory will be included; Reading order is `a-z`
    - Coverage: **globally** - Configs placed here are valid to all modules and to all environments
    - By default, the following files are located here
-      - `_myMVC.php`: This file contains basic settings that are necessary for operation. You should not edit this file. If you want to change settings, override values in your own module config. myMVC config variable names always begin with `MVC_`.  
+      - `_mvc.php`: This file contains basic settings that are necessary for operation. You should not edit this file. If you want to change settings, override values in your own module config. myMVC config variable names always begin with `MVC_`.  
       - See content of file [`/config/_mvc.php`](#myMVC-config-folder-example)
 2. ⬆ **Module's config folder** <a id="Modules-config-folder"></a> _(overrides 1.)_
     - `/modules/{moduleName}/etc/config/`
     - Any `*.php` file in this directory will be included; Reading order is `a-z`
     - Coverage: **module globally** - Configs placed here are valid to all environments of your module
    - By default, the following files are located here
-      - `_myMVC.php`: further MVC configs. myMVC config variable names always begin with `MVC_`.
-   - See [Example `/modules/Foo/etc/config/_mvc.php`](#Modules-config-folder-example)
+      - `_mvc.php`: further MVC configs. myMVC config variable names always begin with `MVC_`.
+      - See [Example `/modules/Foo/etc/config/_mvc.php`](#Modules-config-folder-example)
 3. ⬆ **Module's environment config file** <a id="Modules-environment-config-file"></a> _(overrides 2.)_
    - Schema: `/modules/{moduleName}/etc/config/{moduleName}/config/{environment}.php`
      - If your module is named `Foo` and you have set `MVC_ENV` to `'develop'`, your environment config file has to be `modules/Foo/etc/config/Foo/config/develop.php`. Make sure it exists.
