@@ -26,12 +26,12 @@ You don't need to write secondary modules if you don't need one. Develop your ap
 **Secondary module**  
 But sometimes there are parts of code you want to reuse in other software projects.
 For such a case `secondary` modules are suitable. Code written here should be reused in other myMVC software projects if necessary.
+For this version of myMVC there are already some secondary, public myMVC modules out there for reuse.
 
-There are already some secondary, public myMVC modules for reuse out there.
-
-- <a href="https://github.com/gueff/myMVC_module_DB" target="_blank">`https://github.com/gueff/myMVC_module_DB`</a>
-- <a href="https://github.com/gueff/myMVC_module_OpenApi" target="_blank">`https://github.com/gueff/myMVC_module_OpenApi`</a>
-- <a href="https://github.com/gueff/myMVC_module_Idolon" target="_blank">`https://github.com/gueff/myMVC_module_Idolon`</a>
+Public available modules for free for myMVC 3.3.x: 
+- <a href="https://github.com/gueff/myMVC_module_DB/tree/3.3.x" target="_blank">`https://github.com/gueff/myMVC_module_DB/tree/3.3.x`</a>
+- <a href="https://github.com/gueff/myMVC_module_OpenApi/tree/1.1.x" target="_blank">`https://github.com/gueff/myMVC_module_OpenApi/tree/1.1.x`</a>
+- <a href="https://github.com/gueff/myMVC_module_Idolon/tree/2.0.x" target="_blank">`https://github.com/gueff/myMVC_module_Idolon/tree/2.0.x`</a>
 - <a href="https://github.com/gueff/myMVC_module_Email" target="_blank">`https://github.com/gueff/myMVC_module_Email`</a>
 - <a href="https://github.com/gueff/myMVC_module_Captcha" target="_blank">`https://github.com/gueff/myMVC_module_Captcha`</a>
 
