@@ -47,7 +47,7 @@ _Example_
 <a id="configuration"></a>
 ## Configuration
 
-Preferably change the settings in the [environment configuration file](/3.3.x/configuration#Modules-environment-config-file) of your module according to your needs.
+Preferably change the settings in the [environment configuration file](/3.4.x/configuration#Modules-environment-config-file) of your module according to your needs.
 
 _Settings for Logging_  
 ~~~php

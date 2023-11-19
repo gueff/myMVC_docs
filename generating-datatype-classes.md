@@ -39,8 +39,37 @@ php myDataTypeClass.php
 <a id="array_config"></a>
 ### Configuration as Array
 
-_Example_  
+_Example file `modules/Foo/etc/config/DataType/datatype.php`_    
 ~~~php
+<?php
+
+/**
+ * @usage php datatype.php
+ *          Classes created by this script are placed into folder: `/modules/{module}/DataType/`
+ */
+
+#---------------------------------------------------------------
+require_once realpath(__DIR__ . '/../../../../../') . '/application/init/util/bootstrap.php';
+\MVC\Config::init(get($GLOBALS['aConfig'], array()));
+\MVC\Cache::init(\MVC\Config::get_MVC_CACHE_CONFIG());
+\MVC\Cache::autoDeleteCache('DataType', 0);
+
+#---------------------------------------------------------------
+#  Defining DataType Classes
+
+$sDataTypeDir = realpath(__DIR__ . '/../../../') . '/DataType';
+$sNamespace = str_replace('/', '\\', substr($sDataTypeDir, strlen(\MVC\Config::get_MVC_MODULES_DIR() . '/')));
+
+// base setup
+$aDataType = array(
+    'dir' => $sDataTypeDir,
+    'unlinkDir' => false,
+
+    // enable creation of events in datatype methods
+    'createEvents' => true,
+);
+
+// classes
 $aDataType['class'][] = array(
     // ! mandatory
     'name' => 'DTFoo',
@@ -54,7 +83,7 @@ $aDataType['class'][] = array(
 
     // optional; add some useful Helper Methods like '__toString()` method (default: true)
     'createHelperMethods' => true,
-    
+
     // optional; no need to even note the key here if not used
     'constant' => array(
         array(
@@ -73,7 +102,7 @@ $aDataType['class'][] = array(
         array(
             'key' => 'foo',
             'var' => 'string', 
-            
+
             // optional property settings
             'value' => 'bar',
             'forceCasting' => true,
@@ -88,6 +117,11 @@ $aDataType['class'][] = array(
         ),
     )
 );
+
+#---------------------------------------------------------------
+#  create!
+
+\MVC\Generator\DataType::create()->initConfigArray($aDataType);
 ~~~
 
 <a id="object_config"></a>

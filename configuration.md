@@ -79,7 +79,7 @@ This also means that a later loaded configuration beats (overrides) an earlier l
    - Coverage: **module environment specific** - The concrete environment config file is loaded appropiate to your environment of your module you have set in `MVC_ENV`
    - See [Example `/modules/Foo/etc/config/Foo/config/develop.php`](#Modules-environment-config-file-example)
 
-⚠ If you create a module by using emvicy.php (see: [Creating a primary Module](/3.3.x/creating-a-module#creating-a-primary-module)), the corresponding "Module's environment config file" will be generated automatically. 
+⚠ If you create a module by using emvicy.php (see: [Creating a primary Module](/3.4.x/creating-a-module#creating-a-primary-module)), the corresponding "Module's environment config file" will be generated automatically. 
 But if you change the value of the `MVC_ENV` variable of `/.env` config file afterwards, make sure the corresponding "Module's environment config file" does exist in your module. 
 Example: If your Module is named `Foo`, and you set `MVC_ENV=production`, then the config file `/modules/Foo/etc/config/Foo/config/production.php` has to exist.
 
@@ -167,9 +167,16 @@ $aModule = \MVC\Registry::get('MODULE');
 /**
  * @package myMVC
  * @copyright ueffing.net
- * @author Guido K.B.W. Üffing <info@ueffing.net>
+ * @author Guido K.B.W. Üffing <mymvc@ueffing.net>
  * @license GNU GENERAL PUBLIC LICENSE Version 3. See application/doc/COPYING
+ *
+ * these configs here can be extended and overwritten by:
+ *  `/modules/{module}/etc/config/_mvc.php`
+ *  `/modules/{module}/etc/config/{module}/config/{stage}.php`
  */
+
+//-------------------------------------------------------------------------------------
+// MVC
 
 MVC_RUNTIME_SETTINGS: {
 
@@ -214,7 +221,7 @@ MVC_BIN: {
     $aConfig['MVC_BIN_XARGS'] = whereis('xargs');   # xargs - build and execute command lines from standard input
 }
 
-MVC_APPLICATION_SETTINGS: {
+MVC_APPLICATION_SETTINGS_I: {
 
     /**
      * keys for "query" notation in \MVC\Route routings
@@ -223,16 +230,6 @@ MVC_APPLICATION_SETTINGS: {
     $aConfig['MVC_ROUTE_QUERY_PARAM_MODULE'] = 'module';
     $aConfig['MVC_ROUTE_QUERY_PARAM_C'] = 'c';
     $aConfig['MVC_ROUTE_QUERY_PARAM_M'] = 'm';
-
-    /**
-     * MVC fallback routing
-     * this routing will be used if none is specified for routing
-     * Note: Possibility of a direct call (http|cli) of this route is disabled
-     */
-    $aConfig['MVC_ROUTING_FALLBACK'] =
-          $aConfig['MVC_ROUTE_QUERY_PARAM_MODULE'] . '=standard&'
-        . $aConfig['MVC_ROUTE_QUERY_PARAM_C'] . '=index&'
-        . $aConfig['MVC_ROUTE_QUERY_PARAM_M'] . '=fallback';
 
     /**
      * Name of method to be executed in the Target Controller Class
@@ -257,24 +254,41 @@ MVC_APPLICATION_SETTINGS: {
     $aConfig['MVC_APPLICATION_PATH'] = $aConfig['MVC_BASE_PATH'] . '/application';
     $aConfig['MVC_PUBLIC_PATH'] = $aConfig['MVC_BASE_PATH'] . '/public';
 
-    $aConfig['MVC_APPLICATION_CONFIG_DIR'] = $aConfig['MVC_APPLICATION_PATH'] . '/config';
-    $aConfig['MVC_VIEW_TEMPLATES'] = $aConfig['MVC_BASE_PATH'] . '/modules/Default/templates';
+    $aConfig['MVC_APPLICATION_INIT_DIR'] = $aConfig['MVC_APPLICATION_PATH'] . '/init';
+
     $aConfig['MVC_LIBRARY'] = $aConfig['MVC_APPLICATION_PATH'] . '/library';
     $aConfig['MVC_MODULES_DIR'] = $aConfig['MVC_BASE_PATH'] . '/modules';
 
-    // Main myMVC config folder
+    // Main myMVC config directory
     $aConfig['MVC_CONFIG_DIR'] = $aConfig['MVC_BASE_PATH'] . '/config';
+
+    /**
+     * Event
+     */
+    // allow declaring listeners with wildcard, e.g.:   Event::bind('foo.bar.*', ... );
+    // matches to event 'foo.bar.baz':                  Event::run('foo.bar.baz');
+    // mandatory: asterisk `*` at the end
+    // notice: wildcard listeners are processed before the regular event listeners
+    $aConfig['MVC_EVENT_ENABLE_WILDCARD'] = true;
+
+    // logging of each simple "RUN" event into MVC_LOG_FILE_EVENT
+    // remember:
+    // - events marked as "RUN": fired events without any listener (nothing happens)
+    // - events marked as "RUN+": fired events with bonded listeners / closures to be executed
+    // be aware that setting this to "true" would produce much data in the logfile (consider using logrotate!)
+    // anyway this might be useful for a develop environment, as it helps debugging and understanding
+    $aConfig['MVC_EVENT_LOG_RUN'] = false;
 
     /**
      * Log
      */
-    $aConfig['MVC_LOG_FILE_FOLDER'] = $aConfig['MVC_APPLICATION_PATH'] . '/log/';
-    $aConfig['MVC_LOG_FILE_DEFAULT'] = $aConfig['MVC_LOG_FILE_FOLDER'] . 'default.log';
-    $aConfig['MVC_LOG_FILE_ERROR'] = $aConfig['MVC_LOG_FILE_FOLDER'] . 'error.log';
-    $aConfig['MVC_LOG_FILE_WARNING'] = $aConfig['MVC_LOG_FILE_FOLDER'] . 'warning.log';
-    $aConfig['MVC_LOG_FILE_NOTICE'] = $aConfig['MVC_LOG_FILE_FOLDER'] . 'notice.log';
-    $aConfig['MVC_LOG_FILE_POLICY'] = $aConfig['MVC_LOG_FILE_FOLDER'] . 'policy.log';
-    $aConfig['MVC_LOG_FILE_EVENT'] = $aConfig['MVC_LOG_FILE_FOLDER'] . 'event.log';
+    $aConfig['MVC_LOG_FILE_DIR'] = $aConfig['MVC_APPLICATION_PATH'] . '/log/';
+    $aConfig['MVC_LOG_FILE_DEFAULT'] = $aConfig['MVC_LOG_FILE_DIR'] . 'default.log';
+    $aConfig['MVC_LOG_FILE_ERROR'] = $aConfig['MVC_LOG_FILE_DIR'] . 'error.log';
+    $aConfig['MVC_LOG_FILE_WARNING'] = $aConfig['MVC_LOG_FILE_DIR'] . 'warning.log';
+    $aConfig['MVC_LOG_FILE_NOTICE'] = $aConfig['MVC_LOG_FILE_DIR'] . 'notice.log';
+    $aConfig['MVC_LOG_FILE_POLICY'] = $aConfig['MVC_LOG_FILE_DIR'] . 'policy.log';
+    $aConfig['MVC_LOG_FILE_EVENT'] = $aConfig['MVC_LOG_FILE_DIR'] . 'event.log';
 
     // control log details
     $aConfig['MVC_LOG_DETAIL'] = [
@@ -289,10 +303,13 @@ MVC_APPLICATION_SETTINGS: {
         'message' => true,
     ];
 
+    // force linebreaks in logfiles no matter what
+    $aConfig['MVC_LOG_FORCE_LINEBREAK'] = false;
+
     /**
      * Caching
      */
-    // cache folder
+    // cache directory
     $aConfig['MVC_CACHE_DIR'] = $aConfig['MVC_APPLICATION_PATH'] . '/cache';
     $aConfig['MVC_CACHE_CONFIG'] = array(
         'bCaching' => true,
@@ -315,7 +332,7 @@ MVC_APPLICATION_SETTINGS: {
     /**
      * Session
      */
-    // session folder and
+    // session directory and
     // Session options @see http://php.net/manual/de/session.configuration.php
     $aConfig['MVC_SESSION_NAMESPACE'] = 'myMVC';
     $aConfig['MVC_SESSION_PATH'] = $aConfig['MVC_APPLICATION_PATH'] . '/session';
@@ -352,24 +369,64 @@ MVC_APPLICATION_SETTINGS: {
     $aConfig['MVC_CLI'] = (('cli' === php_sapi_name()) ? true : false);
 }
 
+MODULES: {
+
+    // if a module has that file it is the primary one
+    $aConfig['MVC_MODULE_PRIMARY_ESSENTIAL'] = '/.primary';
+
+    // identify primary module
+    $aConfig['MVC_MODULE_PRIMARY'] = array_filter(
+        array_map(
+            function ($sValue) use ($aConfig){
+                return str_replace($aConfig['MVC_MODULE_PRIMARY_ESSENTIAL'], '', str_replace($aConfig['MVC_MODULES_DIR'] . '/', '', $sValue));
+            }, glob($aConfig['MVC_MODULES_DIR'] . '/*' . $aConfig['MVC_MODULE_PRIMARY_ESSENTIAL'])),
+        'trim'
+    );
+    $aConfig['MVC_MODULE_PRIMARY_NAME'] = current($aConfig['MVC_MODULE_PRIMARY']);
+    $aConfig['MVC_MODULE_PRIMARY_DIR'] = $aConfig['MVC_MODULES_DIR'] . '/' . $aConfig['MVC_MODULE_PRIMARY_NAME'];
+    $aConfig['MVC_MODULE_PRIMARY_CONFIG_DIR'] = $aConfig['MVC_MODULE_PRIMARY_DIR'] . '/etc/config';
+    $aConfig['MVC_MODULE_PRIMARY_CONTROLLER_DIR'] = $aConfig['MVC_MODULE_PRIMARY_DIR'] . '/Controller';
+    $aConfig['MVC_MODULE_PRIMARY_DATATYPE_DIR'] = $aConfig['MVC_MODULE_PRIMARY_DIR'] . '/DataType';
+    $aConfig['MVC_MODULE_PRIMARY_ETC_DIR'] = $aConfig['MVC_MODULE_PRIMARY_DIR'] . '/etc';
+    $aConfig['MVC_MODULE_PRIMARY_STAGING_CONFIG_DIR'] = $aConfig['MVC_MODULE_PRIMARY_CONFIG_DIR'] . '/' . $aConfig['MVC_MODULE_PRIMARY_NAME'] . '/config';
+    $aConfig['MVC_MODULE_PRIMARY_EVENT_DIR'] = $aConfig['MVC_MODULES_DIR'] . '/Event';
+    $aConfig['MVC_MODULE_PRIMARY_MODEL_DIR'] = $aConfig['MVC_MODULES_DIR'] . '/Model';
+    $aConfig['MVC_MODULE_PRIMARY_POLICY_DIR'] = $aConfig['MVC_MODULES_DIR'] . '/Policy';
+    $aConfig['MVC_MODULE_PRIMARY_VIEW_DIR'] = $aConfig['MVC_MODULES_DIR'] . '/View';
+    $aConfig['MVC_MODULE_PRIMARY_COMPOSER_DIR'] = $aConfig['MVC_MODULE_PRIMARY_CONFIG_DIR'] . '/' . $aConfig['MVC_MODULE_PRIMARY_NAME'];
+
+    // array for module configs
+    $aConfig['MODULE'] = array();
+}
+
+MVC_APPLICATION_SETTINGS_II:
+{
+    /**
+     * MVC fallback routing
+     * this routing will be used if none is specified for routing
+     * Note: Possibility of a direct call (http|cli) of this route is disabled
+     */
+    $aConfig['MVC_ROUTING_FALLBACK'] = $aConfig['MVC_ROUTE_QUERY_PARAM_MODULE'] . '=' . $aConfig['MVC_MODULE_PRIMARY_NAME'] . '&'
+                                       . $aConfig['MVC_ROUTE_QUERY_PARAM_C'] . '=index&'
+                                       . $aConfig['MVC_ROUTE_QUERY_PARAM_M'] . '=notFound';
+}
+
 MVC_TEMPLATE_ENGINE_SMARTY: {
+
+    $aConfig['MVC_VIEW_TEMPLATE_DIR'] = $aConfig['MVC_MODULE_PRIMARY_DIR'] . '/templates';
 
     $aConfig['MVC_SMARTY_CACHE_STATUS'] = false;
     $aConfig['MVC_SMARTY_CACHE_DIR'] = $aConfig['MVC_APPLICATION_PATH'] . '/cache';
 
-    $aConfig['MVC_SMARTY_TEMPLATE_DIR'] = $aConfig['MVC_VIEW_TEMPLATES'];
+    $aConfig['MVC_SMARTY_TEMPLATE_DIR'] = $aConfig['MVC_VIEW_TEMPLATE_DIR'];
     $aConfig['MVC_SMARTY_TEMPLATE_DEFAULT'] = 'Frontend/layout/index.tpl';
 
-    // templates_c folder and
-    // templates_c folder access rights, octal mode
+    // templates_c directory and
+    // templates_c directory access rights, octal mode
     $aConfig['MVC_SMARTY_TEMPLATE_CACHE_DIR'] = $aConfig['MVC_APPLICATION_PATH'] . '/templates_c';
 
-    // array Location of Smarty PlugIns 
+    // array Location of Smarty PlugIns
     $aConfig['MVC_SMARTY_PLUGINS_DIR'][] = $aConfig['MVC_APPLICATION_PATH'] . '/smartyPlugins';
-}
-
-MODULES: {
-    $aConfig['MODULE'] = array();
 }
 
 /**
@@ -393,41 +450,30 @@ MVC_MISC: {
 ~~~php
 <?php
 
+/**
+ * @package myMVC
+ * @copyright ueffing.net
+ * @author Guido K.B.W. Üffing <mymvc@ueffing.net>
+ * @license GNU GENERAL PUBLIC LICENSE Version 3. See application/doc/COPYING
+ *
+ * these configs here do extend and overwrite:
+ * `/config/_mvc.php`
+ */
+
 //-------------------------------------------------------------------------------------
 // Module
-
-$aConfig['MVC_MODULE_CURRENT_NAME'] = 'Foo';
-
-$aConfig['MVC_MODULE_CURRENT_DIR'] = $aConfig['MVC_MODULES_DIR'] . '/' . $aConfig['MVC_MODULE_CURRENT_NAME'];
-$aConfig['MVC_MODULE_CURRENT_CONFIG_DIR'] = $aConfig['MVC_MODULE_CURRENT_DIR'] . '/etc/config';
-$aConfig['MVC_MODULE_CURRENT_CONTROLLER_DIR'] = $aConfig['MVC_MODULE_CURRENT_DIR'] . '/Controller';
-$aConfig['MVC_MODULE_CURRENT_DATATYPE_DIR'] = $aConfig['MVC_MODULE_CURRENT_DIR'] . '/DataType';
-$aConfig['MVC_MODULE_CURRENT_ETC_DIR'] = $aConfig['MVC_MODULE_CURRENT_DIR'] . '/etc';
-$aConfig['MVC_MODULE_CURRENT_STAGING_CONFIG_DIR'] = $aConfig['MVC_MODULE_CURRENT_CONFIG_DIR'] . '/' . $aConfig['MVC_MODULE_CURRENT_NAME'] . '/config';
-$aConfig['MVC_MODULE_CURRENT_EVENT_DIR'] = $aConfig['MVC_MODULES_DIR'] . '/Event';
-$aConfig['MVC_MODULE_CURRENT_MODEL_DIR'] = $aConfig['MVC_MODULES_DIR'] . '/Model';
-$aConfig['MVC_MODULE_CURRENT_POLICY_DIR'] = $aConfig['MVC_MODULES_DIR'] . '/Policy';
-$aConfig['MVC_MODULE_CURRENT_VIEW_DIR'] = $aConfig['MVC_MODULES_DIR'] . '/View';
-$aConfig['MVC_MODULE_CURRENT_COMPOSER_DIR'] = $aConfig['MVC_MODULE_CURRENT_CONFIG_DIR'] . '/' . $aConfig['MVC_MODULE_CURRENT_NAME'];
+MVC_ROUTING_FALLBACK
 
 //-------------------------------------------------------------------------------------
 // MVC
 
-// show InfoTool bar
-$aConfig['MVC_INFOTOOL_ENABLE'] = true;
-
 // override default fallback routing
-$aConfig['MVC_ROUTING_FALLBACK'] = $aConfig['MVC_ROUTE_QUERY_PARAM_MODULE'] . '=' . $aConfig['MVC_MODULE_CURRENT_NAME'] . '&'
+$aConfig['MVC_ROUTING_FALLBACK'] = $aConfig['MVC_ROUTE_QUERY_PARAM_MODULE'] . '=' . $aConfig['MVC_MODULE_PRIMARY_NAME'] . '&'
                                    . $aConfig['MVC_ROUTE_QUERY_PARAM_C'] . '=index&'
                                    . $aConfig['MVC_ROUTE_QUERY_PARAM_M'] . '=notFound';
 
-// Smarty
-$aConfig['MVC_VIEW_TEMPLATES'] = $aConfig['MVC_MODULE_CURRENT_DIR'] . '/templates';
-$aConfig['MVC_SMARTY_TEMPLATE_DIR'] = $aConfig['MVC_VIEW_TEMPLATES'];
-$aConfig['MVC_SMARTY_TEMPLATE_DEFAULT'] = 'Frontend/layout/index.tpl'; # relative path from templates folder
-
 // Add Location of Smarty PlugIns
-$aConfig['MVC_SMARTY_PLUGINS_DIR'][] = $aConfig['MVC_MODULE_CURRENT_ETC_DIR'] . '/smartyPlugins';
+$aConfig['MVC_SMARTY_PLUGINS_DIR'][] = realpath(__DIR__ . '/../../') . '/etc/smartyPlugins';
 ~~~
 
 <a id="Modules-environment-config-file-example"></a>
@@ -435,13 +481,30 @@ $aConfig['MVC_SMARTY_PLUGINS_DIR'][] = $aConfig['MVC_MODULE_CURRENT_ETC_DIR'] . 
 ~~~php
 <?php
 
-use MVC\Config;
+/**
+ * @package myMVC
+ * @copyright ueffing.net
+ * @author Guido K.B.W. Üffing <mymvc@ueffing.net>
+ * @license GNU GENERAL PUBLIC LICENSE Version 3. See application/doc/COPYING
+ *
+ * these configs here do extend and overwrite:
+ * `/modules/Foo/etc/config/_mvc.php` (exists if module `Foo` is a primary module)
+ */
+
+//-------------------------------------------------------------------------------------
+// MVC
 
 error_reporting(E_ALL);
 date_default_timezone_set('Europe/Berlin');
 
+// Log autoloader actions
+$aConfig['MVC_LOG_AUTOLOADER'] = true;
+
 // show InfoTool bar
 $aConfig['MVC_INFOTOOL_ENABLE'] = true;
+
+// force linebreaks in logfiles no matter what
+$aConfig['MVC_LOG_FORCE_LINEBREAK'] = true;
 
 //-------------------------------------------------------------------------------------
 // Module Foo

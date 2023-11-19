@@ -12,7 +12,7 @@
 
 There is a distinction between `primary` and `secondary` modules.
 
-You create a module by using `emvicy.php` on CLI. The creation of the necessary environment config file (e.g. 'develop.php') during this module creation process depends on which `MVC_ENV` is set in `/.env` (see [/3.3.x/configuration#Environment](/3.3.x/configuration#Environment)).
+You create a module by using `emvicy.php` on CLI. The creation of the necessary environment config file (e.g. 'develop.php') during this module creation process depends on which `MVC_ENV` is set in `/.env` (see [/3.4.x/configuration#Environment](/3.4.x/configuration#Environment)).
 
 **Primary module**    
 You develop your application in a `primary` module.
@@ -28,10 +28,10 @@ But sometimes there are parts of code you want to reuse in other software projec
 For such a case `secondary` modules are suitable. Code written here should be reused in other myMVC software projects if necessary.
 For this version of myMVC there are already some secondary, public myMVC modules out there for reuse.
 
-Public available modules for free for myMVC 3.3.x: 
-- <a href="https://github.com/gueff/myMVC_module_DB/tree/3.3.x" target="_blank">`https://github.com/gueff/myMVC_module_DB/tree/3.3.x`</a>
-- <a href="https://github.com/gueff/myMVC_module_OpenApi/tree/1.1.x" target="_blank">`https://github.com/gueff/myMVC_module_OpenApi/tree/1.1.x`</a>
-- <a href="https://github.com/gueff/myMVC_module_Idolon/tree/2.0.x" target="_blank">`https://github.com/gueff/myMVC_module_Idolon/tree/2.0.x`</a>
+Public available modules:  
+- <a href="https://github.com/gueff/myMVC_module_DB" target="_blank">`https://github.com/gueff/myMVC_module_DB`</a>
+- <a href="https://github.com/gueff/myMVC_module_OpenApi" target="_blank">`https://github.com/gueff/myMVC_module_OpenApi`</a>
+- <a href="https://github.com/gueff/myMVC_module_Idolon" target="_blank">`https://github.com/gueff/myMVC_module_Idolon`</a>
 - <a href="https://github.com/gueff/myMVC_module_Email" target="_blank">`https://github.com/gueff/myMVC_module_Email`</a>
 - <a href="https://github.com/gueff/myMVC_module_Captcha" target="_blank">`https://github.com/gueff/myMVC_module_Captcha`</a>
 
@@ -67,7 +67,7 @@ php emvicy.php s
 
 Call http://127.0.0.1:1969/ and you will see your created module frontend
 
-![myMVC Creating a Module](/doc/3.3.x/getting-started/mymvc-creating-a-module.png)
+![myMVC Creating a Module](/doc/3.4.x/getting-started/mymvc-creating-a-module.png)
 
 ---
 
